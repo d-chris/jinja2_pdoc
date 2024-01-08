@@ -1,5 +1,8 @@
 # jinja2-pdoc
 
+[![Github](https://img.shields.io/website?url=https%3A%2F%2Fgithub.com%2Fd-chris%2Fjinja2_pdoc&logo=github&label=github)
+](https://www.github.com/d-chris/jinja2_pdoc)
+[![PyPI - License](https://img.shields.io/pypi/l/pathlibutil)](https://raw.githubusercontent.com/d-chris/jinja2_pdoc/main/LICENSE)
 ---
 
 [`jinja2`](https://www.pypi.org/project/jinja2) extension based on [`pdoc`](https://pypi.org/project/pdoc/) to embedd python code directly from modules or files into your `jinja` template.
@@ -10,16 +13,18 @@
 pip install jinja2_pdoc
 ```
 
-##  Usage
+## Usage
 
 - [CLI](#command-line)
 - [Library](#library)
 
 ## Syntax
 
+
 ```jinja2
 {% pdoc <module>::<object>:<pdoc_attr[.str_attr]> %}
 ```
+see also [Example](#library)
 
 ### `<module>`
 
@@ -61,14 +66,13 @@ Example:
 {% pdoc pathlib::Path:docstring %}
 ```
 
-### `str_attr`
+### `[.str_attr]`
 
 optional `str` functions can be added to `<pdoc_attr>` with a dot
 
 - `dedent` - removes common leading whitespace, see `textwrap.dedent`
 - `upper` - converts to upper case
 - `lower` - converts to lower case
-- ...
 
 Example:
 
@@ -81,6 +85,13 @@ Example:
 ### Command Line
 
 ```cmd
+>>> jinja2pdoc .\examples\ --force
+
+rendering.. example.md
+```
+
+```cmd
+
 >>> jinja2pdoc --help
 
 Usage: jinja2pdoc [OPTIONS] INPUT [OUTPUT]
@@ -96,7 +107,8 @@ Usage: jinja2pdoc [OPTIONS] INPUT [OUTPUT]
 Options:
   -p, --pattern TEXT  template search pattern for directories
   -f, --force         overwrite existing files
-  --help              Show this message and exit.
+  -n, --newline TEXT  newline character
+  --help              Show this message and exit..
 ```
 
 ### Library

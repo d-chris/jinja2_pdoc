@@ -1,15 +1,39 @@
 from pathlib import Path
+from typing import Generator, Iterable, Tuple
 
 import click
 
 from jinja2_pdoc import PdocJinja2, jinja2
 
 
-def newline(content: str, newline: str = "\n"):
-    if content.endswith(newline):
+def eof_newline(content: str, eof: str = "\n") -> str:
+    """
+    make sure the file content ends with a newline if specified.
+    """
+    if content.endswith(eof) or not eof:
         return content
 
-    return content + newline
+    return content + eof
+
+
+def load_files(
+    files: Iterable[Path], out_dir: Path, force: bool
+) -> Generator[Tuple[str, Path], None, None]:
+    """
+    iterates over files and yield `(content,  out_file)` if its not existing.
+
+    if `force` is True, all files are proessed.
+    """
+    for file in files:
+        out = out_dir.joinpath(file.stem).resolve()
+
+        if not out.is_file() or force:
+            yield (file.read_text(), out)
+            click.echo(f"rendering.. {out}")
+        else:
+            click.echo(f"skip....... {out}")
+    else:
+        click.echo("\n......done")
 
 
 @click.command()
@@ -22,7 +46,19 @@ def newline(content: str, newline: str = "\n"):
     help="template search pattern for directories",
 )
 @click.option("-f", "--force", is_flag=True, help="overwrite existing files")
-def main(input: str, output: str = ".", pattern: str = "*.jinja2", force: bool = False):
+@click.option(
+    "-n",
+    "--newline",
+    default="\n",
+    help="newline character",
+)
+def main(
+    input: str,
+    output: str = ".",
+    pattern: str = "*.jinja2",
+    force: bool = False,
+    newline: str = "\n",
+) -> None:
     """
     Render jinja2 templates from a input directory or file and
     write to a output directory.
@@ -38,26 +74,16 @@ def main(input: str, output: str = ".", pattern: str = "*.jinja2", force: bool =
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
 
-    i = 0
-
-    if input.is_dir():
-        for file in input.rglob(pattern):
-            code = env.from_string(file.read_text()).render()
-
-            out = output.joinpath(file.stem)
-
-            if force or not out.exists():
-                i += 1
-                out.write_text(code)
+    if input.is_file():
+        files = [
+            input,
+        ]
     else:
-        code = env.from_string(input.read_text()).render()
-        out = output.joinpath(input.stem)
+        files = input.rglob(pattern)
 
-        if force or not out.exists():
-            i = 1
-            out.write_text(code)
-
-    click.echo(f"Rendered {i} files to {output.resolve()}")
+    for content, file in load_files(files, output, force):
+        code = env.from_string(content).render()
+        file.write_text(eof_newline(code, newline))
 
 
 if __name__ == "__main__":

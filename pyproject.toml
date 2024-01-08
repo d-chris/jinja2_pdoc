@@ -15,6 +15,15 @@ click = "^8.1.7"
 [tool.poetry.scripts]
 jinja2pdoc = "jinja2_pdoc.cli:main"
 
+[[tool.poetry.source]]
+name = "testpypi"
+url = "https://test.pypi.org/legacy"
+priority = "explicit"
+
+[[tool.poetry.source]]
+name = "PyPI"
+priority = "primary"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
