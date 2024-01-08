@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "jinja2-pdoc"
+version = "0.0.0"
+description = "jinja2 extension to embedd python code directly from module using pdoc"
+authors = ["Christoph Dörrer <d-chris@web.d>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.8.1,<3.12"
+Jinja2 = "^3.1.2"
+pdoc = "^14.3.0"
+click = "^8.1.7"
+
+[tool.poetry.scripts]
+jinja2pdoc = "jinja2_pdoc.cli:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
