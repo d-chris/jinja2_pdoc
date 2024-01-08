@@ -1,22 +1,30 @@
 # jinja2-pdoc
 
+[![Github](https://img.shields.io/website?url=https%3A%2F%2Fgithub.com%2Fd-chris%2Fjinja2_pdoc&logo=github&label=github)
+](https://www.github.com/d-chris/jinja2_pdoc)
+[![PyPI - License](https://img.shields.io/pypi/l/pathlibutil)](https://raw.githubusercontent.com/d-chris/jinja2_pdoc/main/LICENSE)
 ---
 
 [`jinja2`](https://www.pypi.org/project/jinja2) extension based on [`pdoc`](https://pypi.org/project/pdoc/) to embedd python code directly from modules or files into your `jinja` template.
 
 ## Installation
 
-```bash
+```cmd
 pip install jinja2_pdoc
 ```
 
+## Usage
+
+- [CLI](#command-line)
+- [Library](#library)
+
 ## Syntax
 
-see [Example](#code) down below
 
 ```jinja2
 {% pdoc <module>::<object>:<pdoc_attr[.str_attr]> %}
 ```
+see also [Example](#library)
 
 ### `<module>`
 
@@ -55,27 +63,55 @@ Example:
 Example:
 
 ```jinja2
-{% pdoc pathlib::Path:docstring.source %}
+{% pdoc pathlib::Path:docstring %}
 ```
 
-### `str_attr`
+### `[.str_attr]`
 
 optional `str` functions can be added to `<pdoc_attr>` with a dot
 
 - `dedent` - removes common leading whitespace, see `textwrap.dedent`
 - `upper` - converts to upper case
 - `lower` - converts to lower case
-- ...
 
 Example:
 
 ```jinja2
-{% pdoc pathlib::Path:docstring.dedent %}
+{% pdoc pathlib::Path.open:code.dedent %}
 ```
 
-## Usage
+## Examples
 
-### Code
+### Command Line
+
+```cmd
+>>> jinja2pdoc .\examples\ --force
+
+rendering.. example.md
+```
+
+```cmd
+
+>>> jinja2pdoc --help
+
+Usage: jinja2pdoc [OPTIONS] INPUT [OUTPUT]
+
+  Render jinja2 templates from a input directory or file and write to a output
+  directory.
+
+  if the `input` is a directory, all files with a matching `pattern` are
+  renderd.
+
+  if no `output` is given, the current working directory is used.
+
+Options:
+  -p, --pattern TEXT  template search pattern for directories
+  -f, --force         overwrite existing files
+  -n, --newline TEXT  newline character
+  --help              Show this message and exit..
+```
+
+### Library
 
 python code to render a template directly from a string
 
@@ -90,9 +126,11 @@ s = """
     embedd python code directly from pathlib using a jinja2 extension based on pdoc
 
     ## docstring from pathlib.Path
-    {% pdoc pathlib::Path:docstring.dedent -%}
+
+    {% pdoc pathlib::Path:docstring %}
 
     ## source from pathlib.Path.open
+
     ```python
     {% pdoc pathlib::Path.open:source.dedent -%}
     ```
@@ -100,13 +138,13 @@ s = """
 
 code = env.from_string(textwrap.dedent(s)).render()
 
-Path("jinja2_pdoc.md").write_text(code)
+Path("example.md").write_text(code)
 
 ```
 
 ### Result
 
-output of the code above
+output of the [code](#library) above
 
 ````markdown
 # jinja2-pdoc
