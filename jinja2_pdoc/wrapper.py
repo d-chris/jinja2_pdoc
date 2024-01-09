@@ -72,7 +72,7 @@ class Module(pdoc.doc.Module):
     `Function` instead of `pdoc.doc.Function`
     """
 
-    def get(self, name: str) -> Function:
+    def get(self, name: str) -> Union[Function, None]:
         return Function(super().get(name))
 
     @classmethod
@@ -91,12 +91,12 @@ class Module(pdoc.doc.Module):
 
 class PdocStr(str):
     """
-    inhertits from `str` with a `dedent` property
+    inhertits from `str` with a `dedent` method
     """
 
     def dedent(self) -> str:
         """
-        dedent the common whitespace from the left of every line in the string,
+        remove common whitespace from the left of every line in the string,
         see `textwrap.dedent` for more information.
         """
         return textwrap.dedent(self)
