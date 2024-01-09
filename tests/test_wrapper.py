@@ -1,6 +1,6 @@
 import pytest
 
-from jinja2_pdoc.extension import Function, Module, PdocStr
+from jinja2_pdoc.wrapper import Function, Module, PdocStr
 
 
 @pytest.fixture
