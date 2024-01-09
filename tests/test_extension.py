@@ -52,5 +52,5 @@ def test_jinja2():
     with pytest.raises(AttributeError):
         PdocJinja2._pdoc_jinja2("tests::test_pdoc")
 
-    m = PdocJinja2._pdoc_jinja2("tests/test_pdoc.py::test_jinja2:docstring")
+    m = PdocJinja2._pdoc_jinja2("tests/test_extension.py::test_jinja2:docstring")
     assert m == "test_jinja2"

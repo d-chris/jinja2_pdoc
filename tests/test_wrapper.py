@@ -42,7 +42,6 @@ def test_str(open: Function):
     assert isinstance(sourcecode, PdocStr)
     assert hasattr(sourcecode, "dedent")
 
-    s = getattr(open, "docstring")
     assert isinstance(open.docstring, PdocStr)
 
 
