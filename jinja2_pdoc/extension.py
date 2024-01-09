@@ -2,10 +2,10 @@ import re
 import textwrap
 from functools import cached_property, lru_cache
 from pathlib import Path
-from typing import Dict
+from typing import Any, Dict, Union
 
-import pdoc
 import jinja2
+import pdoc
 
 
 class Function(pdoc.doc.Function):
@@ -22,17 +22,39 @@ class Function(pdoc.doc.Function):
     _regex_def = re.compile(r"def.*?\(.*?\)(?:.*?)?:\s*$", re.MULTILINE | re.DOTALL)
     """regex to match a function definition"""
 
+    def __new__(cls, obj: pdoc.doc.Function) -> Union["Function", None]:
+        """
+        create a new instance of `Function` with the wrapped object
+        """
+        if obj is None:
+            return obj
+
+        return super().__new__(cls)
+
     def __init__(self, obj: pdoc.doc.Function) -> None:
         """
         store the object to wrap
         """
         self.__obj = obj
 
+    def __getattribute__(self, name: str) -> Any:
+        """
+        get all known attributes and cast `str` to `PdocStr`
+        """
+        attr = super().__getattribute__(name)
+
+        if isinstance(attr, str):
+            attr = PdocStr(attr)
+
+        return attr
+
     def __getattr__(self, name):
         """
         get all unknown attributes from the wrapped object
         """
-        return getattr(self.__obj, name)
+        attr = getattr(self.__obj, name)
+
+        return attr
 
     @cached_property
     def code(self) -> "PdocStr":
@@ -92,20 +114,7 @@ class PdocJinja2(jinja2.ext.Extension):
         tag, *_ = self.tags
         return tag
 
-    def __parse(self, parser: jinja2.parser.Parser) -> jinja2.nodes.Node:
-        """
-        replace a `{{ pdoc "module::class:__attr__" }}` with the source code from a
-        the python module. `__attr__` is optional and defaults to `source`, see
-        `pdoc.doc.Functions` which attributes are available.
-        """
-        lineno = next(parser.stream).lineno
-        args = parser.parse_expression()
-
-        content = jinja2.nodes.Const(self._pdoc_jinja2(args.value))
-
-        return jinja2.nodes.Output([content]).set_lineno(lineno)
-
-    def parse(self, parser):
+    def parse(self, parser: jinja2.parser.Parser) -> jinja2.nodes.Node:
         """
         replace a `{{ pdoc module::class:__attr__ }}` with the source code from a
         the python module. `__attr__` is optional and defaults to `source`, see
@@ -119,7 +128,14 @@ class PdocJinja2(jinja2.ext.Extension):
             parser.stream.skip(1)
 
         arg = "".join(tokens)
-        content = jinja2.nodes.Const(self._pdoc_jinja2(arg))
+        try:
+            text = self._pdoc_jinja2(arg)
+        except ValueError:
+            raise jinja2.TemplateSyntaxError(f"syntax error in '{arg}'", lineno)
+        except AttributeError:
+            raise jinja2.TemplateAssertionError(f"could not resolve '{arg}'", lineno)
+
+        content = jinja2.nodes.Const(text)
 
         return jinja2.nodes.Output([content]).set_lineno(lineno)
 
@@ -183,26 +199,20 @@ class PdocJinja2(jinja2.ext.Extension):
         """
         cfg = cls._pdoc_syntax(line)
 
-        try:
-            doc = cls._pdoc_load(cfg["module"])
+        doc = cls._pdoc_load(cfg["module"])
 
-            if cfg["name"]:
-                s = getattr(doc.get(cfg["name"]), cfg["attr"])
-            else:
-                s = getattr(doc, cfg["attr"])
+        if cfg["name"]:
+            s = getattr(doc.get(cfg["name"]), cfg["attr"])
+        else:
+            s = getattr(doc, cfg["attr"])
 
-            if "frmt" in cfg.keys():
-                try:
-                    # call attribute on s stored in cfg["frmt"]
-                    s = getattr(PdocStr(s), cfg["frmt"])()
-                except AttributeError:
-                    pass
+        if "frmt" in cfg.keys():
+            s = getattr(PdocStr(s), cfg["frmt"])
 
-        except Exception as e:
-            cfg["tag"] = cls.tag
-            s = "{{{{ {tag} {module}::{name}:__{attr}__ }}}}".format_map(cfg)
-        finally:
-            return PdocStr(s)
+            if callable(s):
+                s = s()
+
+        return PdocStr(s)
 
 
 def main():
