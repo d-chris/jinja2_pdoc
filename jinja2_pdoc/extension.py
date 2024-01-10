@@ -11,14 +11,6 @@ from jinja2_pdoc.wrapper import PdocStr, Module
 class PdocJinja2(jinja2.ext.Extension):
     tags = {"pdoc"}
 
-    @property
-    def tag(self) -> str:
-        """
-        return the current tag and remove it from the list
-        """
-        tag, *_ = self.tags
-        return tag
-
     def parse(self, parser: jinja2.parser.Parser) -> jinja2.nodes.Node:
         """
         replace a `{{ pdoc module::class:__attr__ }}` with the source code from a
@@ -118,31 +110,3 @@ class PdocJinja2(jinja2.ext.Extension):
                 s = s()
 
         return PdocStr(s)
-
-
-def main():
-    env = jinja2.Environment(extensions=[PdocJinja2])
-
-    s = """
-        # jinja2-pdoc
-
-        embedd python code directly from pathlib using a jinja2 extension based on pdoc
-
-        ## docstring from pathlib.Path
-        {% pdoc pathlib::Path:docstring.dedent -%}
-
-        ## source from pathlib.Path.open
-        ```python
-        {% pdoc pathlib::Path.open:source.dedent -%}
-        ```
-        """
-
-    code = env.from_string(textwrap.dedent(s)).render()
-
-    Path("jinja2_pdoc.md").write_text(code)
-
-    return code
-
-
-if __name__ == "__main__":
-    main()

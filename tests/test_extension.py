@@ -1,6 +1,6 @@
 import pytest
 
-from jinja2_pdoc import PdocJinja2, pdoc
+from jinja2_pdoc import PdocJinja2, jinja2, pdoc
 
 
 @pytest.mark.parametrize(
@@ -43,7 +43,7 @@ def test_syntax(arg, ret):
 
 def test_load():
     with pytest.raises(RuntimeError):
-        PdocJinja2._pdoc_load("fubar")
+        PdocJinja2._pdoc_load("not_a_module")
 
     m = PdocJinja2._pdoc_load("pathlib")
     assert isinstance(m, pdoc.doc.Module)
@@ -63,3 +63,38 @@ def test_jinja2():
 
     m = PdocJinja2._pdoc_jinja2("tests/test_extension.py::test_jinja2:docstring")
     assert m == "test_jinja2"
+
+
+def test_extension():
+    env = jinja2.Environment(extensions=[PdocJinja2])
+
+    s = """
+        {% pdoc pathlib::Path:source.upper %}
+        """
+
+    code = env.from_string(s).render()
+
+    # check that code does not contain `{% pdoc ... %}` anymore
+    assert "{% pdoc" not in code
+
+
+def test_extension_syntax_error():
+    env = jinja2.Environment(extensions=[PdocJinja2])
+
+    s = """
+        {% pdoc %}
+        """
+
+    with pytest.raises(jinja2.exceptions.TemplateSyntaxError):
+        code = env.from_string(s).render()
+
+
+def test_extension_assertion_error():
+    env = jinja2.Environment(extensions=[PdocJinja2])
+
+    s = """
+        {% pdoc pathlib::not_existing %}
+        """
+
+    with pytest.raises(jinja2.exceptions.TemplateAssertionError):
+        code = env.from_string(s).render()

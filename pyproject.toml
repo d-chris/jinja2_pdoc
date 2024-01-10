@@ -7,9 +7,13 @@ license = "MIT"
 readme = "README.md"
 classifiers = [
     "Development Status :: 2 - Pre-Alpha",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
-    "Programming Language :: Python :: 3.11",
 ]
 keywords = ["jinja2", "pdoc", "jinja2 extension"]
 
@@ -41,7 +45,20 @@ priority = "primary"
 pytest = "^7.4.4"
 pytest-random-order = "^1.1.0"
 pytest-cov = "^4.1.0"
+tox = "^4.11.4"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+testpaths = "tests"
+addopts = [
+    "--random-order",
+    "--color=yes",
+    "--cov=jinja2_pdoc",
+    "--cov-report=term-missing:skip-covered",
+    "--cov-append",
+    # "--cov-report=html",
+]
