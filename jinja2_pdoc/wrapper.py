@@ -15,7 +15,7 @@ class Function(pdoc.doc.Function):
     """
 
     _regex_doc = re.compile(
-        r"^\s*?(?P<doc>[\"\']{3}).*?(?P=doc)\s*$", re.MULTILINE | re.DOTALL
+        r"^\s*?(?P<doc>\"{3}|\'{3}).*?(?P=doc)\s*$", re.MULTILINE | re.DOTALL
     )
     """regex to match a docstring"""
 

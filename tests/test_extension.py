@@ -19,12 +19,21 @@ from jinja2_pdoc import PdocJinja2, pdoc
         ("a:::b", {"module": "a", "name": "", "attr": "b"}),
         ("a:::", {"module": "a", "name": "", "attr": "source"}),
         pytest.param(
-            "a", None, marks=pytest.mark.xfail(raises=ValueError, strict=True)
+            "a",
+            None,
+            marks=pytest.mark.xfail(
+                raises=ValueError, strict=True, reason="should be fixed in future"
+            ),
         ),
         pytest.param(
             "a::b:c.",
             {"module": "a", "name": "b", "attr": "c"},
-            marks=pytest.mark.xfail(strict=True),
+            marks=pytest.mark.xfail(strict=True, reason="should be fixed in future"),
+        ),
+        pytest.param(
+            "a:::.b",
+            {"module": "a", "name": "", "attr": "source", "frmt": "b"},
+            marks=pytest.mark.xfail(strict=True, reason="should be fixed in future"),
         ),
     ],
 )
