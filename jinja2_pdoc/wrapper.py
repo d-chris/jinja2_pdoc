@@ -5,6 +5,7 @@ from pathlib import Path
 from typing import Any, Union
 
 import pdoc
+import autopep8
 
 
 class Function(pdoc.doc.Function):
@@ -99,4 +100,12 @@ class PdocStr(str):
         remove common whitespace from the left of every line in the string,
         see `textwrap.dedent` for more information.
         """
-        return textwrap.dedent(self)
+        s = textwrap.dedent(self)
+        return self.__class__(s)
+
+    def indent(self) -> str:
+        """
+        remove leading spaces and change indent size to 2 spaces, instead of 4.
+        """
+        s = autopep8.fix_code(self.dedent(), options={"indent_size": 2})
+        return self.__class__(s)

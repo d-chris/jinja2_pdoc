@@ -13,6 +13,11 @@ def open(doc: Module) -> Function:
     return doc.get("Path.open")
 
 
+@pytest.fixture
+def funcstr() -> PdocStr:
+    return PdocStr("\n".join(["    def dummy():", "        pass"]))
+
+
 def test_module(doc: Module):
     assert isinstance(doc, Module)
 
@@ -48,3 +53,17 @@ def test_str(open: Function):
 def test_module_raises():
     with pytest.raises(RuntimeError):
         Module.from_name("not_a_module")
+
+
+def test_dedent(funcstr: PdocStr):
+    s = funcstr.dedent()
+
+    assert isinstance(s, PdocStr)
+    assert s.startswith("def dummy():\n    pass")
+
+
+def test_autopep8(funcstr: PdocStr):
+    s = funcstr.indent()
+
+    assert isinstance(s, PdocStr)
+    assert s.startswith("def dummy():\n  pass")
