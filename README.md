@@ -1,8 +1,12 @@
 # jinja2-pdoc
 
-[![Github](https://img.shields.io/website?url=https%3A%2F%2Fgithub.com%2Fd-chris%2Fjinja2_pdoc&logo=github&label=github)
-](https://www.github.com/d-chris/jinja2_pdoc)
-[![PyPI - License](https://img.shields.io/pypi/l/pathlibutil)](https://raw.githubusercontent.com/d-chris/jinja2_pdoc/main/LICENSE)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/jinja2_pdoc)](https://pypi.org/project/jinja2_pdoc/)
+[![PyPI](https://img.shields.io/pypi/v/jinja2_pdoc)](https://pypi.org/project/jinja2_pdoc/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/jinja2_pdoc)](https://pypi.org/project/jinja2_pdoc/)
+[![PyPI - License](https://img.shields.io/pypi/l/jinja2_pdoc)](https://raw.githubusercontent.com/d-chris/jinja2_pdoc/main/LICENSE)
+[![GitHub Workflow Test)](https://img.shields.io/github/actions/workflow/status/d-chris/jinja2_pdoc/pytest.yml?logo=github&label=pytest)](https://github.com/d-chris/jinja2_pdoc/actions/workflows/pytest.yml)
+[![GitHub tag (with filter)](https://img.shields.io/github/v/tag/d-chris/jinja2_pdoc?logo=github&label=github)](https://github.com/d-chris/jinja2_pdoc)
+
 ---
 
 [`jinja2`](https://www.pypi.org/project/jinja2) extension based on [`pdoc`](https://pypi.org/project/pdoc/) to embedd python code directly from modules or files into your `jinja` template.
@@ -20,10 +24,10 @@ pip install jinja2_pdoc
 
 ## Syntax
 
-
 ```jinja2
-{% pdoc <module>::<object>:<pdoc_attr[.str_attr]> %}
+{% pdoc <module>:<object>:<pdoc_attr[.str_attr]> %}
 ```
+
 see also [Example](#library)
 
 ### `<module>`
@@ -49,7 +53,7 @@ class and/or function names, eg. from `pathlib`
 Example:
 
 ```jinja2
-{% pdoc pathlib::Path %}
+{% pdoc pathlib:Path %}
 ```
 
 ### `<pdoc_attr>`
@@ -63,7 +67,7 @@ Example:
 Example:
 
 ```jinja2
-{% pdoc pathlib::Path:docstring %}
+{% pdoc pathlib:Path:docstring %}
 ```
 
 ### `[.str_attr]`
@@ -71,13 +75,14 @@ Example:
 optional `str` functions can be added to `<pdoc_attr>` with a dot
 
 - `dedent` - removes common leading whitespace, see `textwrap.dedent`
+- `indent` - format code with 2 spaces for indentation, see `autopep8.fix_code`
 - `upper` - converts to upper case
 - `lower` - converts to lower case
 
 Example:
 
 ```jinja2
-{% pdoc pathlib::Path.open:code.dedent %}
+{% pdoc pathlib:Path.open:code.dedent %}
 ```
 
 ## Examples
@@ -127,12 +132,12 @@ s = """
 
     ## docstring from pathlib.Path
 
-    {% pdoc pathlib::Path:docstring %}
+    {% pdoc pathlib:Path:docstring %}
 
     ## source from pathlib.Path.open
 
     ```python
-    {% pdoc pathlib::Path.open:source.dedent -%}
+    {% pdoc pathlib:Path.open:source.dedent -%}
     ```
     """
 
