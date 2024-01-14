@@ -121,9 +121,9 @@ Options:
 python code to render a template directly from a string
 
 ```python
-from jinja2_pdoc import jinja2, PdocJinja2
+from jinja2_pdoc import jinja2, Jinja2Pdoc
 
-env = jinja2.Environment(extensions=[PdocJinja2])
+env = jinja2.Environment(extensions=[Jinja2Pdoc])
 
 s = """
     # jinja2-pdoc
@@ -137,7 +137,7 @@ s = """
     ## source from pathlib.Path.open
 
     ```python
-    {% pdoc pathlib:Path.open:source.dedent -%}
+    {% pdoc pathlib:Path.open:source.indent -%}
     ```
     """
 
@@ -157,6 +157,7 @@ output of the [code](#library) above
 embedd python code directly from pathlib using a jinja2 extension based on pdoc
 
 ## docstring from pathlib.Path
+
 PurePath subclass that can make system calls.
 
 Path represents a filesystem path but unlike PurePath, also offers
@@ -166,16 +167,16 @@ object. You can also instantiate a PosixPath or WindowsPath directly,
 but cannot instantiate a WindowsPath on a POSIX system or vice versa.
 
 ## source from pathlib.Path.open
+
 ```python
 def open(self, mode='r', buffering=-1, encoding=None,
-        errors=None, newline=None):
-    """
-    Open the file pointed by this path and return a file object, as
-    the built-in open() function does.
-    """
-    if "b" not in mode:
-        encoding = io.text_encoding(encoding)
-    return io.open(self, mode, buffering, encoding, errors, newline)
-
+         errors=None, newline=None):
+  """
+  Open the file pointed by this path and return a file object, as
+  the built-in open() function does.
+  """
+  if "b" not in mode:
+    encoding = io.text_encoding(encoding)
+  return io.open(self, mode, buffering, encoding, errors, newline)
 ```
 ````
