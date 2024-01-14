@@ -1,6 +1,6 @@
 import pytest
 
-from jinja2_pdoc import PdocJinja2, jinja2, pdoc
+from jinja2_pdoc import Jinja2Pdoc, jinja2, pdoc
 
 
 @pytest.mark.parametrize(
@@ -38,35 +38,35 @@ from jinja2_pdoc import PdocJinja2, jinja2, pdoc
     ],
 )
 def test_syntax(arg, ret):
-    assert PdocJinja2._pdoc_syntax(arg) == ret
+    assert Jinja2Pdoc._pdoc_syntax(arg) == ret
 
 
 def test_load():
     with pytest.raises(RuntimeError):
-        PdocJinja2._pdoc_load("not_a_module")
+        Jinja2Pdoc._pdoc_load("not_a_module")
 
-    m = PdocJinja2._pdoc_load("pathlib")
+    m = Jinja2Pdoc._pdoc_load("pathlib")
     assert isinstance(m, pdoc.doc.Module)
 
-    m = PdocJinja2._pdoc_load("tests/__init__.py")
+    m = Jinja2Pdoc._pdoc_load("tests/__init__.py")
     assert issubclass(type(m), pdoc.doc.Module)
 
 
 def test_jinja2():
     """test_jinja2"""
 
-    m = PdocJinja2._pdoc_jinja2("tests:::docstring")
+    m = Jinja2Pdoc._pdoc_jinja2("tests:::docstring")
     assert m == ""
 
     with pytest.raises(AttributeError):
-        PdocJinja2._pdoc_jinja2("tests::test_pdoc")
+        Jinja2Pdoc._pdoc_jinja2("tests::test_pdoc")
 
-    m = PdocJinja2._pdoc_jinja2("tests/test_extension.py::test_jinja2:docstring")
+    m = Jinja2Pdoc._pdoc_jinja2("tests/test_extension.py::test_jinja2:docstring")
     assert m == "test_jinja2"
 
 
 def test_extension():
-    env = jinja2.Environment(extensions=[PdocJinja2])
+    env = jinja2.Environment(extensions=[Jinja2Pdoc])
 
     s = """
         {% pdoc pathlib::Path:source.upper %}
@@ -79,7 +79,7 @@ def test_extension():
 
 
 def test_extension_syntax_error():
-    env = jinja2.Environment(extensions=[PdocJinja2])
+    env = jinja2.Environment(extensions=[Jinja2Pdoc])
 
     s = """
         {% pdoc %}
@@ -90,7 +90,7 @@ def test_extension_syntax_error():
 
 
 def test_extension_assertion_error():
-    env = jinja2.Environment(extensions=[PdocJinja2])
+    env = jinja2.Environment(extensions=[Jinja2Pdoc])
 
     s = """
         {% pdoc pathlib::not_existing %}

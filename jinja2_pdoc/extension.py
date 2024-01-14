@@ -8,7 +8,7 @@ import jinja2
 from jinja2_pdoc.wrapper import PdocStr, Module
 
 
-class PdocJinja2(jinja2.ext.Extension):
+class Jinja2Pdoc(jinja2.ext.Extension):
     tags = {"pdoc"}
 
     def parse(self, parser: jinja2.parser.Parser) -> jinja2.nodes.Node:

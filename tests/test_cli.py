@@ -19,9 +19,37 @@ def test_load_files(tmp_path: Path):
         ],
         tmp_path,
         force=True,
+        root=None,
     ):
         assert "test_load_files" in content
         assert out.parent == tmp_path
+
+
+def test_load_files_folder(tmp_path: Path):
+    files = [
+        "examples/example1.md.jinja2",
+        "examples/ex2/example2.md.jinja2",
+        "examples/example.md",
+    ]
+
+    for file in map(lambda x: tmp_path.joinpath(x), files):
+        file.parent.mkdir(parents=True, exist_ok=True)
+        file.write_text(file.stem)
+
+    input = tmp_path.joinpath("examples").rglob("*.jinja2")
+
+    for _, out in load_files(input, tmp_path, force=True, root=tmp_path):
+        file = out.relative_to(tmp_path)
+        assert out.is_absolute()
+        assert file.as_posix() + ".jinja2" in files
+
+    input = tmp_path.joinpath("examples").rglob("*.jinja2")
+
+    for content, out in load_files(input, tmp_path, force=True, root=None):
+        file = out.relative_to(tmp_path)
+        assert out.is_absolute()
+        assert file.parent == Path(".")
+        assert content == file.name
 
 
 def test_cli_folder(tmp_path):
