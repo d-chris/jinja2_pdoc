@@ -6,35 +6,21 @@ from jinja2_pdoc import Jinja2Pdoc, jinja2, pdoc
 @pytest.mark.parametrize(
     "arg, ret",
     [
-        ("a::b", {"module": "a", "name": "b", "attr": "source"}),
-        ("a::b:", {"module": "a", "name": "b", "attr": "source"}),
-        ("a::b:c", {"module": "a", "name": "b", "attr": "c"}),
-        ("a::b:_c_", {"module": "a", "name": "b", "attr": "c"}),
-        ("a::b:c.d", {"module": "a", "name": "b", "attr": "c", "frmt": "d"}),
-        ("a::b.c:d", {"module": "a", "name": "b.c", "attr": "d"}),
-        ("a::b.c:d.e", {"module": "a", "name": "b.c", "attr": "d", "frmt": "e"}),
-        ("a::b.c:_d_.e", {"module": "a", "name": "b.c", "attr": "d", "frmt": "e"}),
-        ("a::b.c:d._e_", {"module": "a", "name": "b.c", "attr": "d", "frmt": "e"}),
-        ("a::b.c:_d_._e_", {"module": "a", "name": "b.c", "attr": "d", "frmt": "e"}),
-        ("a:::b", {"module": "a", "name": "", "attr": "b"}),
-        ("a:::", {"module": "a", "name": "", "attr": "source"}),
-        pytest.param(
-            "a",
-            None,
-            marks=pytest.mark.xfail(
-                raises=ValueError, strict=True, reason="should be fixed in future"
-            ),
-        ),
-        pytest.param(
-            "a::b:c.",
-            {"module": "a", "name": "b", "attr": "c"},
-            marks=pytest.mark.xfail(strict=True, reason="should be fixed in future"),
-        ),
-        pytest.param(
-            "a:::.b",
-            {"module": "a", "name": "", "attr": "source", "frmt": "b"},
-            marks=pytest.mark.xfail(strict=True, reason="should be fixed in future"),
-        ),
+        ("a:b", {"module": "a", "name": "b", "attr": "source"}),
+        ("a:b:", {"module": "a", "name": "b", "attr": "source"}),
+        ("a:b:c", {"module": "a", "name": "b", "attr": "c"}),
+        ("a:b:_c_", {"module": "a", "name": "b", "attr": "c"}),
+        ("a:b:c.d", {"module": "a", "name": "b", "attr": "c", "frmt": "d"}),
+        ("a:b.c:d", {"module": "a", "name": "b.c", "attr": "d"}),
+        ("a:b.c:d.e", {"module": "a", "name": "b.c", "attr": "d", "frmt": "e"}),
+        ("a:b.c:_d_.e", {"module": "a", "name": "b.c", "attr": "d", "frmt": "e"}),
+        ("a:b.c:d._e_", {"module": "a", "name": "b.c", "attr": "d", "frmt": "e"}),
+        ("a:b.c:_d_._e_", {"module": "a", "name": "b.c", "attr": "d", "frmt": "e"}),
+        ("a::b", {"module": "a", "name": "", "attr": "b"}),
+        ("a::", {"module": "a", "name": "", "attr": "source"}),
+        ("a", {"module": "a", "name": "", "attr": "source"}),
+        ("a:b:c.", {"module": "a", "name": "b", "attr": "c"}),
+        ("a::.b", {"module": "a", "name": "", "attr": "source", "frmt": "b"}),
     ],
 )
 def test_syntax(arg, ret):

@@ -39,7 +39,7 @@ class Jinja2Pdoc(jinja2.ext.Extension):
     @staticmethod
     def _pdoc_syntax(line: str) -> Dict[str, str]:
         """
-        Parse a line of the form `module::name:__attr__` and return a dict with
+        Parse a line of the form `module:name:__attr__` and return a dict with
         corresponding keys and values.
 
         - `module` is the module name or file path
@@ -53,26 +53,30 @@ class Jinja2Pdoc(jinja2.ext.Extension):
         """
         pdoc = {}
 
-        parts = line.split("::")
-
-        if len(parts) == 1:
-            raise ValueError("Syntax Error: 'module::name:__attr__', attr is optional")
-
-        module = parts[0]
-        name, *code = parts[1].split(":")
-
-        pdoc["module"] = module.strip()
-        pdoc["name"] = name.strip()
         try:
-            pdoc["attr"] = code[0].strip().strip("_") or "source"
-        except IndexError as e:
+            pdoc["module"], line = line.split(":", 1)
+        except ValueError:
+            pdoc["module"] = line
+            pdoc["name"] = ""
             pdoc["attr"] = "source"
+            return pdoc
 
-        attr, *frmt = pdoc["attr"].split(".")
+        try:
+            pdoc["name"], line = line.split(":", 1)
+        except ValueError:
+            pdoc["name"] = line
+            pdoc["attr"] = "source"
+            return pdoc
 
-        if frmt:
-            pdoc["attr"] = attr.strip("_")
-            pdoc["frmt"] = frmt[0].strip().strip("_")
+        try:
+            attr, frmt = line.split(".", 1)
+        except ValueError:
+            pdoc["attr"] = line.strip("_") or "source"
+        else:
+            pdoc["attr"] = attr.strip("_") or "source"
+            frmt = frmt.strip("_")
+            if frmt:
+                pdoc["frmt"] = frmt
 
         return pdoc
 
