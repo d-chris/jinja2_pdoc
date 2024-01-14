@@ -3,7 +3,7 @@ from typing import Generator, Iterable, Tuple
 
 import click
 
-from jinja2_pdoc import PdocJinja2, jinja2
+from jinja2_pdoc import Jinja2Pdoc, jinja2
 
 
 def eof_newline(content: str, eof: str = "\n") -> str:
@@ -68,7 +68,7 @@ def main(
     if no `output` is given, the current working directory is used.
     """
 
-    env = jinja2.Environment(extensions=[PdocJinja2])
+    env = jinja2.Environment(extensions=[Jinja2Pdoc])
 
     input = Path(input)
     output = Path(output)
