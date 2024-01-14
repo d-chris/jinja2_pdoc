@@ -13,7 +13,7 @@ class Jinja2Pdoc(jinja2.ext.Extension):
 
     def parse(self, parser: jinja2.parser.Parser) -> jinja2.nodes.Node:
         """
-        replace a `{{ pdoc module::class:__attr__ }}` with the source code from a
+        replace a `{{ pdoc module:name:__attr__ }}` with the source code from a
         the python module. `__attr__` is optional and defaults to `source`, see
         `pdoc.doc.Functions` which attributes are available.
         """
@@ -94,7 +94,7 @@ class Jinja2Pdoc(jinja2.ext.Extension):
         Return the code segment of a function or class from a module.
 
         Example:
-        >>> PdocJinja2._pdoc_jinja2("pathlib::Path.open:__docstring__")
+        >>> PdocJinja2._pdoc_jinja2("pathlib:Path.open:__docstring__")
         Open the file pointed by this path and return a file object, as
         the built-in open() function does.
         """

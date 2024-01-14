@@ -41,13 +41,13 @@ def test_load():
 def test_jinja2():
     """test_jinja2"""
 
-    m = Jinja2Pdoc._pdoc_jinja2("tests:::docstring")
+    m = Jinja2Pdoc._pdoc_jinja2("tests::docstring")
     assert m == ""
 
     with pytest.raises(AttributeError):
-        Jinja2Pdoc._pdoc_jinja2("tests::test_pdoc")
+        Jinja2Pdoc._pdoc_jinja2("tests:test_nonexisting")
 
-    m = Jinja2Pdoc._pdoc_jinja2("tests/test_extension.py::test_jinja2:docstring")
+    m = Jinja2Pdoc._pdoc_jinja2("tests/test_extension.py:test_jinja2:docstring")
     assert m == "test_jinja2"
 
 
@@ -55,7 +55,7 @@ def test_extension():
     env = jinja2.Environment(extensions=[Jinja2Pdoc])
 
     s = """
-        {% pdoc pathlib::Path:source.upper %}
+        {% pdoc pathlib:Path:source.upper %}
         """
 
     code = env.from_string(s).render()
@@ -79,7 +79,7 @@ def test_extension_assertion_error():
     env = jinja2.Environment(extensions=[Jinja2Pdoc])
 
     s = """
-        {% pdoc pathlib::not_existing %}
+        {% pdoc pathlib:not_existing %}
         """
 
     with pytest.raises(jinja2.exceptions.TemplateAssertionError):
