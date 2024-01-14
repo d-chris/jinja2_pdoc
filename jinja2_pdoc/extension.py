@@ -1,11 +1,9 @@
-import textwrap
 from functools import lru_cache
-from pathlib import Path
-from typing import Any, Dict
+from typing import Dict
 
 import jinja2
 
-from jinja2_pdoc.wrapper import PdocStr, Module
+from jinja2_pdoc.wrapper import Module, PdocStr
 
 
 class Jinja2Pdoc(jinja2.ext.Extension):
