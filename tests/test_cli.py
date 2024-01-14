@@ -19,6 +19,7 @@ def test_load_files(tmp_path: Path):
         ],
         tmp_path,
         force=True,
+        root=None,
     ):
         assert "test_load_files" in content
         assert out.parent == tmp_path
