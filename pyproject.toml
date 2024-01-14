@@ -6,7 +6,6 @@ authors = ["Christoph Dörrer <d-chris@web.d>"]
 license = "MIT"
 readme = "README.md"
 classifiers = [
-    "Development Status :: 2 - Pre-Alpha",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -18,9 +17,8 @@ classifiers = [
 keywords = ["jinja2", "pdoc", "jinja2 extension"]
 
 [tool.poetry.urls]
-homepage = "https://github.com/d-chris/jinja2_pdoc"
+homepage = "https://d-chris.github.io/jinja2_pdoc"
 repository = "https://github.com/d-chris/jinja2_pdoc"
-documentation = "https://github.com/d-chris/jinja2_pdoc"
 
 [tool.poetry.dependencies]
 python = ">=3.8.1,<3.13"
