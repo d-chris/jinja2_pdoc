@@ -3,7 +3,7 @@ from typing import Generator, Iterable, Tuple
 
 import click
 
-from jinja2_pdoc import PdocJinja2, jinja2
+from jinja2_pdoc import Jinja2Pdoc, jinja2
 
 
 def eof_newline(content: str, eof: str = "\n") -> str:
@@ -17,7 +17,7 @@ def eof_newline(content: str, eof: str = "\n") -> str:
 
 
 def load_files(
-    files: Iterable[Path], out_dir: Path, force: bool
+    files: Iterable[Path], out_dir: Path, force: bool, root: Path = None
 ) -> Generator[Tuple[str, Path], None, None]:
     """
     iterates over files and yield `(content,  out_file)` if its not existing.
@@ -25,10 +25,13 @@ def load_files(
     if `force` is True, all files are proessed.
     """
     for file in files:
-        out = out_dir.joinpath(file.stem).resolve()
+        if not root:
+            out = out_dir.joinpath(file.name)
+        else:
+            out = out_dir.joinpath(file.relative_to(root))
 
         if not out.is_file() or force:
-            yield (file.read_text(), out)
+            yield (file.read_text(), out.with_suffix(""))
             click.echo(f"rendering.. {out}")
         else:
             click.echo(f"skip....... {out}")
@@ -68,21 +71,23 @@ def main(
     if no `output` is given, the current working directory is used.
     """
 
-    env = jinja2.Environment(extensions=[PdocJinja2])
+    env = jinja2.Environment(extensions=[Jinja2Pdoc])
 
-    input = Path(input)
-    output = Path(output)
-    output.mkdir(parents=True, exist_ok=True)
+    input = Path(input).resolve()
+    output = Path(output).resolve()
 
     if input.is_file():
         files = [
             input,
         ]
+        root = None
     else:
         files = input.rglob(pattern)
+        root = input
 
-    for content, file in load_files(files, output, force):
+    for content, file in load_files(files, output, force, root):
         code = env.from_string(content).render()
+        file.parent.mkdir(parents=True, exist_ok=True)
         file.write_text(eof_newline(code, newline))
 
 
