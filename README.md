@@ -120,7 +120,8 @@ Options:
 
 python code to render a template directly from a string
 
-```python
+````python
+
 from jinja2_pdoc import jinja2, Jinja2Pdoc
 
 env = jinja2.Environment(extensions=[Jinja2Pdoc])
@@ -145,13 +146,14 @@ code = env.from_string(textwrap.dedent(s)).render()
 
 Path("example.md").write_text(code)
 
-```
+````
 
 ### Result
 
 output of the [code](#library) above
 
 ````markdown
+
 # jinja2-pdoc
 
 embedd python code directly from pathlib using a jinja2 extension based on pdoc
@@ -179,4 +181,5 @@ def open(self, mode='r', buffering=-1, encoding=None,
     encoding = io.text_encoding(encoding)
   return io.open(self, mode, buffering, encoding, errors, newline)
 ```
+
 ````
