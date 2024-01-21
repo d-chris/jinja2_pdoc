@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Generator, Iterable, Tuple
+from typing import Tuple
 
 import click
 
@@ -16,27 +16,27 @@ def eof_newline(content: str, eof: str = "\n") -> str:
     return content + eof
 
 
-def load_files(
-    files: Iterable[Path], out_dir: Path, force: bool, root: Path = None
-) -> Generator[Tuple[str, Path], None, None]:
+def search_files(file: str, pattern: str = "*.jinja2") -> Tuple[Path, Path]:
     """
-    iterates over files and yield `(content,  out_file)` if its not existing.
+    Search for files with a pattern in a directory or a single file.
 
-    if `force` is True, all files are proessed.
+    Return tuples of template file and output file name
     """
-    for file in map(lambda x: x.with_suffix(""), files):
-        if not root:
-            out = out_dir.joinpath(file.name)
-        else:
-            out = out_dir.joinpath(file.relative_to(root))
+    root = Path(file)
 
-        if not out.is_file() or force:
-            yield (file.read_text(), out)
-            click.echo(f"rendering.. {out}")
-        else:
-            click.echo(f"skip....... {out}")
+    if root.is_file():
+        if root.suffix != Path(pattern).suffix:
+            raise ValueError(f"file suffix {root.suffix} does not match {pattern}")
+
+        files = [
+            root,
+        ]
+        root = root.parent
     else:
-        click.echo("\n......done")
+        files = root.rglob(pattern)
+
+    for file in files:
+        yield (file, file.relative_to(root).with_suffix(""))
 
 
 @click.command()
@@ -73,22 +73,41 @@ def main(
 
     env = jinja2.Environment(extensions=[Jinja2Pdoc])
 
-    input = Path(input).resolve()
-    output = Path(output).resolve()
+    output = Path(output)
 
-    if input.is_file():
-        files = [
-            input,
-        ]
-        root = None
-    else:
-        files = input.rglob(pattern)
-        root = input
+    def echo(tag, file, out):
+        if isinstance(tag, BaseException):
+            out = str(tag)[:48]
+            tag = type(tag).__name__
+            color = "red"
+        else:
+            out = str(out.resolve())[-48:]
 
-    for content, file in load_files(files, output, force, root):
-        code = env.from_string(content).render()
-        file.parent.mkdir(parents=True, exist_ok=True)
-        file.write_text(eof_newline(code, newline))
+            if tag == "skip":
+                color = "yellow"
+            else:
+                color = "green"
+
+        tag = click.style(f"{tag[:16]:<16}", fg=color)
+
+        click.echo(f"{tag} {str(file)[-48:]:.<48}   {out}")
+
+    for template, file in search_files(input, pattern):
+        out = output.joinpath(file)
+
+        if out.is_file() and not force:
+            echo("skip", template, out)
+            continue
+
+        try:
+            content = template.read_text()
+            code = env.from_string(content).render()
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(eof_newline(code, newline))
+        except BaseException as e:
+            echo(e, template, out)
+        else:
+            echo("rendered", template, out)
 
 
 if __name__ == "__main__":
