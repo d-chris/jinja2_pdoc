@@ -1,21 +1,23 @@
-import textwrap
 from functools import lru_cache
-from pathlib import Path
-from typing import Any, Dict
+from typing import Dict
 
 import jinja2
 
-from jinja2_pdoc.wrapper import PdocStr, Module
+from jinja2_pdoc.wrapper import Module, PdocStr
 
 
 class Jinja2Pdoc(jinja2.ext.Extension):
+    """
+    extension to include source code directly from python modules into
+    jinja2 templates with `{% pdoc module:object:pdoc_attr.str_attr %}`
+    """
+
     tags = {"pdoc"}
 
     def parse(self, parser: jinja2.parser.Parser) -> jinja2.nodes.Node:
         """
-        replace a `{{ pdoc module:name:__attr__ }}` with the source code from a
-        the python module. `__attr__` is optional and defaults to `source`, see
-        `pdoc.doc.Functions` which attributes are available.
+        parse the arguments following the tag `pdoc` and return a node with the
+        formatted source code or docstring.
         """
         lineno = next(parser.stream).lineno
 

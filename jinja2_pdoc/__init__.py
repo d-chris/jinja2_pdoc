@@ -1,3 +1,7 @@
+"""
+.. include:: ../README.md
+"""
+
 import jinja2
 import pdoc
 
