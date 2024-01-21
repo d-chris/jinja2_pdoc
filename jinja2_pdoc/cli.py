@@ -24,14 +24,14 @@ def load_files(
 
     if `force` is True, all files are proessed.
     """
-    for file in files:
+    for file in map(lambda x: x.with_suffix(""), files):
         if not root:
             out = out_dir.joinpath(file.name)
         else:
             out = out_dir.joinpath(file.relative_to(root))
 
         if not out.is_file() or force:
-            yield (file.read_text(), out.with_suffix(""))
+            yield (file.read_text(), out)
             click.echo(f"rendering.. {out}")
         else:
             click.echo(f"skip....... {out}")
