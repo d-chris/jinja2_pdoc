@@ -4,8 +4,8 @@ from functools import cached_property
 from pathlib import Path
 from typing import Any, Union
 
-import pdoc
 import autopep8
+import pdoc
 
 
 class Function(pdoc.doc.Function):

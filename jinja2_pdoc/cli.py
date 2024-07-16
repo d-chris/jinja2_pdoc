@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Tuple
+from typing import Generator, Tuple
 
 import click
 
@@ -16,7 +16,9 @@ def eof_newline(content: str, eof: str = "\n") -> str:
     return content + eof
 
 
-def search_files(file: str, pattern: str = "*.jinja2") -> Tuple[Path, Path]:
+def search_files(
+    file: str, pattern: str = "*.jinja2"
+) -> Generator[Tuple[Path, Path], None, None]:
     """
     Search for files with a pattern in a directory or a single file.
 
