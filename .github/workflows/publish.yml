@@ -15,10 +15,9 @@ jobs:
           python-version: 3.12
       - name: Install dependencies
         run: |
-          poetry install --only main,docs
+          poetry install --only main
       - name: Build Documentation
         run: |
-          poetry run jinja2pdoc --force docs/README.md.jinja2
           poetry run python -m docs
       - name: Upload GH Page
         uses: peaceiris/actions-gh-pages@v4
