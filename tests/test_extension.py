@@ -72,7 +72,7 @@ def test_extension_syntax_error():
         """
 
     with pytest.raises(jinja2.exceptions.TemplateSyntaxError):
-        code = env.from_string(s).render()
+        _ = env.from_string(s).render()
 
 
 def test_extension_assertion_error():
@@ -83,4 +83,4 @@ def test_extension_assertion_error():
         """
 
     with pytest.raises(jinja2.exceptions.TemplateAssertionError):
-        code = env.from_string(s).render()
+        _ = env.from_string(s).render()

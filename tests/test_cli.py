@@ -1,8 +1,6 @@
-from pathlib import Path
-
 from click.testing import CliRunner
 
-from jinja2_pdoc.cli import eof_newline, main, search_files
+from jinja2_pdoc.cli import eof_newline, main
 
 
 def test_eof_newline():

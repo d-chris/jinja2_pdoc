@@ -1,49 +1,106 @@
-import sys
-
-import click
-from pathlibutil import Path
-
-
-@click.group()
-def cli():
-    pass
+import json
+import os
+import shutil
+import warnings
+from contextlib import contextmanager
+from pathlib import Path
 
 
-@cli.command()
-@click.argument("root", type=click.Path(file_okay=False))
-def erase(root: str) -> None:
-    """remove a directry tree"""
+@contextmanager
+def pushd(path):
+    cwd = os.getcwd()
+    try:
+        os.chdir(path)
+        yield Path(path)
+    finally:
+        os.chdir(cwd)
 
-    self = Path(sys.argv[0]).parent
-    root = Path(root).resolve()
 
-    if self == root:
-        raise click.UsageError("Invalid value for ROOT: cannot delete itself")
+class WarningMessageEncoder(json.JSONEncoder):
+    def default(self, obj):
+
+        if isinstance(obj, warnings.WarningMessage):
+            return {
+                k: v
+                for k, v in obj.__dict__.items()
+                if v is not None and not k.startswith("_")
+            }
+
+        if isinstance(obj, type):
+            return obj.__name__
+
+        if isinstance(obj, Exception):
+            return str(obj).strip().split("\n")
+
+        return super().default(obj)
+
+
+def main() -> int:
+    """
+    Create a static html documentation for the project in the 'public' directory.
+
+    Requires follwing PyPi packages:
+    - 'pdoc'
+    - 'pathlibutil'
+
+    Returns non-zero on failure.
+    """
 
     try:
-        root.delete(recursive=True, missing_ok=True)
-    except Exception:
-        sys.exit(1)
+        from pdoc import pdoc, render
 
+        with pushd(Path(__file__).parent) as cwd:
+            print(f"\nrunning docs in {cwd=}...")
 
-@cli.command()
-@click.argument("src", type=click.Path(exists=True, file_okay=False))
-@click.argument("dst", type=click.Path(file_okay=False))
-@click.option(
-    "-u", "--unignore", is_flag=True, help="remove gitignore files in destination"
-)
-def copy(src: str, dst: str, unignore=True) -> None:
-    """copy directory from src to dst and remove any gitignore files"""
+            documentation = cwd / "public"
 
-    try:
-        dest = Path(src).copy(dst)
-    except Exception:
-        sys.exit(1)
+            try:
+                print("cleaning output directory.")
+                shutil.rmtree(documentation)
+            except FileNotFoundError:
+                pass
 
-    if unignore:
-        for file in dest.rglob(".gitignore"):
-            file.unlink()
+            documentation.mkdir(parents=True)
+
+            config = {
+                "template_directory": cwd / "dark-mode",
+                "show_source": False,
+                "search": False,
+            }
+
+            modules = [
+                "jinja2_pdoc",
+                "pdoc",
+            ]
+
+            with warnings.catch_warnings(record=True) as messages:
+                print(f"rendering {modules=}.")
+
+                render.configure(**config)
+                pdoc(*modules, output_directory=documentation)
+
+                log = documentation / "warnings.json"
+
+                with log.open("w", encoding="utf-8") as f:
+                    json.dump(
+                        messages,
+                        f,
+                        cls=WarningMessageEncoder,
+                    )
+
+                if messages:
+                    print(f"{log=} generated with {len(messages)} warnings.")
+    except ModuleNotFoundError as e:
+        print(f"Creation failed, due missing dependency!\n\tpip install {e.name}")
+        return 2
+    except Exception as e:
+        print(f"{documentation=} creation failed!\n\t{e}")
+        return 1
+
+    print(f"{documentation=} generated successfully.\n")
+
+    return 0
 
 
 if __name__ == "__main__":
-    cli()
+    SystemExit(main())
