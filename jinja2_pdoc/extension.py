@@ -13,6 +13,7 @@ class Jinja2Pdoc(jinja2.ext.Extension):
     """
 
     tags = {"pdoc"}
+    """The tag name for the extension."""
 
     def parse(self, parser: jinja2.parser.Parser) -> jinja2.nodes.Node:
         """

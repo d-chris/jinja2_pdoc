@@ -71,6 +71,7 @@ def main() -> int:
             modules = [
                 "jinja2_pdoc",
                 "pdoc",
+                "jinja2",
             ]
 
             with warnings.catch_warnings(record=True) as messages:

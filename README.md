@@ -1,11 +1,14 @@
 # jinja2-pdoc
 
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/jinja2_pdoc)](https://pypi.org/project/jinja2_pdoc/)
-[![PyPI](https://img.shields.io/pypi/v/jinja2_pdoc)](https://pypi.org/project/jinja2_pdoc/)
+[![PyPI - jinja2_pdoc](https://img.shields.io/pypi/v/jinja2_pdoc)](https://pypi.org/project/jinja2_pdoc/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/jinja2_pdoc)](https://pypi.org/project/jinja2_pdoc/)
 [![PyPI - License](https://img.shields.io/pypi/l/jinja2_pdoc)](https://raw.githubusercontent.com/d-chris/jinja2_pdoc/main/LICENSE)
-[![GitHub Workflow Test)](https://img.shields.io/github/actions/workflow/status/d-chris/jinja2_pdoc/pytest.yml?logo=github&label=pytest)](https://github.com/d-chris/jinja2_pdoc/actions/workflows/pytest.yml)
+[![GitHub - pytest](https://img.shields.io/github/actions/workflow/status/d-chris/jinja2_pdoc/pytest.yml?logo=github&label=pytest)](https://github.com/d-chris/jinja2_pdoc/actions/workflows/pytest.yml)
+[![GitHub - Page](https://img.shields.io/website?url=https%3A%2F%2Fd-chris.github.io%2Fjinja2_pdoc%2F&up_message=pdoc&logo=github&label=documentation)](https://d-chris.github.io/jinja2_pdoc)
 [![GitHub tag (with filter)](https://img.shields.io/github/v/tag/d-chris/jinja2_pdoc?logo=github&label=github)](https://github.com/d-chris/jinja2_pdoc)
+[![codecov](https://codecov.io/gh/d-chris/jinja2_pdoc/graph/badge.svg?token=19YB50ZL63)](https://codecov.io/gh/d-chris/jinja2_pdoc)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 
 ---
 
@@ -183,3 +186,12 @@ def open(self, mode='r', buffering=-1, encoding=None,
 ```
 
 ````
+
+## Dependencies
+
+[![PyPI - autopep8](https://img.shields.io/pypi/v/autopep8?logo=pypi&logoColor=white&label=autopep8)](https://pypi.org/project/autopep8/)
+[![PyPI - click](https://img.shields.io/pypi/v/click?logo=pypi&logoColor=white&label=click)](https://pypi.org/project/click/)
+[![PyPI - jinja2](https://img.shields.io/pypi/v/jinja2?logo=jinja&logoColor=white&label=jinja2)](https://pypi.org/project/jinja2/)
+[![PyPI - pdoc](https://img.shields.io/pypi/v/pdoc?logo=pypi&logoColor=white&label=pdoc)](https://pypi.org/project/pdoc/)
+
+---
