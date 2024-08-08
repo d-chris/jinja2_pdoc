@@ -6,7 +6,7 @@ import yaml
 
 def frontmatter(content: str) -> Dict[str, Any]:
     match = re.search(
-        r"^(.*?)<!--(.*?)-->",
+        r"^(.*?)(?:<!|-)--(.*?)--(?:>|-)",
         content,
         re.MULTILINE | re.DOTALL,
     )
