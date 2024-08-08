@@ -1,26 +1,13 @@
 from click.testing import CliRunner
 
-from jinja2_pdoc.cli import eof_newline, main
-
-
-def test_eof_newline():
-    assert eof_newline("test") == "test\n"
-    assert eof_newline("test\n") == "test\n"
-    assert eof_newline("test", "") == "test"
-    assert eof_newline("test", "\n") == "test\n"
+from jinja2_pdoc.cli import main
 
 
 def test_cli_folder(tmp_path):
     runner = CliRunner()
     result = runner.invoke(
         main,
-        ["examples", str(tmp_path)],
+        ["examples/*.jinja2", "--output", str(tmp_path)],
     )
     assert result.exit_code == 0
     assert tmp_path.joinpath("example.md").is_file()
-
-    result = runner.invoke(
-        main,
-        ["examples/example.md.jinja2", str(tmp_path)],
-    )
-    assert result.exit_code == 0
