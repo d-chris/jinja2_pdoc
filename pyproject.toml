@@ -35,12 +35,13 @@ autopep8 = "^2.0.4"
 pyyaml = "^6.0.1"
 
 [tool.poetry.scripts]
-jinja2pdoc = "jinja2_pdoc.cli:main"
+jinja2pdoc = "jinja2_pdoc.cli:cli"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.4.4"
 pytest-random-order = "^1.1.0"
 pytest-cov = "^4.1.0"
+pytest-mock = "^3.14.0"
 
 [tool.poetry.group.dev.dependencies]
 tox = "^4.11.4"
@@ -63,7 +64,6 @@ testpaths = "tests"
 addopts = [
   "--random-order",
   "--color=yes",
-  "-s",
   "--cov=jinja2_pdoc",
   "--cov-report=term-missing:skip-covered",
   "--cov-report=xml",

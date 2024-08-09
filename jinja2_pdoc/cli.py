@@ -1,4 +1,3 @@
-import inspect
 from pathlib import Path
 from typing import Generator, List, Set
 
@@ -6,31 +5,6 @@ import click
 
 import jinja2_pdoc.meta as meta
 from jinja2_pdoc.environment import Environment
-
-
-def signature(wrapped):
-    """
-    A decorator that sets the signature of the wrapper function to the wrapped function
-    and also copies the docstring.
-    """
-
-    def decorator(wrapper):
-        wrapper.__doc__ += "\n\n" + wrapped.__doc__
-
-        sig = inspect.signature(wrapped)
-
-        param = [
-            inspect.Parameter(
-                name="files",
-                kind=inspect.Parameter.VAR_POSITIONAL,
-                annotation=str,
-            ),
-        ] + [p for n, p in sig.parameters.items() if n != "files"]
-
-        wrapper.__signature__ = sig.replace(parameters=param, return_annotation=int)
-        return wrapper
-
-    return decorator
 
 
 def expand(files: List[str], duplicates: bool = False) -> Generator[Path, None, None]:
@@ -95,7 +69,68 @@ def echo(tag, file, out):
     click.echo(f"{tag} {str(file)[-48:]:.<48}   {out}")
 
 
-@click.command()
+def jinja2pdoc(
+    *files: str,
+    output: str = None,
+    encoding="utf-8",
+    suffixes: Set[str] = {".jinja2", ".j2"},
+    fail_fast: bool = False,
+    frontmatter: bool = True,
+    rerender: bool = False,
+) -> None:
+    """
+    Render jinja2 one or multiple template files, wildcards in filenames are allowed,
+    e.g. `examples/*.jinja2`.
+
+    If no 'filename' is provided in the frontmatter section of your file, e.g.
+    '<!--filename: example.md-->'. All files are written to `output`
+    directory and `suffixes` will be removed.
+
+    To ignore the frontmatter section use the `--no-meta` flag.
+    """
+
+    root = Path(output) if output else Path.cwd()
+
+    env = Environment()
+
+    def render_file(file):
+        template = file.read_text(encoding)
+
+        content = env.from_string(template).render()
+
+        post = meta.frontmatter(content) if frontmatter else {}
+
+        try:
+            output = root.joinpath(post["filename"]).resolve()
+        except KeyError:
+            output = root.joinpath(file.name)
+
+        if output.suffix in suffixes:
+            output = output.with_suffix("")
+
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(content, encoding)
+
+        return output
+
+    result = 0
+    i = 0
+
+    for i, file in enumerate(expand(files, duplicates=rerender), start=1):
+        try:
+            echo("rendering", file, render_file(file))
+        except Exception as e:
+            echo(e, file, "")
+
+            if fail_fast:
+                return 1
+
+            result += 1
+
+    return result if i > 0 else -1
+
+
+@click.command(help=jinja2pdoc.__doc__)
 @click.argument(
     "files",
     nargs=-1,
@@ -146,79 +181,9 @@ def echo(tag, file, out):
     show_default=True,
     help="Each file is rendered only once.",
 )
-def main(
-    files: List[str],
-    *,
-    output: str = None,
-    encoding="utf-8",
-    suffixes: Set[str] = {".jinja2", ".j2"},
-    fail_fast: bool = False,
-    frontmatter: bool = True,
-    rerender: bool = False,
-) -> None:
-    """
-    Render jinja2 one or multiple template files, wildcards in filenames are allowed,
-    e.g. `examples/*.jinja2`.
-
-    If no 'filename' is provided in the frontmatter section of your file, e.g.
-    '<!--filename: example.md-->'. All files are written to `output`
-    directory and `suffixes` will be removed.
-
-    To ignore the frontmatter section use the `--no-meta` flag.
-    """
-
-    root = Path(output) if output else Path.cwd()
-
-    env = Environment()
-
-    def render_file(file):
-        template = file.read_text(encoding)
-
-        content = env.from_string(template).render()
-
-        post = meta.frontmatter(content) if frontmatter else {}
-
-        try:
-            output = root.joinpath(post["filename"]).resolve()
-        except KeyError:
-            output = root.joinpath(file.name)
-
-        if output.suffix in suffixes:
-            output = output.with_suffix("")
-
-        output.parent.mkdir(parents=True, exist_ok=True)
-        output.write_text(content, encoding)
-
-        return output
-
-    result = 0
-
-    for file in expand(files, duplicates=rerender):
-        try:
-            echo("rendering", file, render_file(file))
-        except Exception as e:
-            echo(e, file, "")
-
-            if fail_fast:
-                return 1
-
-            result += 1
-
-    return result
-
-
-@signature(main.callback)
-def jinja2pdoc(*files, **kwargs):
-    """
-    Wrapper function to call the `jinja2pdoc command-line-interface` directly from your
-    python code.
-
-    `output` is set on default to the current working directory.
-
-    Returns non-zero exit code if an error occurred.
-    """
-    return main.callback(files, **kwargs)
+def cli(**kwargs):
+    return jinja2pdoc(*kwargs.pop("files"), **kwargs)
 
 
 if __name__ == "__main__":
-    main()
+    cli()
