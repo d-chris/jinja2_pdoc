@@ -23,9 +23,9 @@ def expand(files: List[str], duplicates: bool = False) -> Generator[Path, None, 
         try:
             file = Path(file)
             file.resolve(True)
-        except (FileNotFoundError, TypeError):
+        except TypeError:
             pass
-        except OSError:
+        except (OSError, FileNotFoundError):
             parent, pattern = file.parent, file.name
 
             yield from parent.glob(pattern)
