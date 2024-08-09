@@ -22,6 +22,7 @@ from jinja2_pdoc import Jinja2Pdoc, jinja2, pdoc
         ("a:b:c.", {"module": "a", "name": "b", "attr": "c"}),
         ("a::.b", {"module": "a", "name": "", "attr": "source", "frmt": "b"}),
     ],
+    ids=lambda x: str(x),
 )
 def test_syntax(arg, ret):
     assert Jinja2Pdoc._pdoc_syntax(arg) == ret
@@ -72,7 +73,7 @@ def test_extension_syntax_error():
         """
 
     with pytest.raises(jinja2.exceptions.TemplateSyntaxError):
-        code = env.from_string(s).render()
+        _ = env.from_string(s).render()
 
 
 def test_extension_assertion_error():
@@ -83,4 +84,4 @@ def test_extension_assertion_error():
         """
 
     with pytest.raises(jinja2.exceptions.TemplateAssertionError):
-        code = env.from_string(s).render()
+        _ = env.from_string(s).render()

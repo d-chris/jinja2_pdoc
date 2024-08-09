@@ -1,5 +1,5 @@
 .vscode
-docs/jinja2_pdoc
+docs/public/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

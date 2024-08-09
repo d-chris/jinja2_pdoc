@@ -9,10 +9,15 @@ from jinja2_pdoc.wrapper import Module, PdocStr
 class Jinja2Pdoc(jinja2.ext.Extension):
     """
     extension to include source code directly from python modules into
-    jinja2 templates with `{% pdoc module:object:pdoc_attr.str_attr %}`
+    jinja2 templates with
+
+    ```jinja2
+    {% pdoc module:object:pdoc_attr.str_attr %}
+    ```
     """
 
     tags = {"pdoc"}
+    """The tag name for the extension."""
 
     def parse(self, parser: jinja2.parser.Parser) -> jinja2.nodes.Node:
         """

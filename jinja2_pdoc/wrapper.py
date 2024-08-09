@@ -4,8 +4,8 @@ from functools import cached_property
 from pathlib import Path
 from typing import Any, Union
 
-import pdoc
 import autopep8
+import pdoc
 
 
 class Function(pdoc.doc.Function):
@@ -15,7 +15,8 @@ class Function(pdoc.doc.Function):
     """
 
     _regex_doc = re.compile(
-        r"^\s*?(?P<doc>\"{3}|\'{3}).*?(?P=doc)\s*$", re.MULTILINE | re.DOTALL
+        r"^\s*?(?P<doc>\"{3}|\'{3}).*?(?P=doc)\s*$",
+        re.MULTILINE | re.DOTALL,
     )
     """regex to match a docstring"""
 

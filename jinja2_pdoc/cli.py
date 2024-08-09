@@ -1,114 +1,202 @@
 from pathlib import Path
-from typing import Tuple
+from typing import Generator, List, Set
 
 import click
 
-from jinja2_pdoc import Jinja2Pdoc, jinja2
+import jinja2_pdoc.meta as meta
+from jinja2_pdoc.environment import Environment
 
 
-def eof_newline(content: str, eof: str = "\n") -> str:
+def expand(files: List[str], duplicates: bool = False) -> Generator[Path, None, None]:
     """
-    make sure the file content ends with a newline if specified.
-    """
-    if content.endswith(eof) or not eof:
-        return content
+    yields only an existing file.
 
-    return content + eof
+    if file.name contains a glob pattern it yields all
+    matching files
 
-
-def search_files(file: str, pattern: str = "*.jinja2") -> Tuple[Path, Path]:
-    """
-    Search for files with a pattern in a directory or a single file.
-
-    Return tuples of template file and output file name
-    """
-    root = Path(file)
-
-    if root.is_file():
-        if root.suffix != Path(pattern).suffix:
-            raise ValueError(f"file suffix {root.suffix} does not match {pattern}")
-
-        files = [
-            root,
-        ]
-        root = root.parent
-    else:
-        files = root.rglob(pattern)
-
-    for file in files:
-        yield (file, file.relative_to(root).with_suffix(""))
-
-
-@click.command()
-@click.argument("input", type=click.Path(exists=True))
-@click.argument("output", type=click.Path(file_okay=False), default=Path.cwd())
-@click.option(
-    "-p",
-    "--pattern",
-    default="*.jinja2",
-    help="template search pattern for directories",
-)
-@click.option("-f", "--force", is_flag=True, help="overwrite existing files")
-@click.option(
-    "-n",
-    "--newline",
-    default="\n",
-    help="newline character",
-)
-def main(
-    input: str,
-    output: str = ".",
-    pattern: str = "*.jinja2",
-    force: bool = False,
-    newline: str = "\n",
-) -> None:
-    """
-    Render jinja2 templates from a input directory or file and
-    write to a output directory.
-
-    if the `input` is a directory, all files with a matching `pattern` are renderd.
-
-    if no `output` is given, the current working directory is used.
+    >>> list(expand("examples/*.jinja2"))
+    [WindowsPath('examples/example.md.jinja2')]
     """
 
-    env = jinja2.Environment(extensions=[Jinja2Pdoc])
-
-    output = Path(output)
-
-    def echo(tag, file, out):
-        if isinstance(tag, BaseException):
-            out = str(tag)[:48]
-            tag = type(tag).__name__
-            color = "red"
-        else:
-            out = str(out.resolve())[-48:]
-
-            if tag == "skip":
-                color = "yellow"
-            else:
-                color = "green"
-
-        tag = click.style(f"{tag[:16]:<16}", fg=color)
-
-        click.echo(f"{tag} {str(file)[-48:]:.<48}   {out}")
-
-    for template, file in search_files(input, pattern):
-        out = output.joinpath(file)
-
-        if out.is_file() and not force:
-            echo("skip", template, out)
-            continue
+    def wrapper(file: str) -> Generator[Path, None, None]:
 
         try:
-            content = template.read_text()
-            code = env.from_string(content).render()
-            out.parent.mkdir(parents=True, exist_ok=True)
-            out.write_text(eof_newline(code, newline))
-        except BaseException as e:
-            echo(e, template, out)
+            file = Path(file)
+            file.resolve(True)
+        except TypeError:
+            pass
+        except (OSError, FileNotFoundError):
+            parent, pattern = file.parent, file.name
+
+            yield from parent.glob(pattern)
         else:
-            echo("rendered", template, out)
+            yield file
+
+    if not duplicates:
+        seen = set()
+
+        for file in files:
+            for item in wrapper(file):
+                if item not in seen:
+                    seen.add(item)
+                    yield item
+    else:
+        for file in files:
+            yield from wrapper(file)
+
+
+def echo(tag, file, out, silent=False):
+    """
+    print a message to the console
+    """
+    if silent:
+        return
+
+    if isinstance(tag, Exception):
+        out = str(tag)[:48]
+        tag = type(tag).__name__
+        color = "red"
+    else:
+        try:
+            out = str(out.relative_to(Path.cwd()))[-48:]
+        except ValueError:
+            out = str(out)[-48:]
+
+        if tag == "skip":
+            color = "yellow"
+        else:
+            color = "green"
+
+    tag = click.style(f"{tag[:16]:<16}", fg=color)
+
+    click.echo(f"{tag} {str(file)[-48:]:.<48}   {out}")
+
+
+def jinja2pdoc(
+    *files: str,
+    output: str = None,
+    encoding="utf-8",
+    suffixes: Set[str] = {".jinja2", ".j2"},
+    fail_fast: bool = False,
+    frontmatter: bool = True,
+    rerender: bool = False,
+    silent: bool = True,
+) -> None:
+    """
+    Render jinja2 one or multiple template files, wildcards in filenames are allowed,
+    e.g. `examples/*.jinja2`.
+
+    If no 'filename' is provided in the frontmatter section of your file, e.g.
+    '<!--filename: example.md-->'. All files are written to `output`
+    directory and `suffixes` will be removed.
+
+    To ignore the frontmatter section use the `--no-meta` flag.
+    """
+
+    root = Path(output) if output else Path.cwd()
+
+    env = Environment()
+
+    def render_file(file):
+        template = file.read_text(encoding)
+
+        content = env.from_string(template).render()
+
+        post = meta.frontmatter(content) if frontmatter else {}
+
+        try:
+            output = root.joinpath(post["filename"]).resolve()
+        except KeyError:
+            output = root.joinpath(file.name)
+
+        if output.suffix in suffixes:
+            output = output.with_suffix("")
+
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(content, encoding)
+
+        return output
+
+    result = 0
+    i = 0
+
+    for i, file in enumerate(expand(files, duplicates=rerender), start=1):
+        try:
+            echo("rendering", file, render_file(file), silent)
+        except Exception as e:
+            echo(e, file, "")
+
+            if fail_fast:
+                return 1
+
+            result += 1
+
+    return result if i > 0 else -1
+
+
+@click.command(help=jinja2pdoc.__doc__)
+@click.argument(
+    "files",
+    nargs=-1,
+)
+@click.option(
+    "-o",
+    "--output",
+    default=Path.cwd(),
+    type=click.Path(),
+    help=(
+        "output directory for files, if no 'filename' is provided in the frontmatter."
+        "  [default: cwd]"
+    ),
+)
+@click.option(
+    "-e",
+    "--encoding",
+    default="utf-8",
+    show_default=True,
+    help="encoding of the files",
+)
+@click.option(
+    "-s",
+    "--suffixes",
+    multiple=True,
+    default=[".jinja2", ".j2"],
+    show_default=True,
+    help=(
+        "suffixes which will be removed from templates, "
+        "if no 'filename' is provided in the frontmatter"
+    ),
+)
+@click.option(
+    "--fail-fast",
+    is_flag=True,
+    default=False,
+    show_default=True,
+    help="exit on first error when rendering multiple file",
+)
+@click.option(
+    "--meta/--no-meta",
+    "frontmatter",
+    default=True,
+    show_default=True,
+    help="parse frontmatter from the template, to search for 'filename'",
+)
+@click.option(
+    "--rerender/--no-rerender",
+    default=False,
+    show_default=True,
+    help="Each file is rendered only once.",
+)
+@click.option(
+    "--silent",
+    is_flag=True,
+    default=False,
+    show_default=True,
+    help="suppress console output",
+)
+def cli(**kwargs):
+    return jinja2pdoc(*kwargs.pop("files"), **kwargs)
 
 
 if __name__ == "__main__":
-    main()
+    cli()
