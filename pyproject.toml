@@ -5,7 +5,7 @@ requires = [ "poetry-core" ]
 
 [tool.poetry]
 name = "jinja2-pdoc"
-version = "0.1.0"
+version = "0.0.0"
 description = "jinja2 extension to embedd python code directly from module using pdoc"
 authors = [ "Christoph Dörrer <d-chris@web.d>" ]
 license = "MIT"
@@ -19,11 +19,12 @@ classifiers = [
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
 ]
-keywords = [ "jinja2", "pdoc", "jinja2 extension" ]
+keywords = [ "jinja2", "pdoc", "jinja2 extension", "pre-commit-hook" ]
 
 [tool.poetry.urls]
-homepage = "https://d-chris.github.io/jinja2_pdoc"
+homepage = "https://github.com/d-chris/jinja2_pdoc"
 repository = "https://github.com/d-chris/jinja2_pdoc"
+documentation = "https://d-chris.github.io/jinja2_pdoc"
 
 [tool.poetry.dependencies]
 python = "^3.8.1"

@@ -91,9 +91,7 @@ def open(self, mode='r', buffering=-1, encoding=None,
 
 ## Syntax
 
-```jinja2
-{% pdoc <module>:<object>:<pdoc_attr[.str_attr]> %}
-```
+`{% pdoc`[`<module>`](#module)`:`[`<object>`](#object)`:`[`<pdoc_attr[.str_attr]>`](#pdoc_attr)`%}`
 
 ### `<module>`
 
@@ -153,29 +151,55 @@ Example:
 ## Command Line Interface
 
 ```cmd
-
 >>> jinja2pdoc --help
 
-Usage: jinja2pdoc [OPTIONS] INPUT [OUTPUT]
+Usage: jinja2pdoc [OPTIONS] [FILES]...
 
-  Render jinja2 templates from a input directory or file and write to a output
-  directory.
+  Render jinja2 one or multiple template files, wildcards in filenames are
+  allowed, e.g. `examples/*.jinja2`.
 
-  if the `input` is a directory, all files with a matching `pattern` are
-  renderd.
+  If no 'filename' is provided in the frontmatter section of your file, e.g.
+  '<!--filename: example.md-->'. All files are written to `output` directory
+  and `suffixes` will be removed.
 
-  if no `output` is given, the current working directory is used.
+  To ignore the frontmatter section use the `--no-meta` flag.
 
 Options:
-  -p, --pattern TEXT  template search pattern for directories
-  -f, --force         overwrite existing files
-  -n, --newline TEXT  newline character
-  --help              Show this message and exit..
+  -o, --output PATH           output directory for files, if no 'filename' is
+                              provided in the frontmatter.  [default:
+                              K:\jinja2_pdoc]
+  -e, --encoding TEXT         encoding of the files  [default: utf-8]
+  -s, --suffixes TEXT         suffixes which will be removed from templates,
+                              if no 'filename' is provided in the frontmatter
+                              [default: .jinja2, .j2]
+  --fail-fast                 exit on first error when rendering multiple file
+  --meta / --no-meta          parse frontmatter from the template, to search
+                              for 'filename'  [default: meta]
+  --rerender / --no-rerender  Each file is rendered only once.  [default: no-
+                              rerender]
+  --help                      Show this message and exit.
 ```
 
 ```cmd
->>> jinja2pdoc .\examples\ --force
+>>> jinja2pdoc .\examples\*.jinja2
 rendered         examples\example.md.jinja2......................   .\example.md
+```
+
+## pre-commit hook
+
+**Per default the hook is not registered to any `type` or `files`!**
+
+To render all template files from `docs` using `.pre-commit-config.yaml` add the following.
+
+You may add a `frontmatter` section at the beginning of in your templates to specify output directory and filename, e.g. `<!--filename: example.md-->`. If no metadata are at the beginning of the  template, the rendered file is written to the `output` directory which is default the current working direktory.
+
+```yaml
+repos:
+  - repo: https://github.com/d-chris/jinja2_pdoc/
+    rev: v1.0.0
+    hooks:
+      - id: jinja2pdoc
+        files: docs/.*\.jinja2$
 ```
 
 ## Dependencies
@@ -184,5 +208,6 @@ rendered         examples\example.md.jinja2......................   .\example.md
 [![PyPI - click](https://img.shields.io/pypi/v/click?logo=pypi&logoColor=white&label=click)](https://pypi.org/project/click/)
 [![PyPI - jinja2](https://img.shields.io/pypi/v/jinja2?logo=jinja&logoColor=white&label=jinja2)](https://pypi.org/project/jinja2/)
 [![PyPI - pdoc](https://img.shields.io/pypi/v/pdoc?logo=pypi&logoColor=white&label=pdoc)](https://pypi.org/project/pdoc/)
+[![Pypi - PyYAML](https://img.shields.io/pypi/v/PyYAML?logo=pypi&logoColor=white&label=PyYAML)](https://pypi.org/project/PyYAML/)
 
 ---

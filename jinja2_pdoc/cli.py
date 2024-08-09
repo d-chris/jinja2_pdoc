@@ -1,10 +1,36 @@
+import inspect
 from pathlib import Path
 from typing import Generator, List, Set
 
 import click
 
 import jinja2_pdoc.meta as meta
-from jinja2_pdoc import Environment
+from jinja2_pdoc.environment import Environment
+
+
+def signature(wrapped):
+    """
+    A decorator that sets the signature of the wrapper function to the wrapped function
+    and also copies the docstring.
+    """
+
+    def decorator(wrapper):
+        wrapper.__doc__ += "\n\n" + wrapped.__doc__
+
+        sig = inspect.signature(wrapped)
+
+        param = [
+            inspect.Parameter(
+                name="files",
+                kind=inspect.Parameter.VAR_POSITIONAL,
+                annotation=str,
+            ),
+        ] + [p for n, p in sig.parameters.items() if n != "files"]
+
+        wrapper.__signature__ = sig.replace(parameters=param, return_annotation=int)
+        return wrapper
+
+    return decorator
 
 
 def expand(files: List[str], duplicates: bool = False) -> Generator[Path, None, None]:
@@ -19,10 +45,11 @@ def expand(files: List[str], duplicates: bool = False) -> Generator[Path, None, 
     """
 
     def wrapper(file: str) -> Generator[Path, None, None]:
-        file = Path(file)
+
         try:
+            file = Path(file)
             file.resolve(True)
-        except FileNotFoundError:
+        except (FileNotFoundError, TypeError):
             pass
         except OSError:
             parent, pattern = file.parent, file.name
@@ -53,7 +80,10 @@ def echo(tag, file, out):
         tag = type(tag).__name__
         color = "red"
     else:
-        out = str(out.resolve())[-48:]
+        try:
+            out = str(out.relative_to(Path.cwd()))[-48:]
+        except ValueError:
+            out = str(out)[-48:]
 
         if tag == "skip":
             color = "yellow"
@@ -75,7 +105,8 @@ def echo(tag, file, out):
     "--output",
     default=Path.cwd(),
     show_default=True,
-    help="output directory for files, if no 'filename' is provided in the frontmatter",
+    type=click.Path(),
+    help="output directory for files, if no 'filename' is provided in the frontmatter.",
 )
 @click.option(
     "-e",
@@ -109,26 +140,34 @@ def echo(tag, file, out):
     show_default=True,
     help="parse frontmatter from the template, to search for 'filename'",
 )
+@click.option(
+    "--rerender/--no-rerender",
+    default=False,
+    show_default=True,
+    help="Each file is rendered only once.",
+)
 def main(
     files: List[str],
-    output: str = Path.cwd(),
+    *,
+    output: str = None,
     encoding="utf-8",
     suffixes: Set[str] = {".jinja2", ".j2"},
     fail_fast: bool = False,
     frontmatter: bool = True,
+    rerender: bool = False,
 ) -> None:
     """
     Render jinja2 one or multiple template files, wildcards in filenames are allowed,
     e.g. `examples/*.jinja2`.
 
-    If no 'filename' is provided in the frontmatter section, e.g.
+    If no 'filename' is provided in the frontmatter section of your file, e.g.
     '<!--filename: example.md-->'. All files are written to `output`
     directory and `suffixes` will be removed.
 
     To ignore the frontmatter section use the `--no-meta` flag.
     """
 
-    root = Path(output)
+    root = Path(output) if output else Path.cwd()
 
     env = Environment()
 
@@ -137,18 +176,15 @@ def main(
 
         content = env.from_string(template).render()
 
-        if not content.endswith("\n"):
-            content += "\n"
-
         post = meta.frontmatter(content) if frontmatter else {}
 
         try:
-            output = Path(post["filename"])
+            output = root.joinpath(post["filename"]).resolve()
         except KeyError:
             output = root.joinpath(file.name)
 
-            if output.suffix in suffixes:
-                output = output.with_suffix("")
+        if output.suffix in suffixes:
+            output = output.with_suffix("")
 
         output.parent.mkdir(parents=True, exist_ok=True)
         output.write_text(content, encoding)
@@ -157,7 +193,7 @@ def main(
 
     result = 0
 
-    for file in expand(files):
+    for file in expand(files, duplicates=rerender):
         try:
             echo("rendering", file, render_file(file))
         except Exception as e:
@@ -171,5 +207,18 @@ def main(
     return result
 
 
+@signature(main.callback)
+def jinja2pdoc(*files, **kwargs):
+    """
+    Wrapper function to call the `jinja2pdoc command-line-interface` directly from your
+    python code.
+
+    `output` is set on default to the current working directory.
+
+    Returns non-zero exit code if an error occurred.
+    """
+    return main.callback(files, **kwargs)
+
+
 if __name__ == "__main__":
-    SystemExit(main())
+    main()

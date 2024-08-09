@@ -11,7 +11,7 @@ class Jinja2Pdoc(jinja2.ext.Extension):
     extension to include source code directly from python modules into
     jinja2 templates with
 
-    ````jinja2
+    ```jinja2
     {% pdoc module:object:pdoc_attr.str_attr %}
     ```
     """
