@@ -1,0 +1,2035 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="pdoc 14.6.0"/>
+    <title>jinja2.environment API documentation</title>
+
+    <style>/*! * Bootstrap Reboot v5.0.0 (https://getbootstrap.com/) * Copyright 2011-2021 The Bootstrap Authors * Copyright 2011-2021 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) * Forked from Normalize.css, licensed MIT (https://github.com/necolas/normalize.css/blob/master/LICENSE.md) */*,::after,::before{box-sizing:border-box}@media (prefers-reduced-motion:no-preference){:root{scroll-behavior:smooth}}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}hr{margin:1rem 0;color:inherit;background-color:currentColor;border:0;opacity:.25}hr:not([size]){height:1px}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:500;line-height:1.2}h1{font-size:calc(1.375rem + 1.5vw)}@media (min-width:1200px){h1{font-size:2.5rem}}h2{font-size:calc(1.325rem + .9vw)}@media (min-width:1200px){h2{font-size:2rem}}h3{font-size:calc(1.3rem + .6vw)}@media (min-width:1200px){h3{font-size:1.75rem}}h4{font-size:calc(1.275rem + .3vw)}@media (min-width:1200px){h4{font-size:1.5rem}}h5{font-size:1.25rem}h6{font-size:1rem}p{margin-top:0;margin-bottom:1rem}abbr[data-bs-original-title],abbr[title]{-webkit-text-decoration:underline dotted;text-decoration:underline dotted;cursor:help;-webkit-text-decoration-skip-ink:none;text-decoration-skip-ink:none}address{margin-bottom:1rem;font-style:normal;line-height:inherit}ol,ul{padding-left:2rem}dl,ol,ul{margin-top:0;margin-bottom:1rem}ol ol,ol ul,ul ol,ul ul{margin-bottom:0}dt{font-weight:700}dd{margin-bottom:.5rem;margin-left:0}blockquote{margin:0 0 1rem}b,strong{font-weight:bolder}small{font-size:.875em}mark{padding:.2em;background-color:#fcf8e3}sub,sup{position:relative;font-size:.75em;line-height:0;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}a{color:#0d6efd;text-decoration:underline}a:hover{color:#0a58ca}a:not([href]):not([class]),a:not([href]):not([class]):hover{color:inherit;text-decoration:none}code,kbd,pre,samp{font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:1em;direction:ltr;unicode-bidi:bidi-override}pre{display:block;margin-top:0;margin-bottom:1rem;overflow:auto;font-size:.875em}pre code{font-size:inherit;color:inherit;word-break:normal}code{font-size:.875em;color:#d63384;word-wrap:break-word}a>code{color:inherit}kbd{padding:.2rem .4rem;font-size:.875em;color:#fff;background-color:#212529;border-radius:.2rem}kbd kbd{padding:0;font-size:1em;font-weight:700}figure{margin:0 0 1rem}img,svg{vertical-align:middle}table{caption-side:bottom;border-collapse:collapse}caption{padding-top:.5rem;padding-bottom:.5rem;color:#6c757d;text-align:left}th{text-align:inherit;text-align:-webkit-match-parent}tbody,td,tfoot,th,thead,tr{border-color:inherit;border-style:solid;border-width:0}label{display:inline-block}button{border-radius:0}button:focus:not(:focus-visible){outline:0}button,input,optgroup,select,textarea{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button,select{text-transform:none}[role=button]{cursor:pointer}select{word-wrap:normal}select:disabled{opacity:1}[list]::-webkit-calendar-picker-indicator{display:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}::-moz-focus-inner{padding:0;border-style:none}textarea{resize:vertical}fieldset{min-width:0;padding:0;margin:0;border:0}legend{float:left;width:100%;padding:0;margin-bottom:.5rem;font-size:calc(1.275rem + .3vw);line-height:inherit}@media (min-width:1200px){legend{font-size:1.5rem}}legend+*{clear:left}::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-fields-wrapper,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-text,::-webkit-datetime-edit-year-field{padding:0}::-webkit-inner-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:textfield}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-color-swatch-wrapper{padding:0}::file-selector-button{font:inherit}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}iframe{border:0}summary{display:list-item;cursor:pointer}progress{vertical-align:baseline}[hidden]{display:none!important}</style>
+    <style>/*! syntax-highlighting.css */pre{line-height:125%;}span.linenos{color:inherit; background-color:transparent; padding-left:5px; padding-right:20px;}.pdoc-code .hll{background-color:#49483e}.pdoc-code{background:#272822; color:#f8f8f2}.pdoc-code .c{color:#75715e}.pdoc-code .err{color:#960050; background-color:#1e0010}.pdoc-code .esc{color:#f8f8f2}.pdoc-code .g{color:#f8f8f2}.pdoc-code .k{color:#66d9ef}.pdoc-code .l{color:#ae81ff}.pdoc-code .n{color:#f8f8f2}.pdoc-code .o{color:#f92672}.pdoc-code .x{color:#f8f8f2}.pdoc-code .p{color:#f8f8f2}.pdoc-code .ch{color:#75715e}.pdoc-code .cm{color:#75715e}.pdoc-code .cp{color:#75715e}.pdoc-code .cpf{color:#75715e}.pdoc-code .c1{color:#75715e}.pdoc-code .cs{color:#75715e}.pdoc-code .gd{color:#f92672}.pdoc-code .ge{color:#f8f8f2; font-style:italic}.pdoc-code .gr{color:#f8f8f2}.pdoc-code .gh{color:#f8f8f2}.pdoc-code .gi{color:#a6e22e}.pdoc-code .go{color:#66d9ef}.pdoc-code .gp{color:#f92672; font-weight:bold}.pdoc-code .gs{color:#f8f8f2; font-weight:bold}.pdoc-code .gu{color:#75715e}.pdoc-code .gt{color:#f8f8f2}.pdoc-code .kc{color:#66d9ef}.pdoc-code .kd{color:#66d9ef}.pdoc-code .kn{color:#f92672}.pdoc-code .kp{color:#66d9ef}.pdoc-code .kr{color:#66d9ef}.pdoc-code .kt{color:#66d9ef}.pdoc-code .ld{color:#e6db74}.pdoc-code .m{color:#ae81ff}.pdoc-code .s{color:#e6db74}.pdoc-code .na{color:#a6e22e}.pdoc-code .nb{color:#f8f8f2}.pdoc-code .nc{color:#a6e22e}.pdoc-code .no{color:#66d9ef}.pdoc-code .nd{color:#a6e22e}.pdoc-code .ni{color:#f8f8f2}.pdoc-code .ne{color:#a6e22e}.pdoc-code .nf{color:#a6e22e}.pdoc-code .nl{color:#f8f8f2}.pdoc-code .nn{color:#f8f8f2}.pdoc-code .nx{color:#a6e22e}.pdoc-code .py{color:#f8f8f2}.pdoc-code .nt{color:#f92672}.pdoc-code .nv{color:#f8f8f2}.pdoc-code .ow{color:#f92672}.pdoc-code .w{color:#f8f8f2}.pdoc-code .mb{color:#ae81ff}.pdoc-code .mf{color:#ae81ff}.pdoc-code .mh{color:#ae81ff}.pdoc-code .mi{color:#ae81ff}.pdoc-code .mo{color:#ae81ff}.pdoc-code .sa{color:#e6db74}.pdoc-code .sb{color:#e6db74}.pdoc-code .sc{color:#e6db74}.pdoc-code .dl{color:#e6db74}.pdoc-code .sd{color:#e6db74}.pdoc-code .s2{color:#e6db74}.pdoc-code .se{color:#ae81ff}.pdoc-code .sh{color:#e6db74}.pdoc-code .si{color:#e6db74}.pdoc-code .sx{color:#e6db74}.pdoc-code .sr{color:#e6db74}.pdoc-code .s1{color:#e6db74}.pdoc-code .ss{color:#e6db74}.pdoc-code .bp{color:#f8f8f2}.pdoc-code .fm{color:#a6e22e}.pdoc-code .vc{color:#f8f8f2}.pdoc-code .vg{color:#f8f8f2}.pdoc-code .vi{color:#f8f8f2}.pdoc-code .vm{color:#f8f8f2}</style>
+    <style>/*! theme.css */:root{--pdoc-background:#212529;}.pdoc{--text:#f7f7f7;--muted:#9d9d9d;--link:#58a6ff;--link-hover:#3989ff;--code:#333;--active:#555;--accent:#343434;--accent2:#555;--nav-hover:rgba(0, 0, 0, 0.1);--name:#77C1FF;--def:#0cdd0c;--annotation:#00c037;}</style>
+    <style>/*! layout.css */html, body{width:100%;height:100%;}html, main{scroll-behavior:smooth;}body{background-color:var(--pdoc-background);}@media (max-width:769px){#navtoggle{cursor:pointer;position:absolute;width:50px;height:40px;top:1rem;right:1rem;border-color:var(--text);color:var(--text);display:flex;opacity:0.8;z-index:999;}#navtoggle:hover{opacity:1;}#togglestate + div{display:none;}#togglestate:checked + div{display:inherit;}main, header{padding:2rem 3vw;}header + main{margin-top:-3rem;}.git-button{display:none !important;}nav input[type="search"]{max-width:77%;}nav input[type="search"]:first-child{margin-top:-6px;}nav input[type="search"]:valid ~ *{display:none !important;}}@media (min-width:770px){:root{--sidebar-width:clamp(12.5rem, 28vw, 22rem);}nav{position:fixed;overflow:auto;height:100vh;width:var(--sidebar-width);}main, header{padding:3rem 2rem 3rem calc(var(--sidebar-width) + 3rem);width:calc(54rem + var(--sidebar-width));max-width:100%;}header + main{margin-top:-4rem;}#navtoggle{display:none;}}#togglestate{position:absolute;height:0;opacity:0;}nav.pdoc{--pad:clamp(0.5rem, 2vw, 1.75rem);--indent:1.5rem;background-color:var(--accent);border-right:1px solid var(--accent2);box-shadow:0 0 20px rgba(50, 50, 50, .2) inset;padding:0 0 0 var(--pad);overflow-wrap:anywhere;scrollbar-width:thin; scrollbar-color:var(--accent2) transparent; z-index:1}nav.pdoc::-webkit-scrollbar{width:.4rem; }nav.pdoc::-webkit-scrollbar-thumb{background-color:var(--accent2); }nav.pdoc > div{padding:var(--pad) 0;}nav.pdoc .module-list-button{display:inline-flex;align-items:center;color:var(--text);border-color:var(--muted);margin-bottom:1rem;}nav.pdoc .module-list-button:hover{border-color:var(--text);}nav.pdoc input[type=search]{display:block;outline-offset:0;width:calc(100% - var(--pad));}nav.pdoc .logo{max-width:calc(100% - var(--pad));max-height:35vh;display:block;margin:0 auto 1rem;transform:translate(calc(-.5 * var(--pad)), 0);}nav.pdoc ul{list-style:none;padding-left:0;}nav.pdoc > div > ul{margin-left:calc(0px - var(--pad));}nav.pdoc li a{padding:.2rem 0 .2rem calc(var(--pad) + var(--indent));}nav.pdoc > div > ul > li > a{padding-left:var(--pad);}nav.pdoc li{transition:all 100ms;}nav.pdoc li:hover{background-color:var(--nav-hover);}nav.pdoc a, nav.pdoc a:hover{color:var(--text);}nav.pdoc a{display:block;}nav.pdoc > h2:first-of-type{margin-top:1.5rem;}nav.pdoc .class:before{content:"class ";color:var(--muted);}nav.pdoc .function:after{content:"()";color:var(--muted);}nav.pdoc footer:before{content:"";display:block;width:calc(100% - var(--pad));border-top:solid var(--accent2) 1px;margin-top:1.5rem;padding-top:.5rem;}nav.pdoc footer{font-size:small;}</style>
+    <style>/*! content.css */.pdoc{color:var(--text);box-sizing:border-box;line-height:1.5;background:none;}.pdoc .pdoc-button{cursor:pointer;display:inline-block;border:solid black 1px;border-radius:2px;font-size:.75rem;padding:calc(0.5em - 1px) 1em;transition:100ms all;}.pdoc .alert{padding:1rem 1rem 1rem calc(1.5rem + 24px);border:1px solid transparent;border-radius:.25rem;background-repeat:no-repeat;background-position:.75rem center;margin-bottom:1rem;}.pdoc .alert > em{display:none;}.pdoc .alert > *:last-child{margin-bottom:0;}.pdoc .alert.note {color:#084298;background-color:#cfe2ff;border-color:#b6d4fe;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22%23084298%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8%2016A8%208%200%201%200%208%200a8%208%200%200%200%200%2016zm.93-9.412-1%204.705c-.07.34.029.533.304.533.194%200%20.487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703%200-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381%202.29-.287zM8%205.5a1%201%200%201%201%200-2%201%201%200%200%201%200%202z%22/%3E%3C/svg%3E");}.pdoc .alert.warning{color:#664d03;background-color:#fff3cd;border-color:#ffecb5;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22%23664d03%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8.982%201.566a1.13%201.13%200%200%200-1.96%200L.165%2013.233c-.457.778.091%201.767.98%201.767h13.713c.889%200%201.438-.99.98-1.767L8.982%201.566zM8%205c.535%200%20.954.462.9.995l-.35%203.507a.552.552%200%200%201-1.1%200L7.1%205.995A.905.905%200%200%201%208%205zm.002%206a1%201%200%201%201%200%202%201%201%200%200%201%200-2z%22/%3E%3C/svg%3E");}.pdoc .alert.danger{color:#842029;background-color:#f8d7da;border-color:#f5c2c7;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22%23842029%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5.52.359A.5.5%200%200%201%206%200h4a.5.5%200%200%201%20.474.658L8.694%206H12.5a.5.5%200%200%201%20.395.807l-7%209a.5.5%200%200%201-.873-.454L6.823%209.5H3.5a.5.5%200%200%201-.48-.641l2.5-8.5z%22/%3E%3C/svg%3E");}.pdoc .visually-hidden{position:absolute !important;width:1px !important;height:1px !important;padding:0 !important;margin:-1px !important;overflow:hidden !important;clip:rect(0, 0, 0, 0) !important;white-space:nowrap !important;border:0 !important;}.pdoc h1, .pdoc h2, .pdoc h3{font-weight:300;margin:.3em 0;padding:.2em 0;}.pdoc > section:not(.module-info) h1{font-size:1.5rem;font-weight:500;}.pdoc > section:not(.module-info) h2{font-size:1.4rem;font-weight:500;}.pdoc > section:not(.module-info) h3{font-size:1.3rem;font-weight:500;}.pdoc > section:not(.module-info) h4{font-size:1.2rem;}.pdoc > section:not(.module-info) h5{font-size:1.1rem;}.pdoc a{text-decoration:none;color:var(--link);}.pdoc a:hover{color:var(--link-hover);}.pdoc blockquote{margin-left:2rem;}.pdoc pre{border-top:1px solid var(--accent2);border-bottom:1px solid var(--accent2);margin-top:0;margin-bottom:1em;padding:.5rem 0 .5rem .5rem;overflow-x:auto;background-color:var(--code);}.pdoc code{color:var(--text);padding:.2em .4em;margin:0;font-size:85%;background-color:var(--accent);border-radius:6px;}.pdoc a > code{color:inherit;}.pdoc pre > code{display:inline-block;font-size:inherit;background:none;border:none;padding:0;}.pdoc > section:not(.module-info){margin-bottom:1.5rem;}.pdoc .modulename{margin-top:0;font-weight:bold;}.pdoc .modulename a{color:var(--link);transition:100ms all;}.pdoc .git-button{float:right;border:solid var(--link) 1px;}.pdoc .git-button:hover{background-color:var(--link);color:var(--pdoc-background);}.view-source-toggle-state,.view-source-toggle-state ~ .pdoc-code{display:none;}.view-source-toggle-state:checked ~ .pdoc-code{display:block;}.view-source-button{display:inline-block;float:right;font-size:.75rem;line-height:1.5rem;color:var(--muted);padding:0 .4rem 0 1.3rem;cursor:pointer;text-indent:-2px;}.view-source-button > span{visibility:hidden;}.module-info .view-source-button{float:none;display:flex;justify-content:flex-end;margin:-1.2rem .4rem -.2rem 0;}.view-source-button::before{position:absolute;content:"View Source";display:list-item;list-style-type:disclosure-closed;}.view-source-toggle-state:checked ~ .attr .view-source-button::before,.view-source-toggle-state:checked ~ .view-source-button::before{list-style-type:disclosure-open;}.pdoc .docstring{margin-bottom:1.5rem;}.pdoc section:not(.module-info) .docstring{margin-left:clamp(0rem, 5vw - 2rem, 1rem);}.pdoc .docstring .pdoc-code{margin-left:1em;margin-right:1em;}.pdoc h1:target,.pdoc h2:target,.pdoc h3:target,.pdoc h4:target,.pdoc h5:target,.pdoc h6:target,.pdoc .pdoc-code > pre > span:target{background-color:var(--active);box-shadow:-1rem 0 0 0 var(--active);}.pdoc .pdoc-code > pre > span:target{display:block;}.pdoc div:target > .attr,.pdoc section:target > .attr,.pdoc dd:target > a{background-color:var(--active);}.pdoc *{scroll-margin:2rem;}.pdoc .pdoc-code .linenos{user-select:none;}.pdoc .attr:hover{filter:contrast(0.95);}.pdoc section, .pdoc .classattr{position:relative;}.pdoc .headerlink{--width:clamp(1rem, 3vw, 2rem);position:absolute;top:0;left:calc(0rem - var(--width));transition:all 100ms ease-in-out;opacity:0;}.pdoc .headerlink::before{content:"#";display:block;text-align:center;width:var(--width);height:2.3rem;line-height:2.3rem;font-size:1.5rem;}.pdoc .attr:hover ~ .headerlink,.pdoc *:target > .headerlink,.pdoc .headerlink:hover{opacity:1;}.pdoc .attr{display:block;margin:.5rem 0 .5rem;padding:.4rem .4rem .4rem 1rem;background-color:var(--accent);overflow-x:auto;}.pdoc .classattr{margin-left:2rem;}.pdoc .name{color:var(--name);font-weight:bold;}.pdoc .def{color:var(--def);font-weight:bold;}.pdoc .signature{background-color:transparent;}.pdoc .param, .pdoc .return-annotation{white-space:pre;}.pdoc .signature.multiline .param{display:block;}.pdoc .signature.condensed .param{display:inline-block;}.pdoc .annotation{color:var(--annotation);}.pdoc .view-value-toggle-state,.pdoc .view-value-toggle-state ~ .default_value{display:none;}.pdoc .view-value-toggle-state:checked ~ .default_value{display:inherit;}.pdoc .view-value-button{font-size:.5rem;vertical-align:middle;border-style:dashed;margin-top:-0.1rem;}.pdoc .view-value-button:hover{background:white;}.pdoc .view-value-button::before{content:"show";text-align:center;width:2.2em;display:inline-block;}.pdoc .view-value-toggle-state:checked ~ .view-value-button::before{content:"hide";}.pdoc .inherited{margin-left:2rem;}.pdoc .inherited dt{font-weight:700;}.pdoc .inherited dt, .pdoc .inherited dd{display:inline;margin-left:0;margin-bottom:.5rem;}.pdoc .inherited dd:not(:last-child):after{content:", ";}.pdoc .inherited .class:before{content:"class ";}.pdoc .inherited .function a:after{content:"()";}.pdoc .search-result .docstring{overflow:auto;max-height:25vh;}.pdoc .search-result.focused > .attr{background-color:var(--active);}.pdoc .attribution{margin-top:2rem;display:block;opacity:0.5;transition:all 200ms;filter:grayscale(100%);}.pdoc .attribution:hover{opacity:1;filter:grayscale(0%);}.pdoc .attribution img{margin-left:5px;height:35px;vertical-align:middle;width:70px;transition:all 200ms;}.pdoc table{display:block;width:max-content;max-width:100%;overflow:auto;margin-bottom:1rem;}.pdoc table th{font-weight:600;}.pdoc table th, .pdoc table td{padding:6px 13px;border:1px solid var(--accent2);}</style>
+    <style>/*! custom.css */</style></head>
+<body>
+    <nav class="pdoc">
+        <label id="navtoggle" for="togglestate" class="pdoc-button"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke-linecap='round' stroke="currentColor" stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg></label>
+        <input id="togglestate" type="checkbox" aria-hidden="true" tabindex="-1">
+        <div><!-- Remove pdoc-button -->
+
+
+
+
+
+            <h2>API Documentation</h2>
+                <ul class="memberlist">
+            <li>
+                    <a class="function" href="#get_spontaneous_environment">get_spontaneous_environment</a>
+            </li>
+            <li>
+                    <a class="function" href="#create_cache">create_cache</a>
+            </li>
+            <li>
+                    <a class="function" href="#copy_cache">copy_cache</a>
+            </li>
+            <li>
+                    <a class="function" href="#load_extensions">load_extensions</a>
+            </li>
+            <li>
+                    <a class="class" href="#Environment">Environment</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#Environment.__init__">Environment</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.sandboxed">sandboxed</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.overlayed">overlayed</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.linked_to">linked_to</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.shared">shared</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.code_generator_class">code_generator_class</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.concat">concat</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.context_class">context_class</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.template_class">template_class</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.block_start_string">block_start_string</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.block_end_string">block_end_string</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.variable_start_string">variable_start_string</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.variable_end_string">variable_end_string</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.comment_start_string">comment_start_string</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.comment_end_string">comment_end_string</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.line_statement_prefix">line_statement_prefix</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.line_comment_prefix">line_comment_prefix</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.trim_blocks">trim_blocks</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.lstrip_blocks">lstrip_blocks</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.newline_sequence">newline_sequence</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.keep_trailing_newline">keep_trailing_newline</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.undefined">undefined</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.optimized">optimized</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.finalize">finalize</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.autoescape">autoescape</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.filters">filters</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.tests">tests</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.globals">globals</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.loader">loader</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.cache">cache</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.bytecode_cache">bytecode_cache</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.auto_reload">auto_reload</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.policies">policies</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.extensions">extensions</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.is_async">is_async</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.add_extension">add_extension</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.extend">extend</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.overlay">overlay</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Environment.lexer">lexer</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.iter_extensions">iter_extensions</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.getitem">getitem</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.getattr">getattr</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.call_filter">call_filter</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.call_test">call_test</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.parse">parse</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.lex">lex</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.preprocess">preprocess</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.compile">compile</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.compile_expression">compile_expression</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.compile_templates">compile_templates</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.list_templates">list_templates</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.handle_exception">handle_exception</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.join_path">join_path</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.get_template">get_template</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.select_template">select_template</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.get_or_select_template">get_or_select_template</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.from_string">from_string</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Environment.make_globals">make_globals</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#Template">Template</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="variable" href="#Template.environment_class">environment_class</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Template.environment">environment</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Template.globals">globals</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Template.name">name</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Template.filename">filename</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Template.blocks">blocks</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Template.root_render_func">root_render_func</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Template.from_code">from_code</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Template.from_module_dict">from_module_dict</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Template.render">render</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Template.render_async">render_async</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Template.stream">stream</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Template.generate">generate</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Template.generate_async">generate_async</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Template.new_context">new_context</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Template.make_module">make_module</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Template.make_module_async">make_module_async</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Template.module">module</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#Template.get_corresponding_lineno">get_corresponding_lineno</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Template.is_up_to_date">is_up_to_date</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Template.debug_info">debug_info</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#TemplateModule">TemplateModule</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#TemplateModule.__init__">TemplateModule</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#TemplateExpression">TemplateExpression</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#TemplateExpression.__init__">TemplateExpression</a>
+                        </li>
+                </ul>
+
+            </li>
+            <li>
+                    <a class="class" href="#TemplateStream">TemplateStream</a>
+                            <ul class="memberlist">
+                        <li>
+                                <a class="function" href="#TemplateStream.__init__">TemplateStream</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#TemplateStream.dump">dump</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#TemplateStream.disable_buffering">disable_buffering</a>
+                        </li>
+                        <li>
+                                <a class="function" href="#TemplateStream.enable_buffering">enable_buffering</a>
+                        </li>
+                </ul>
+
+            </li>
+    </ul>
+
+
+
+        <a class="attribution" title="pdoc: Python API documentation generator" href="https://pdoc.dev" target="_blank">
+            built with <span class="visually-hidden">pdoc</span><img
+                alt="pdoc logo"
+                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20role%3D%22img%22%20aria-label%3D%22pdoc%20logo%22%20width%3D%22300%22%20height%3D%22150%22%20viewBox%3D%22-1%200%2060%2030%22%3E%3Ctitle%3Epdoc%3C/title%3E%3Cpath%20d%3D%22M29.621%2021.293c-.011-.273-.214-.475-.511-.481a.5.5%200%200%200-.489.503l-.044%201.393c-.097.551-.695%201.215-1.566%201.704-.577.428-1.306.486-2.193.182-1.426-.617-2.467-1.654-3.304-2.487l-.173-.172a3.43%203.43%200%200%200-.365-.306.49.49%200%200%200-.286-.196c-1.718-1.06-4.931-1.47-7.353.191l-.219.15c-1.707%201.187-3.413%202.131-4.328%201.03-.02-.027-.49-.685-.141-1.763.233-.721.546-2.408.772-4.076.042-.09.067-.187.046-.288.166-1.347.277-2.625.241-3.351%201.378-1.008%202.271-2.586%202.271-4.362%200-.976-.272-1.935-.788-2.774-.057-.094-.122-.18-.184-.268.033-.167.052-.339.052-.516%200-1.477-1.202-2.679-2.679-2.679-.791%200-1.496.352-1.987.9a6.3%206.3%200%200%200-1.001.029c-.492-.564-1.207-.929-2.012-.929-1.477%200-2.679%201.202-2.679%202.679A2.65%202.65%200%200%200%20.97%206.554c-.383.747-.595%201.572-.595%202.41%200%202.311%201.507%204.29%203.635%205.107-.037.699-.147%202.27-.423%203.294l-.137.461c-.622%202.042-2.515%208.257%201.727%2010.643%201.614.908%203.06%201.248%204.317%201.248%202.665%200%204.492-1.524%205.322-2.401%201.476-1.559%202.886-1.854%206.491.82%201.877%201.393%203.514%201.753%204.861%201.068%202.223-1.713%202.811-3.867%203.399-6.374.077-.846.056-1.469.054-1.537zm-4.835%204.313c-.054.305-.156.586-.242.629-.034-.007-.131-.022-.307-.157-.145-.111-.314-.478-.456-.908.221.121.432.25.675.355.115.039.219.051.33.081zm-2.251-1.238c-.05.33-.158.648-.252.694-.022.001-.125-.018-.307-.157-.217-.166-.488-.906-.639-1.573.358.344.754.693%201.198%201.036zm-3.887-2.337c-.006-.116-.018-.231-.041-.342.635.145%201.189.368%201.599.625.097.231.166.481.174.642-.03.049-.055.101-.067.158-.046.013-.128.026-.298.004-.278-.037-.901-.57-1.367-1.087zm-1.127-.497c.116.306.176.625.12.71-.019.014-.117.045-.345.016-.206-.027-.604-.332-.986-.695.41-.051.816-.056%201.211-.031zm-4.535%201.535c.209.22.379.47.358.598-.006.041-.088.138-.351.234-.144.055-.539-.063-.979-.259a11.66%2011.66%200%200%200%20.972-.573zm.983-.664c.359-.237.738-.418%201.126-.554.25.237.479.548.457.694-.006.042-.087.138-.351.235-.174.064-.694-.105-1.232-.375zm-3.381%201.794c-.022.145-.061.29-.149.401-.133.166-.358.248-.69.251h-.002c-.133%200-.306-.26-.45-.621.417.091.854.07%201.291-.031zm-2.066-8.077a4.78%204.78%200%200%201-.775-.584c.172-.115.505-.254.88-.378l-.105.962zm-.331%202.302a10.32%2010.32%200%200%201-.828-.502c.202-.143.576-.328.984-.49l-.156.992zm-.45%202.157l-.701-.403c.214-.115.536-.249.891-.376a11.57%2011.57%200%200%201-.19.779zm-.181%201.716c.064.398.194.702.298.893-.194-.051-.435-.162-.736-.398.061-.119.224-.3.438-.495zM8.87%204.141c0%20.152-.123.276-.276.276s-.275-.124-.275-.276.123-.276.276-.276.275.124.275.276zm-.735-.389a1.15%201.15%200%200%200-.314.783%201.16%201.16%200%200%200%201.162%201.162c.457%200%20.842-.27%201.032-.653.026.117.042.238.042.362a1.68%201.68%200%200%201-1.679%201.679%201.68%201.68%200%200%201-1.679-1.679c0-.843.626-1.535%201.436-1.654zM5.059%205.406A1.68%201.68%200%200%201%203.38%207.085a1.68%201.68%200%200%201-1.679-1.679c0-.037.009-.072.011-.109.21.3.541.508.935.508a1.16%201.16%200%200%200%201.162-1.162%201.14%201.14%200%200%200-.474-.912c.015%200%20.03-.005.045-.005.926.001%201.679.754%201.679%201.68zM3.198%204.141c0%20.152-.123.276-.276.276s-.275-.124-.275-.276.123-.276.276-.276.275.124.275.276zM1.375%208.964c0-.52.103-1.035.288-1.52.466.394%201.06.64%201.717.64%201.144%200%202.116-.725%202.499-1.738.383%201.012%201.355%201.738%202.499%201.738.867%200%201.631-.421%202.121-1.062.307.605.478%201.267.478%201.942%200%202.486-2.153%204.51-4.801%204.51s-4.801-2.023-4.801-4.51zm24.342%2019.349c-.985.498-2.267.168-3.813-.979-3.073-2.281-5.453-3.199-7.813-.705-1.315%201.391-4.163%203.365-8.423.97-3.174-1.786-2.239-6.266-1.261-9.479l.146-.492c.276-1.02.395-2.457.444-3.268a6.11%206.11%200%200%200%201.18.115%206.01%206.01%200%200%200%202.536-.562l-.006.175c-.802.215-1.848.612-2.021%201.25-.079.295.021.601.274.837.219.203.415.364.598.501-.667.304-1.243.698-1.311%201.179-.02.144-.022.507.393.787.213.144.395.26.564.365-1.285.521-1.361.96-1.381%201.126-.018.142-.011.496.427.746l.854.489c-.473.389-.971.914-.999%201.429-.018.278.095.532.316.713.675.556%201.231.721%201.653.721.059%200%20.104-.014.158-.02.207.707.641%201.64%201.513%201.64h.013c.8-.008%201.236-.345%201.462-.626.173-.216.268-.457.325-.692.424.195.93.374%201.372.374.151%200%20.294-.021.423-.068.732-.27.944-.704.993-1.021.009-.061.003-.119.002-.179.266.086.538.147.789.147.15%200%20.294-.021.423-.069.542-.2.797-.489.914-.754.237.147.478.258.704.288.106.014.205.021.296.021.356%200%20.595-.101.767-.229.438.435%201.094.992%201.656%201.067.106.014.205.021.296.021a1.56%201.56%200%200%200%20.323-.035c.17.575.453%201.289.866%201.605.358.273.665.362.914.362a.99.99%200%200%200%20.421-.093%201.03%201.03%200%200%200%20.245-.164c.168.428.39.846.68%201.068.358.273.665.362.913.362a.99.99%200%200%200%20.421-.093c.317-.148.512-.448.639-.762.251.157.495.257.726.257.127%200%20.25-.024.37-.071.427-.17.706-.617.841-1.314.022-.015.047-.022.068-.038.067-.051.133-.104.196-.159-.443%201.486-1.107%202.761-2.086%203.257zM8.66%209.925a.5.5%200%201%200-1%200c0%20.653-.818%201.205-1.787%201.205s-1.787-.552-1.787-1.205a.5.5%200%201%200-1%200c0%201.216%201.25%202.205%202.787%202.205s2.787-.989%202.787-2.205zm4.4%2015.965l-.208.097c-2.661%201.258-4.708%201.436-6.086.527-1.542-1.017-1.88-3.19-1.844-4.198a.4.4%200%200%200-.385-.414c-.242-.029-.406.164-.414.385-.046%201.249.367%203.686%202.202%204.896.708.467%201.547.7%202.51.7%201.248%200%202.706-.392%204.362-1.174l.185-.086a.4.4%200%200%200%20.205-.527c-.089-.204-.326-.291-.527-.206zM9.547%202.292c.093.077.205.114.317.114a.5.5%200%200%200%20.318-.886L8.817.397a.5.5%200%200%200-.703.068.5.5%200%200%200%20.069.703l1.364%201.124zm-7.661-.065c.086%200%20.173-.022.253-.068l1.523-.893a.5.5%200%200%200-.506-.863l-1.523.892a.5.5%200%200%200-.179.685c.094.158.261.247.432.247z%22%20transform%3D%22matrix%28-1%200%200%201%2058%200%29%22%20fill%3D%22%233bb300%22/%3E%3Cpath%20d%3D%22M.3%2021.86V10.18q0-.46.02-.68.04-.22.18-.5.28-.54%201.34-.54%201.06%200%201.42.28.38.26.44.78.76-1.04%202.38-1.04%201.64%200%203.1%201.54%201.46%201.54%201.46%203.58%200%202.04-1.46%203.58-1.44%201.54-3.08%201.54-1.64%200-2.38-.92v4.04q0%20.46-.04.68-.02.22-.18.5-.14.3-.5.42-.36.12-.98.12-.62%200-1-.12-.36-.12-.52-.4-.14-.28-.18-.5-.02-.22-.02-.68zm3.96-9.42q-.46.54-.46%201.18%200%20.64.46%201.18.48.52%201.2.52.74%200%201.24-.52.52-.52.52-1.18%200-.66-.48-1.18-.48-.54-1.26-.54-.76%200-1.22.54zm14.741-8.36q.16-.3.54-.42.38-.12%201-.12.64%200%201.02.12.38.12.52.42.16.3.18.54.04.22.04.68v11.94q0%20.46-.04.7-.02.22-.18.5-.3.54-1.7.54-1.38%200-1.54-.98-.84.96-2.34.96-1.8%200-3.28-1.56-1.48-1.58-1.48-3.66%200-2.1%201.48-3.68%201.5-1.58%203.28-1.58%201.48%200%202.3%201v-4.2q0-.46.02-.68.04-.24.18-.52zm-3.24%2010.86q.52.54%201.26.54.74%200%201.22-.54.5-.54.5-1.18%200-.66-.48-1.22-.46-.56-1.26-.56-.8%200-1.28.56-.48.54-.48%201.2%200%20.66.52%201.2zm7.833-1.2q0-2.4%201.68-3.96%201.68-1.56%203.84-1.56%202.16%200%203.82%201.56%201.66%201.54%201.66%203.94%200%201.66-.86%202.96-.86%201.28-2.1%201.9-1.22.6-2.54.6-1.32%200-2.56-.64-1.24-.66-2.1-1.92-.84-1.28-.84-2.88zm4.18%201.44q.64.48%201.3.48.66%200%201.32-.5.66-.5.66-1.48%200-.98-.62-1.46-.62-.48-1.34-.48-.72%200-1.34.5-.62.5-.62%201.48%200%20.96.64%201.46zm11.412-1.44q0%20.84.56%201.32.56.46%201.18.46.64%200%201.18-.36.56-.38.9-.38.6%200%201.46%201.06.46.58.46%201.04%200%20.76-1.1%201.42-1.14.8-2.8.8-1.86%200-3.58-1.34-.82-.64-1.34-1.7-.52-1.08-.52-2.36%200-1.3.52-2.34.52-1.06%201.34-1.7%201.66-1.32%203.54-1.32.76%200%201.48.22.72.2%201.06.4l.32.2q.36.24.56.38.52.4.52.92%200%20.5-.42%201.14-.72%201.1-1.38%201.1-.38%200-1.08-.44-.36-.34-1.04-.34-.66%200-1.24.48-.58.48-.58%201.34z%22%20fill%3D%22green%22/%3E%3C/svg%3E"/>
+        </a>
+</div>
+    </nav>
+    <main class="pdoc">
+            <section class="module-info">
+                    <h1 class="modulename">
+<a href="./../jinja2.html">jinja2</a><wbr>.environment    </h1>
+
+                        <div class="docstring"><p>Classes for managing templates and their runtime and compile time
+options.</p>
+</div>
+
+                
+                
+                
+            </section>
+                <section id="get_spontaneous_environment">
+                    <div class="attr function">
+                    <div class="decorator">@lru_cache(maxsize=10)</div>
+
+        <span class="def">def</span>
+        <span class="name">get_spontaneous_environment</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">cls</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="o">~</span><span class="n">_env_bound</span><span class="p">]</span>, </span><span class="param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="o">~</span><span class="n">_env_bound</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#get_spontaneous_environment"></a>
+    
+            <div class="docstring"><p>Return a new spontaneous environment. A spontaneous environment
+is used for templates created directly rather than through an
+existing environment.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>cls</strong>:  Environment class to create.</li>
+<li><strong>args</strong>:  Positional arguments passed to environment.</li>
+</ul>
+</div>
+
+
+                </section>
+                <section id="create_cache">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">create_cache</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">size</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="n">Optional</span><span class="p">[</span><span class="n">MutableMapping</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">weakref</span><span class="o">.</span><span class="n">ReferenceType</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n"><a href="#Template">Template</a></span><span class="p">]]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#create_cache"></a>
+    
+            <div class="docstring"><p>Return the cache class for the given size.</p>
+</div>
+
+
+                </section>
+                <section id="copy_cache">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">copy_cache</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">cache</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MutableMapping</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span></span><span class="return-annotation">) -> <span class="n">Optional</span><span class="p">[</span><span class="n">MutableMapping</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="n">weakref</span><span class="o">.</span><span class="n">ReferenceType</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="nb">str</span><span class="p">],</span> <span class="n"><a href="#Template">Template</a></span><span class="p">]]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#copy_cache"></a>
+    
+            <div class="docstring"><p>Create an empty copy of the given cache.</p>
+</div>
+
+
+                </section>
+                <section id="load_extensions">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">load_extensions</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="n"><a href="#Environment">Environment</a></span>,</span><span class="param">	<span class="n">extensions</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Extension&#39;</span><span class="p">)]]]</span></span><span class="return-annotation">) -> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Extension&#39;</span><span class="p">)]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#load_extensions"></a>
+    
+            <div class="docstring"><p>Load the extensions from the list and bind it to the environment.
+Returns a dict of instantiated extensions.</p>
+</div>
+
+
+                </section>
+                <section id="Environment">
+                    <div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">Environment</span>:
+
+        
+    </div>
+    <a class="headerlink" href="#Environment"></a>
+    
+            <div class="docstring"><p>The core component of Jinja is the <code><a href="#Environment">Environment</a></code>.  It contains
+important shared variables like configuration, filters, tests,
+globals and others.  Instances of this class may be modified if
+they are not shared and if no template was loaded so far.
+Modifications on environments after the first template was loaded
+will lead to surprising effects and undefined behavior.</p>
+
+<p>Here are the possible initialization parameters:</p>
+
+<pre><code>`block_start_string`
+    The string marking the beginning of a block.  Defaults to ``'{%'``.
+
+`block_end_string`
+    The string marking the end of a block.  Defaults to ``'%}'``.
+
+`variable_start_string`
+    The string marking the beginning of a print statement.
+    Defaults to ``'{{'``.
+
+`variable_end_string`
+    The string marking the end of a print statement.  Defaults to
+    ``'}}'``.
+
+`comment_start_string`
+    The string marking the beginning of a comment.  Defaults to ``'{#'``.
+
+`comment_end_string`
+    The string marking the end of a comment.  Defaults to ``'#}'``.
+
+`line_statement_prefix`
+    If given and a string, this will be used as prefix for line based
+    statements.  See also :ref:`line-statements`.
+
+`line_comment_prefix`
+    If given and a string, this will be used as prefix for line based
+    comments.  See also :ref:`line-statements`.
+
+    *New in version 2.2.*
+
+`trim_blocks`
+    If this is set to ``True`` the first newline after a block is
+    removed (block, not variable tag!).  Defaults to `False`.
+
+`lstrip_blocks`
+    If this is set to ``True`` leading spaces and tabs are stripped
+    from the start of a line to a block.  Defaults to `False`.
+
+`newline_sequence`
+    The sequence that starts a newline.  Must be one of ``'\r'``,
+    ``'\n'`` or ``'\r\n'``.  The default is ``'\n'`` which is a
+    useful default for Linux and OS X systems as well as web
+    applications.
+
+`keep_trailing_newline`
+    Preserve the trailing newline when rendering templates.
+    The default is ``False``, which causes a single newline,
+    if present, to be stripped from the end of the template.
+
+    *New in version 2.7.*
+
+`extensions`
+    List of Jinja extensions to use.  This can either be import paths
+    as strings or extension classes.  For more information have a
+    look at :ref:`the extensions documentation &lt;jinja-extensions&gt;`.
+
+`optimized`
+    should the optimizer be enabled?  Default is ``True``.
+
+`undefined`
+    `Undefined` or a subclass of it that is used to represent
+    undefined values in the template.
+
+`finalize`
+    A callable that can be used to process the result of a variable
+    expression before it is output.  For example one can convert
+    ``None`` implicitly into an empty string here.
+
+`autoescape`
+    If set to ``True`` the XML/HTML autoescaping feature is enabled by
+    default.  For more details about autoescaping see
+    `~markupsafe.Markup`.  As of Jinja 2.4 this can also
+    be a callable that is passed the template name and has to
+    return ``True`` or ``False`` depending on autoescape should be
+    enabled by default.
+
+    *Changed in version 2.4:*
+    `autoescape` can now be a function
+
+
+`loader`
+    The template loader for this environment.
+
+`cache_size`
+    The size of the cache.  Per default this is ``400`` which means
+    that if more than 400 templates are loaded the loader will clean
+    out the least recently used template.  If the cache size is set to
+    ``0`` templates are recompiled all the time, if the cache size is
+    ``-1`` the cache will not be cleaned.
+
+    *Changed in version 2.8:*
+    The cache size was increased to 400 from a low 50.
+
+
+`auto_reload`
+    Some loaders load templates from locations where the template
+    sources may change (ie: file system or database).  If
+    ``auto_reload`` is set to ``True`` (default) every time a template is
+    requested the loader checks if the source changed and if yes, it
+    will reload the template.  For higher performance it's possible to
+    disable that.
+
+`bytecode_cache`
+    If set to a bytecode cache object, this object will provide a
+    cache for the internal Jinja bytecode so that templates don't
+    have to be parsed if they were not changed.
+
+    See :ref:`bytecode-cache` for more information.
+
+`enable_async`
+    If set to true this enables async template execution which
+    allows using async functions and generators.
+</code></pre>
+</div>
+
+
+                            <div id="Environment.__init__" class="classattr">
+                                <div class="attr function">
+            
+        <span class="name">Environment</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">block_start_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;{%&#39;</span>,</span><span class="param">	<span class="n">block_end_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;%}&#39;</span>,</span><span class="param">	<span class="n">variable_start_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;{{&#39;</span>,</span><span class="param">	<span class="n">variable_end_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;}}&#39;</span>,</span><span class="param">	<span class="n">comment_start_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;{#&#39;</span>,</span><span class="param">	<span class="n">comment_end_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;#}&#39;</span>,</span><span class="param">	<span class="n">line_statement_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">line_comment_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">trim_blocks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">lstrip_blocks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">newline_sequence</span><span class="p">:</span> <span class="s2">&quot;te.Literal[&#39;</span><span class="se">\\</span><span class="s2">n&#39;, &#39;</span><span class="se">\\</span><span class="s2">r</span><span class="se">\\</span><span class="s2">n&#39;, &#39;</span><span class="se">\\</span><span class="s2">r&#39;]&quot;</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>,</span><span class="param">	<span class="n">keep_trailing_newline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">extensions</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Extension&#39;</span><span class="p">)]]]</span> <span class="o">=</span> <span class="p">()</span>,</span><span class="param">	<span class="n">optimized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>,</span><span class="param">	undefined: Type[<a href="runtime.html#Undefined">jinja2.runtime.Undefined</a>] = &lt;class &#x27;<a href="runtime.html#Undefined">jinja2.runtime.Undefined</a>&#x27;&gt;,</span><span class="param">	<span class="n">finalize</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">autoescape</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">loader</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;BaseLoader&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">cache_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">400</span>,</span><span class="param">	<span class="n">auto_reload</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>,</span><span class="param">	<span class="n">bytecode_cache</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;BytecodeCache&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">enable_async</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></span>)</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.__init__"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.sandboxed" class="classattr">
+                                <div class="attr variable">
+            <span class="name">sandboxed</span>        =
+<span class="default_value">False</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.sandboxed"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.overlayed" class="classattr">
+                                <div class="attr variable">
+            <span class="name">overlayed</span>        =
+<span class="default_value">False</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.overlayed"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.linked_to" class="classattr">
+                                <div class="attr variable">
+            <span class="name">linked_to</span><span class="annotation">: Optional[<a href="#Environment">Environment</a>]</span>        =
+<span class="default_value">None</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.linked_to"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.shared" class="classattr">
+                                <div class="attr variable">
+            <span class="name">shared</span>        =
+<span class="default_value">False</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.shared"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.code_generator_class" class="classattr">
+                                <div class="attr variable">
+            <span class="name">code_generator_class</span><span class="annotation">: Type[<a href="compiler.html#CodeGenerator">jinja2.compiler.CodeGenerator</a>]</span>        =
+<span class="default_value">&lt;class &#39;<a href="compiler.html#CodeGenerator">jinja2.compiler.CodeGenerator</a>&#39;&gt;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.code_generator_class"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.concat" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">concat</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">iterable</span>, </span><span class="param"><span class="o">/</span></span><span class="return-annotation">):</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.concat"></a>
+    
+            <div class="docstring"><p>Concatenate any number of strings.</p>
+
+<p>The string whose method is called is inserted in between each given string.
+The result is returned as a new string.</p>
+
+<p>Example: '.'.join(['ab', 'pq', 'rs']) -> 'ab.pq.rs'</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.context_class" class="classattr">
+                                <div class="attr variable">
+            <span class="name">context_class</span><span class="annotation">: Type[<a href="runtime.html#Context">jinja2.runtime.Context</a>]</span>        =
+<span class="default_value">&lt;class &#39;<a href="runtime.html#Context">jinja2.runtime.Context</a>&#39;&gt;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.context_class"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.template_class" class="classattr">
+                                <div class="attr variable">
+            <span class="name">template_class</span><span class="annotation">: Type[<a href="#Template">Template</a>]</span>        =
+<span class="default_value">&lt;class &#39;<a href="#Template">Template</a>&#39;&gt;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.template_class"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.block_start_string" class="classattr">
+                                <div class="attr variable">
+            <span class="name">block_start_string</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.block_start_string"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.block_end_string" class="classattr">
+                                <div class="attr variable">
+            <span class="name">block_end_string</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.block_end_string"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.variable_start_string" class="classattr">
+                                <div class="attr variable">
+            <span class="name">variable_start_string</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.variable_start_string"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.variable_end_string" class="classattr">
+                                <div class="attr variable">
+            <span class="name">variable_end_string</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.variable_end_string"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.comment_start_string" class="classattr">
+                                <div class="attr variable">
+            <span class="name">comment_start_string</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.comment_start_string"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.comment_end_string" class="classattr">
+                                <div class="attr variable">
+            <span class="name">comment_end_string</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.comment_end_string"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.line_statement_prefix" class="classattr">
+                                <div class="attr variable">
+            <span class="name">line_statement_prefix</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.line_statement_prefix"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.line_comment_prefix" class="classattr">
+                                <div class="attr variable">
+            <span class="name">line_comment_prefix</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.line_comment_prefix"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.trim_blocks" class="classattr">
+                                <div class="attr variable">
+            <span class="name">trim_blocks</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.trim_blocks"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.lstrip_blocks" class="classattr">
+                                <div class="attr variable">
+            <span class="name">lstrip_blocks</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.lstrip_blocks"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.newline_sequence" class="classattr">
+                                <div class="attr variable">
+            <span class="name">newline_sequence</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.newline_sequence"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.keep_trailing_newline" class="classattr">
+                                <div class="attr variable">
+            <span class="name">keep_trailing_newline</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.keep_trailing_newline"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.undefined" class="classattr">
+                                <div class="attr variable">
+            <span class="name">undefined</span><span class="annotation">: Type[<a href="runtime.html#Undefined">jinja2.runtime.Undefined</a>]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.undefined"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.optimized" class="classattr">
+                                <div class="attr variable">
+            <span class="name">optimized</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.optimized"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.finalize" class="classattr">
+                                <div class="attr variable">
+            <span class="name">finalize</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.finalize"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.autoescape" class="classattr">
+                                <div class="attr variable">
+            <span class="name">autoescape</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.autoescape"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.filters" class="classattr">
+                                <div class="attr variable">
+            <span class="name">filters</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.filters"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.tests" class="classattr">
+                                <div class="attr variable">
+            <span class="name">tests</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.tests"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.globals" class="classattr">
+                                <div class="attr variable">
+            <span class="name">globals</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.globals"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.loader" class="classattr">
+                                <div class="attr variable">
+            <span class="name">loader</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.loader"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.cache" class="classattr">
+                                <div class="attr variable">
+            <span class="name">cache</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.cache"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.bytecode_cache" class="classattr">
+                                <div class="attr variable">
+            <span class="name">bytecode_cache</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.bytecode_cache"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.auto_reload" class="classattr">
+                                <div class="attr variable">
+            <span class="name">auto_reload</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.auto_reload"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.policies" class="classattr">
+                                <div class="attr variable">
+            <span class="name">policies</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.policies"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.extensions" class="classattr">
+                                <div class="attr variable">
+            <span class="name">extensions</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.extensions"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.is_async" class="classattr">
+                                <div class="attr variable">
+            <span class="name">is_async</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.is_async"></a>
+    
+    
+
+                            </div>
+                            <div id="Environment.add_extension" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">add_extension</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">extension</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Extension&#39;</span><span class="p">)]]</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.add_extension"></a>
+    
+            <div class="docstring"><p>Adds an extension after the environment was created.</p>
+
+<p><em>New in version 2.5.</em></p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.extend" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">extend</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="o">**</span><span class="n">attributes</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.extend"></a>
+    
+            <div class="docstring"><p>Add the items to the instance of the environment if they do not exist
+yet.  This is used by :ref:<code>extensions &lt;writing-extensions&gt;</code> to register
+callbacks and configuration values without breaking inheritance.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.overlay" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">overlay</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">block_start_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">block_end_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">variable_start_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">variable_end_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">comment_start_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">comment_end_string</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">line_statement_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">line_comment_prefix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">trim_blocks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">lstrip_blocks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">newline_sequence</span><span class="p">:</span> <span class="s2">&quot;te.Literal[&#39;</span><span class="se">\\</span><span class="s2">n&#39;, &#39;</span><span class="se">\\</span><span class="s2">r</span><span class="se">\\</span><span class="s2">n&#39;, &#39;</span><span class="se">\\</span><span class="s2">r&#39;]&quot;</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">keep_trailing_newline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">extensions</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Type</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Extension&#39;</span><span class="p">)]]]</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">optimized</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">undefined</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n"><a href="runtime.html#Undefined">jinja2.runtime.Undefined</a></span><span class="p">]</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">finalize</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">autoescape</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">loader</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;BaseLoader&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">cache_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">auto_reload</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">bytecode_cache</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;BytecodeCache&#39;</span><span class="p">)]</span> <span class="o">=</span> <span class="n">missing</span>,</span><span class="param">	<span class="n">enable_async</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></span><span class="return-annotation">) -> <span class="n"><a href="#Environment">Environment</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.overlay"></a>
+    
+            <div class="docstring"><p>Create a new overlay environment that shares all the data with the
+current environment except for cache and the overridden attributes.
+Extensions cannot be removed for an overlayed environment.  An overlayed
+environment automatically gets all the extensions of the environment it
+is linked to plus optional extra extensions.</p>
+
+<p>Creating overlays should happen after the initial environment was set
+up completely.  Not all attributes are truly linked, some are just
+copied over so modifications on the original environment may not shine
+through.</p>
+
+<p><em>Changed in version 3.1.2:</em>
+Added the <code><a href="#Environment.newline_sequence">newline_sequence</a></code>,, <code><a href="#Environment.keep_trailing_newline">keep_trailing_newline</a></code>,
+and <code>enable_async</code> parameters to match <code><a href="#Environment.__init__">__init__</a></code>.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.lexer" class="classattr">
+                                <div class="attr variable">
+            <span class="name">lexer</span><span class="annotation">: <a href="lexer.html#Lexer">jinja2.lexer.Lexer</a></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.lexer"></a>
+    
+            <div class="docstring"><p>The lexer for this environment.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.iter_extensions" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">iter_extensions</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="n">ForwardRef</span><span class="p">(</span><span class="s1">&#39;Extension&#39;</span><span class="p">)]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.iter_extensions"></a>
+    
+            <div class="docstring"><p>Iterates over the extensions by priority.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.getitem" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">getitem</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">obj</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="n">argument</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="n">Union</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n"><a href="runtime.html#Undefined">jinja2.runtime.Undefined</a></span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.getitem"></a>
+    
+            <div class="docstring"><p>Get an item or attribute of an object but prefer the item.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.getattr" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">getattr</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">obj</span><span class="p">:</span> <span class="n">Any</span>, </span><span class="param"><span class="n">attribute</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="n">Any</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.getattr"></a>
+    
+            <div class="docstring"><p>Get an item or attribute of an object but prefer the attribute.
+Unlike <code><a href="#Environment.getitem">getitem()</a></code> the attribute <em>must</em> be a string.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.call_filter" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">call_filter</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">name</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n"><a href="runtime.html#Context">jinja2.runtime.Context</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">eval_ctx</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n"><a href="nodes.html#EvalContext">jinja2.nodes.EvalContext</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Any</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.call_filter"></a>
+    
+            <div class="docstring"><p>Invoke a filter on a value the same way the compiler does.</p>
+
+<p>This might return a coroutine if the filter is running from an
+environment in async mode and the filter supports async
+execution. It's your responsibility to await this if needed.</p>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.call_test" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">call_test</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">name</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="n">args</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n"><a href="runtime.html#Context">jinja2.runtime.Context</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">eval_ctx</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n"><a href="nodes.html#EvalContext">jinja2.nodes.EvalContext</a></span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Any</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.call_test"></a>
+    
+            <div class="docstring"><p>Invoke a test on a value the same way the compiler does.</p>
+
+<p>This might return a coroutine if the test is running from an
+environment in async mode and the test supports async execution.
+It's your responsibility to await this if needed.</p>
+
+<p><em>Changed in version 3.0:</em>
+Tests support <code>@pass_context</code>, etc. decorators. Added
+the <code>context</code> and <code>eval_ctx</code> parameters.</p>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.parse" class="classattr">
+                                <div class="attr function">
+                    <div class="decorator">@internalcode</div>
+
+        <span class="def">def</span>
+        <span class="name">parse</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">source</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">filename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n"><a href="nodes.html#Template">jinja2.nodes.Template</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.parse"></a>
+    
+            <div class="docstring"><p>Parse the sourcecode and return the abstract syntax tree.  This
+tree of nodes is used by the compiler to convert the template into
+executable source- or bytecode.  This is useful for debugging or to
+extract information from templates.</p>
+
+<p>If you are :ref:<code>developing Jinja extensions &lt;writing-extensions&gt;</code>
+this gives you a good overview of the node tree generated.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.lex" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">lex</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">source</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">filename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.lex"></a>
+    
+            <div class="docstring"><p>Lex the given sourcecode and return a generator that yields
+tokens as tuples in the form <code>(lineno, token_type, value)</code>.
+This can be useful for :ref:<code>extension development &lt;writing-extensions&gt;</code>
+and debugging templates.</p>
+
+<p>This does not perform preprocessing.  If you want the preprocessing
+of the extensions to be applied you have to filter source through
+the <code><a href="#Environment.preprocess">preprocess()</a></code> method.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.preprocess" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">preprocess</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">source</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">filename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.preprocess"></a>
+    
+            <div class="docstring"><p>Preprocesses the source with all extensions.  This is automatically
+called for all parsing and compiling methods but <em>not</em> for <code><a href="#Environment.lex">lex()</a></code>
+because there you usually only want the actual source tokenized.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.compile" class="classattr">
+                                <div class="attr function">
+                    <div class="decorator">@internalcode</div>
+
+        <span class="def">def</span>
+        <span class="name">compile</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n"><a href="nodes.html#Template">jinja2.nodes.Template</a></span><span class="p">]</span>,</span><span class="param">	<span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">filename</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">raw</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">defer_init</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></span><span class="return-annotation">) -> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">code</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.compile"></a>
+    
+            <div class="docstring"><p>Compile a node or template source code.  The <code>name</code> parameter is
+the load name of the template after it was joined using
+<code><a href="#Environment.join_path">join_path()</a></code> if necessary, not the filename on the file system.
+the <code>filename</code> parameter is the estimated filename of the template on
+the file system.  If the template came from a database or memory this
+can be omitted.</p>
+
+<p>The return value of this method is a python code object.  If the <code>raw</code>
+parameter is <code>True</code> the return value will be a string with python
+code equivalent to the bytecode returned otherwise.  This method is
+mainly used internally.</p>
+
+<p><code>defer_init</code> is use internally to aid the module code generator.  This
+causes the generated code to be able to import without the global
+environment variable to be set.</p>
+
+<p><em>New in version 2.4:</em>
+<code>defer_init</code> parameter added.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.compile_expression" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">compile_expression</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">source</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">undefined_to_none</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span></span><span class="return-annotation">) -> <span class="n"><a href="#TemplateExpression">TemplateExpression</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.compile_expression"></a>
+    
+            <div class="docstring"><p>A handy helper method that returns a callable that accepts keyword
+arguments that appear as variables in the expression.  If called it
+returns the result of the expression.</p>
+
+<p>This is useful if applications want to use the same rules as Jinja
+in template "configuration files" or similar situations.</p>
+
+<p>Example usage:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">env</span> <span class="o">=</span> <span class="n">Environment</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span> <span class="o">=</span> <span class="n">env</span><span class="o">.</span><span class="n">compile_expression</span><span class="p">(</span><span class="s1">&#39;foo == 42&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="p">(</span><span class="n">foo</span><span class="o">=</span><span class="mi">23</span><span class="p">)</span>
+<span class="go">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">expr</span><span class="p">(</span><span class="n">foo</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="go">True</span>
+</code></pre>
+</div>
+
+<p>Per default the return value is converted to <code>None</code> if the
+expression returns an undefined value.  This can be changed
+by setting <code>undefined_to_none</code> to <code>False</code>.</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">env</span><span class="o">.</span><span class="n">compile_expression</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">)()</span> <span class="ow">is</span> <span class="kc">None</span>
+<span class="go">True</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">env</span><span class="o">.</span><span class="n">compile_expression</span><span class="p">(</span><span class="s1">&#39;var&#39;</span><span class="p">,</span> <span class="n">undefined_to_none</span><span class="o">=</span><span class="kc">False</span><span class="p">)()</span>
+<span class="go">Undefined</span>
+</code></pre>
+</div>
+
+<p><em>New in version 2.1.</em></p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.compile_templates" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">compile_templates</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">target</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span>,</span><span class="param">	<span class="n">extensions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">filter_func</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="nb">zip</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;deflated&#39;</span>,</span><span class="param">	<span class="n">log_function</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="n">NoneType</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">ignore_errors</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.compile_templates"></a>
+    
+            <div class="docstring"><p>Finds all the templates the loader can find, compiles them
+and stores them in <code>target</code>.  If <code>zip</code> is <code>None</code>, instead of in a
+zipfile, the templates will be stored in a directory.
+By default a deflate zip algorithm is used. To switch to
+the stored algorithm, <code>zip</code> can be set to <code>'stored'</code>.</p>
+
+<p><code><a href="#Environment.extensions">extensions</a></code> and <code>filter_func</code> are passed to <code><a href="#Environment.list_templates">list_templates()</a></code>.
+Each template returned will be compiled to the target folder or
+zipfile.</p>
+
+<p>By default template compilation errors are ignored.  In case a
+log function is provided, errors are logged.  If you want template
+syntax errors to abort the compilation you can set <code>ignore_errors</code>
+to <code>False</code> and you will get an exception on syntax errors.</p>
+
+<p><em>New in version 2.4.</em></p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.list_templates" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">list_templates</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">extensions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">filter_func</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.list_templates"></a>
+    
+            <div class="docstring"><p>Returns a list of templates for this environment.  This requires
+that the loader supports the loader's
+<code>~BaseLoader.list_templates()</code> method.</p>
+
+<p>If there are other files in the template folder besides the
+actual templates, the returned list can be filtered.  There are two
+ways: either <code><a href="#Environment.extensions">extensions</a></code> is set to a list of file extensions for
+templates, or a <code>filter_func</code> can be provided which is a callable that
+is passed a template name and should return <code>True</code> if it should end up
+in the result list.</p>
+
+<p>If the loader does not support that, a <code>TypeError</code> is raised.</p>
+
+<p><em>New in version 2.4.</em></p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.handle_exception" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">handle_exception</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">source</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="s1">&#39;te.NoReturn&#39;</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.handle_exception"></a>
+    
+            <div class="docstring"><p>Exception handling helper.  This is used internally to either raise
+rewritten exceptions or return a rendered traceback for the template.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.join_path" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">join_path</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">template</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">parent</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.join_path"></a>
+    
+            <div class="docstring"><p>Join a template with the parent.  By default all the lookups are
+relative to the loader root so this method returns the <code>template</code>
+parameter unchanged, but if the paths should be relative to the
+parent template, this function can be used to calculate the real
+template name.</p>
+
+<p>Subclasses may override this method and implement template path
+joining here.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.get_template" class="classattr">
+                                <div class="attr function">
+                    <div class="decorator">@internalcode</div>
+
+        <span class="def">def</span>
+        <span class="name">get_template</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">name</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n"><a href="#Template">Template</a></span><span class="p">]</span>,</span><span class="param">	<span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="nb">globals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n"><a href="#Template">Template</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.get_template"></a>
+    
+            <div class="docstring"><p>Load a template by name with <code><a href="#Environment.loader">loader</a></code> and return a
+<code><a href="#Template">Template</a></code>. If the template does not exist a
+<code>TemplateNotFound</code> exception is raised.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>name</strong>:  Name of the template to load. When loading
+templates from the filesystem, "/" is used as the path
+separator, even on Windows.</li>
+<li><strong>parent</strong>:  The name of the parent template importing this
+template. <code><a href="#Environment.join_path">join_path()</a></code> can be used to implement name
+transformations with this.</li>
+<li><strong>globals</strong>:  Extend the environment <code><a href="#Environment.globals">globals</a></code> with
+these extra variables available for all renders of this
+template. If the template has already been loaded and
+cached, its globals are updated with any new items.</li>
+</ul>
+
+<p><em>Changed in version 3.0:</em>
+If a template is loaded from cache, <code><a href="#Environment.globals">globals</a></code> will update
+the template's globals instead of ignoring the new values.</p>
+
+<p><em>Changed in version 2.4:</em>
+If <code>name</code> is a <code><a href="#Template">Template</a></code> object it is returned
+unchanged.</p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.select_template" class="classattr">
+                                <div class="attr function">
+                    <div class="decorator">@internalcode</div>
+
+        <span class="def">def</span>
+        <span class="name">select_template</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">names</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n"><a href="#Template">Template</a></span><span class="p">]]</span>,</span><span class="param">	<span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="nb">globals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n"><a href="#Template">Template</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.select_template"></a>
+    
+            <div class="docstring"><p>Like <code><a href="#Environment.get_template">get_template()</a></code>, but tries loading multiple names.
+If none of the names can be loaded a <code>TemplatesNotFound</code>
+exception is raised.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>names</strong>:  List of template names to try loading in order.</li>
+<li><strong>parent</strong>:  The name of the parent template importing this
+template. <code><a href="#Environment.join_path">join_path()</a></code> can be used to implement name
+transformations with this.</li>
+<li><strong>globals</strong>:  Extend the environment <code><a href="#Environment.globals">globals</a></code> with
+these extra variables available for all renders of this
+template. If the template has already been loaded and
+cached, its globals are updated with any new items.</li>
+</ul>
+
+<p><em>Changed in version 3.0:</em>
+If a template is loaded from cache, <code><a href="#Environment.globals">globals</a></code> will update
+the template's globals instead of ignoring the new values.</p>
+
+<p><em>Changed in version 2.11:</em>
+If <code>names</code> is <code>Undefined</code>, an <code>UndefinedError</code>
+is raised instead. If no templates were found and <code>names</code>
+contains <code>Undefined</code>, the message is more helpful.</p>
+
+<p><em>Changed in version 2.4:</em>
+If <code>names</code> contains a <code><a href="#Template">Template</a></code> object it is
+returned unchanged.</p>
+
+<p><em>New in version 2.3.</em></p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.get_or_select_template" class="classattr">
+                                <div class="attr function">
+                    <div class="decorator">@internalcode</div>
+
+        <span class="def">def</span>
+        <span class="name">get_or_select_template</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">template_name_or_list</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n"><a href="#Template">Template</a></span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n"><a href="#Template">Template</a></span><span class="p">]]]</span>,</span><span class="param">	<span class="n">parent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="nb">globals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n"><a href="#Template">Template</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.get_or_select_template"></a>
+    
+            <div class="docstring"><p>Use <code><a href="#Environment.select_template">select_template()</a></code> if an iterable of template names
+is given, or <code><a href="#Environment.get_template">get_template()</a></code> if one name is given.</p>
+
+<p><em>New in version 2.3.</em></p>
+</div>
+
+
+                            </div>
+                            <div id="Environment.from_string" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">from_string</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n"><a href="nodes.html#Template">jinja2.nodes.Template</a></span><span class="p">]</span>,</span><span class="param">	<span class="nb">globals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">template_class</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Type</span><span class="p">[</span><span class="n"><a href="#Template">Template</a></span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n"><a href="#Template">Template</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.from_string"></a>
+    
+            <div class="docstring"><p>Load a template from a source string without using
+<code><a href="#Environment.loader">loader</a></code>.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>source</strong>:  Jinja source to compile into a template.</li>
+<li><strong>globals</strong>:  Extend the environment <code><a href="#Environment.globals">globals</a></code> with
+these extra variables available for all renders of this
+template. If the template has already been loaded and
+cached, its globals are updated with any new items.</li>
+<li><strong>template_class</strong>:  Return an instance of this
+<code><a href="#Template">Template</a></code> class.</li>
+</ul>
+</div>
+
+
+                            </div>
+                            <div id="Environment.make_globals" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">make_globals</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">d</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span></span><span class="return-annotation">) -> <span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Environment.make_globals"></a>
+    
+            <div class="docstring"><p>Make the globals map for a template. Any given template
+globals overlay the environment <code><a href="#Environment.globals">globals</a></code>.</p>
+
+<p>Returns a <code>collections.ChainMap</code>. This allows any changes
+to a template's globals to only affect that template, while
+changes to the environment's globals are still reflected.
+However, avoid modifying any globals after a template is loaded.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>d</strong>:  Dict of template-specific globals.</li>
+</ul>
+
+<p><em>Changed in version 3.0:</em>
+Use <code>collections.ChainMap</code> to always prevent mutating
+environment globals.</p>
+</div>
+
+
+                            </div>
+                </section>
+                <section id="Template">
+                    <div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">Template</span>:
+
+        
+    </div>
+    <a class="headerlink" href="#Template"></a>
+    
+            <div class="docstring"><p>A compiled template that can be rendered.</p>
+
+<p>Use the methods on <code><a href="#Environment">Environment</a></code> to create or load templates.
+The environment is used to configure how templates are compiled and
+behave.</p>
+
+<p>It is also possible to create a template object directly. This is
+not usually recommended. The constructor takes most of the same
+arguments as <code><a href="#Environment">Environment</a></code>. All templates created with the
+same environment arguments share the same ephemeral <code><a href="#Environment">Environment</a></code>
+instance behind the scenes.</p>
+
+<p>A template object should be considered immutable. Modifications on
+the object are not supported.</p>
+</div>
+
+
+                            <div id="Template.environment_class" class="classattr">
+                                <div class="attr variable">
+            <span class="name">environment_class</span><span class="annotation">: Type[<a href="#Environment">Environment</a>]</span>        =
+<span class="default_value">&lt;class &#39;<a href="#Environment">Environment</a>&#39;&gt;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.environment_class"></a>
+    
+    
+
+                            </div>
+                            <div id="Template.environment" class="classattr">
+                                <div class="attr variable">
+            <span class="name">environment</span><span class="annotation">: <a href="#Environment">Environment</a></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.environment"></a>
+    
+    
+
+                            </div>
+                            <div id="Template.globals" class="classattr">
+                                <div class="attr variable">
+            <span class="name">globals</span><span class="annotation">: MutableMapping[str, Any]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.globals"></a>
+    
+    
+
+                            </div>
+                            <div id="Template.name" class="classattr">
+                                <div class="attr variable">
+            <span class="name">name</span><span class="annotation">: Optional[str]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.name"></a>
+    
+    
+
+                            </div>
+                            <div id="Template.filename" class="classattr">
+                                <div class="attr variable">
+            <span class="name">filename</span><span class="annotation">: Optional[str]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.filename"></a>
+    
+    
+
+                            </div>
+                            <div id="Template.blocks" class="classattr">
+                                <div class="attr variable">
+            <span class="name">blocks</span><span class="annotation">: Dict[str, Callable[[<a href="runtime.html#Context">jinja2.runtime.Context</a>], Iterator[str]]]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.blocks"></a>
+    
+    
+
+                            </div>
+                            <div id="Template.root_render_func" class="classattr">
+                                <div class="attr variable">
+            <span class="name">root_render_func</span><span class="annotation">: Callable[[<a href="runtime.html#Context">jinja2.runtime.Context</a>], Iterator[str]]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.root_render_func"></a>
+    
+    
+
+                            </div>
+                            <div id="Template.from_code" class="classattr">
+                                <div class="attr function">
+                    <div class="decorator">@classmethod</div>
+
+        <span class="def">def</span>
+        <span class="name">from_code</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">cls</span>,</span><span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="n"><a href="#Environment">Environment</a></span>,</span><span class="param">	<span class="n">code</span><span class="p">:</span> <span class="n">code</span>,</span><span class="param">	<span class="nb">globals</span><span class="p">:</span> <span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="n">uptodate</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[],</span> <span class="nb">bool</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n"><a href="#Template">Template</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.from_code"></a>
+    
+            <div class="docstring"><p>Creates a template object from compiled code and the globals.  This
+is used by the loaders and environment to create a template object.</p>
+</div>
+
+
+                            </div>
+                            <div id="Template.from_module_dict" class="classattr">
+                                <div class="attr function">
+                    <div class="decorator">@classmethod</div>
+
+        <span class="def">def</span>
+        <span class="name">from_module_dict</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">cls</span>,</span><span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="n"><a href="#Environment">Environment</a></span>,</span><span class="param">	<span class="n">module_dict</span><span class="p">:</span> <span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="nb">globals</span><span class="p">:</span> <span class="n">MutableMapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="n"><a href="#Template">Template</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.from_module_dict"></a>
+    
+            <div class="docstring"><p>Creates a template object from a module.  This is used by the
+module loader to create a template object.</p>
+
+<p><em>New in version 2.4.</em></p>
+</div>
+
+
+                            </div>
+                            <div id="Template.render" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">render</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>, </span><span class="param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.render"></a>
+    
+            <div class="docstring"><p>This method accepts the same arguments as the <code>dict</code> constructor:
+A dict, a dict subclass or some keyword arguments.  If no arguments
+are given the context will be empty.  These two calls do the same::</p>
+
+<pre><code>template.render(knights='that say nih')
+template.render({'knights': 'that say nih'})
+</code></pre>
+
+<p>This will return the rendered template as a string.</p>
+</div>
+
+
+                            </div>
+                            <div id="Template.render_async" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">async def</span>
+        <span class="name">render_async</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>, </span><span class="param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.render_async"></a>
+    
+            <div class="docstring"><p>This works similar to <code><a href="#Template.render">render()</a></code> but returns a coroutine
+that when awaited returns the entire rendered template string.  This
+requires the async feature to be enabled.</p>
+
+<p>Example usage::</p>
+
+<pre><code>await template.render_async(knights='that say nih; asynchronously')
+</code></pre>
+</div>
+
+
+                            </div>
+                            <div id="Template.stream" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">stream</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>, </span><span class="param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n"><a href="#TemplateStream">TemplateStream</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.stream"></a>
+    
+            <div class="docstring"><p>Works exactly like <code><a href="#Template.generate">generate()</a></code> but returns a
+<code><a href="#TemplateStream">TemplateStream</a></code>.</p>
+</div>
+
+
+                            </div>
+                            <div id="Template.generate" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">generate</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>, </span><span class="param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.generate"></a>
+    
+            <div class="docstring"><p>For very large templates it can be useful to not render the whole
+template at once but evaluate each statement after another and yield
+piece for piece.  This method basically does exactly that and returns
+a generator that yields one item after another as strings.</p>
+
+<p>It accepts the same arguments as <code><a href="#Template.render">render()</a></code>.</p>
+</div>
+
+
+                            </div>
+                            <div id="Template.generate_async" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">async def</span>
+        <span class="name">generate_async</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>, </span><span class="param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n">AsyncIterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.generate_async"></a>
+    
+            <div class="docstring"><p>An async version of <code><a href="#Template.generate">generate()</a></code>.  Works very similarly but
+returns an async iterator instead.</p>
+</div>
+
+
+                            </div>
+                            <div id="Template.new_context" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">new_context</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="nb">vars</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">shared</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="nb">locals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n"><a href="runtime.html#Context">jinja2.runtime.Context</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.new_context"></a>
+    
+            <div class="docstring"><p>Create a new <code>Context</code> for this template.  The vars
+provided will be passed to the template.  Per default the globals
+are added to the context.  If shared is set to <code>True</code> the data
+is passed as is to the context without adding the globals.</p>
+
+<p><code>locals</code> can be a dict of local variables for internal usage.</p>
+</div>
+
+
+                            </div>
+                            <div id="Template.make_module" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">make_module</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="nb">vars</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">shared</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="nb">locals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n"><a href="#TemplateModule">TemplateModule</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.make_module"></a>
+    
+            <div class="docstring"><p>This method works like the <code><a href="#Template.module">module</a></code> attribute when called
+without arguments but it will evaluate the template on every call
+rather than caching it.  It's also possible to provide
+a dict which is then used as context.  The arguments are the same
+as for the <code><a href="#Template.new_context">new_context()</a></code> method.</p>
+</div>
+
+
+                            </div>
+                            <div id="Template.make_module_async" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">async def</span>
+        <span class="name">make_module_async</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="nb">vars</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">shared</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="nb">locals</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n"><a href="#TemplateModule">TemplateModule</a></span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.make_module_async"></a>
+    
+            <div class="docstring"><p>As template module creation can invoke template code for
+asynchronous executions this method must be used instead of the
+normal <code><a href="#Template.make_module">make_module()</a></code> one.  Likewise the module attribute
+becomes unavailable in async mode.</p>
+</div>
+
+
+                            </div>
+                            <div id="Template.module" class="classattr">
+                                <div class="attr variable">
+            <span class="name">module</span><span class="annotation">: <a href="#TemplateModule">TemplateModule</a></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.module"></a>
+    
+            <div class="docstring"><p>The template as module.  This is used for imports in the
+template runtime but is also useful if one wants to access
+exported template variables from the Python layer:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Template</span><span class="p">(</span><span class="s1">&#39;{% macro foo() %}42{</span><span class="si">% e</span><span class="s1">ndmacro %}23&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">str</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">module</span><span class="p">)</span>
+<span class="go">&#39;23&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">module</span><span class="o">.</span><span class="n">foo</span><span class="p">()</span> <span class="o">==</span> <span class="sa">u</span><span class="s1">&#39;42&#39;</span>
+<span class="go">True</span>
+</code></pre>
+</div>
+
+<p>This attribute is not available if async mode is enabled.</p>
+</div>
+
+
+                            </div>
+                            <div id="Template.get_corresponding_lineno" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">get_corresponding_lineno</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">lineno</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">) -> <span class="nb">int</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.get_corresponding_lineno"></a>
+    
+            <div class="docstring"><p>Return the source line number of a line number in the
+generated bytecode as they are not in sync.</p>
+</div>
+
+
+                            </div>
+                            <div id="Template.is_up_to_date" class="classattr">
+                                <div class="attr variable">
+            <span class="name">is_up_to_date</span><span class="annotation">: bool</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.is_up_to_date"></a>
+    
+            <div class="docstring"><p>If this variable is <code>False</code> there is a newer version available.</p>
+</div>
+
+
+                            </div>
+                            <div id="Template.debug_info" class="classattr">
+                                <div class="attr variable">
+            <span class="name">debug_info</span><span class="annotation">: List[Tuple[int, int]]</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Template.debug_info"></a>
+    
+            <div class="docstring"><p>The debug info mapping.</p>
+</div>
+
+
+                            </div>
+                </section>
+                <section id="TemplateModule">
+                    <div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">TemplateModule</span>:
+
+        
+    </div>
+    <a class="headerlink" href="#TemplateModule"></a>
+    
+            <div class="docstring"><p>Represents an imported template.  All the exported names of the
+template are available as attributes on this object.  Additionally
+converting it into a string renders the contents.</p>
+</div>
+
+
+                            <div id="TemplateModule.__init__" class="classattr">
+                                <div class="attr function">
+            
+        <span class="name">TemplateModule</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">template</span><span class="p">:</span> <span class="n"><a href="#Template">Template</a></span>,</span><span class="param">	<span class="n">context</span><span class="p">:</span> <span class="n"><a href="runtime.html#Context">jinja2.runtime.Context</a></span>,</span><span class="param">	<span class="n">body_stream</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span>)</span>
+
+        
+    </div>
+    <a class="headerlink" href="#TemplateModule.__init__"></a>
+    
+    
+
+                            </div>
+                </section>
+                <section id="TemplateExpression">
+                    <div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">TemplateExpression</span>:
+
+        
+    </div>
+    <a class="headerlink" href="#TemplateExpression"></a>
+    
+            <div class="docstring"><p>The <code><a href="#Environment.compile_expression">Environment.compile_expression()</a></code> method returns an
+instance of this object.  It encapsulates the expression-like access
+to the template with an expression it wraps.</p>
+</div>
+
+
+                            <div id="TemplateExpression.__init__" class="classattr">
+                                <div class="attr function">
+            
+        <span class="name">TemplateExpression</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">template</span><span class="p">:</span> <span class="n"><a href="#Template">Template</a></span>, </span><span class="param"><span class="n">undefined_to_none</span><span class="p">:</span> <span class="nb">bool</span></span>)</span>
+
+        
+    </div>
+    <a class="headerlink" href="#TemplateExpression.__init__"></a>
+    
+    
+
+                            </div>
+                </section>
+                <section id="TemplateStream">
+                    <div class="attr class">
+            
+    <span class="def">class</span>
+    <span class="name">TemplateStream</span>:
+
+        
+    </div>
+    <a class="headerlink" href="#TemplateStream"></a>
+    
+            <div class="docstring"><p>A template stream works pretty much like an ordinary python generator
+but it can buffer multiple items to reduce the number of total iterations.
+Per default the output is unbuffered which means that for every unbuffered
+instruction in the template one string is yielded.</p>
+
+<p>If buffering is enabled with a buffer size of 5, five items are combined
+into a new string.  This is mainly useful if you are streaming
+big templates to a client via WSGI which flushes after each iteration.</p>
+</div>
+
+
+                            <div id="TemplateStream.__init__" class="classattr">
+                                <div class="attr function">
+            
+        <span class="name">TemplateStream</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">gen</span><span class="p">:</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></span>)</span>
+
+        
+    </div>
+    <a class="headerlink" href="#TemplateStream.__init__"></a>
+    
+    
+
+                            </div>
+                            <div id="TemplateStream.dump" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">dump</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="bp">self</span>,</span><span class="param">	<span class="n">fp</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">IO</span><span class="p">[</span><span class="nb">bytes</span><span class="p">]]</span>,</span><span class="param">	<span class="n">encoding</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">errors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;strict&#39;</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#TemplateStream.dump"></a>
+    
+            <div class="docstring"><p>Dump the complete stream into a file or file-like object.
+Per default strings are written, if you want to encode
+before writing specify an <code>encoding</code>.</p>
+
+<p>Example usage::</p>
+
+<pre><code>Template('Hello {{ name }}!').stream(name='foo').dump('hello.html')
+</code></pre>
+</div>
+
+
+                            </div>
+                            <div id="TemplateStream.disable_buffering" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">disable_buffering</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#TemplateStream.disable_buffering"></a>
+    
+            <div class="docstring"><p>Disable the output buffering.</p>
+</div>
+
+
+                            </div>
+                            <div id="TemplateStream.enable_buffering" class="classattr">
+                                <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">enable_buffering</span><span class="signature pdoc-code condensed">(<span class="param"><span class="bp">self</span>, </span><span class="param"><span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span></span><span class="return-annotation">) -> <span class="kc">None</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#TemplateStream.enable_buffering"></a>
+    
+            <div class="docstring"><p>Enable buffering.  Buffer <code>size</code> items before yielding them.</p>
+</div>
+
+
+                            </div>
+                </section>
+    </main>
+</body>
+</html>

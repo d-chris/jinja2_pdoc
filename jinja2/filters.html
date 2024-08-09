@@ -1,0 +1,2189 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="pdoc 14.6.0"/>
+    <title>jinja2.filters API documentation</title>
+
+    <style>/*! * Bootstrap Reboot v5.0.0 (https://getbootstrap.com/) * Copyright 2011-2021 The Bootstrap Authors * Copyright 2011-2021 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) * Forked from Normalize.css, licensed MIT (https://github.com/necolas/normalize.css/blob/master/LICENSE.md) */*,::after,::before{box-sizing:border-box}@media (prefers-reduced-motion:no-preference){:root{scroll-behavior:smooth}}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}hr{margin:1rem 0;color:inherit;background-color:currentColor;border:0;opacity:.25}hr:not([size]){height:1px}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:500;line-height:1.2}h1{font-size:calc(1.375rem + 1.5vw)}@media (min-width:1200px){h1{font-size:2.5rem}}h2{font-size:calc(1.325rem + .9vw)}@media (min-width:1200px){h2{font-size:2rem}}h3{font-size:calc(1.3rem + .6vw)}@media (min-width:1200px){h3{font-size:1.75rem}}h4{font-size:calc(1.275rem + .3vw)}@media (min-width:1200px){h4{font-size:1.5rem}}h5{font-size:1.25rem}h6{font-size:1rem}p{margin-top:0;margin-bottom:1rem}abbr[data-bs-original-title],abbr[title]{-webkit-text-decoration:underline dotted;text-decoration:underline dotted;cursor:help;-webkit-text-decoration-skip-ink:none;text-decoration-skip-ink:none}address{margin-bottom:1rem;font-style:normal;line-height:inherit}ol,ul{padding-left:2rem}dl,ol,ul{margin-top:0;margin-bottom:1rem}ol ol,ol ul,ul ol,ul ul{margin-bottom:0}dt{font-weight:700}dd{margin-bottom:.5rem;margin-left:0}blockquote{margin:0 0 1rem}b,strong{font-weight:bolder}small{font-size:.875em}mark{padding:.2em;background-color:#fcf8e3}sub,sup{position:relative;font-size:.75em;line-height:0;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}a{color:#0d6efd;text-decoration:underline}a:hover{color:#0a58ca}a:not([href]):not([class]),a:not([href]):not([class]):hover{color:inherit;text-decoration:none}code,kbd,pre,samp{font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:1em;direction:ltr;unicode-bidi:bidi-override}pre{display:block;margin-top:0;margin-bottom:1rem;overflow:auto;font-size:.875em}pre code{font-size:inherit;color:inherit;word-break:normal}code{font-size:.875em;color:#d63384;word-wrap:break-word}a>code{color:inherit}kbd{padding:.2rem .4rem;font-size:.875em;color:#fff;background-color:#212529;border-radius:.2rem}kbd kbd{padding:0;font-size:1em;font-weight:700}figure{margin:0 0 1rem}img,svg{vertical-align:middle}table{caption-side:bottom;border-collapse:collapse}caption{padding-top:.5rem;padding-bottom:.5rem;color:#6c757d;text-align:left}th{text-align:inherit;text-align:-webkit-match-parent}tbody,td,tfoot,th,thead,tr{border-color:inherit;border-style:solid;border-width:0}label{display:inline-block}button{border-radius:0}button:focus:not(:focus-visible){outline:0}button,input,optgroup,select,textarea{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button,select{text-transform:none}[role=button]{cursor:pointer}select{word-wrap:normal}select:disabled{opacity:1}[list]::-webkit-calendar-picker-indicator{display:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}::-moz-focus-inner{padding:0;border-style:none}textarea{resize:vertical}fieldset{min-width:0;padding:0;margin:0;border:0}legend{float:left;width:100%;padding:0;margin-bottom:.5rem;font-size:calc(1.275rem + .3vw);line-height:inherit}@media (min-width:1200px){legend{font-size:1.5rem}}legend+*{clear:left}::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-fields-wrapper,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-text,::-webkit-datetime-edit-year-field{padding:0}::-webkit-inner-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:textfield}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-color-swatch-wrapper{padding:0}::file-selector-button{font:inherit}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}iframe{border:0}summary{display:list-item;cursor:pointer}progress{vertical-align:baseline}[hidden]{display:none!important}</style>
+    <style>/*! syntax-highlighting.css */pre{line-height:125%;}span.linenos{color:inherit; background-color:transparent; padding-left:5px; padding-right:20px;}.pdoc-code .hll{background-color:#49483e}.pdoc-code{background:#272822; color:#f8f8f2}.pdoc-code .c{color:#75715e}.pdoc-code .err{color:#960050; background-color:#1e0010}.pdoc-code .esc{color:#f8f8f2}.pdoc-code .g{color:#f8f8f2}.pdoc-code .k{color:#66d9ef}.pdoc-code .l{color:#ae81ff}.pdoc-code .n{color:#f8f8f2}.pdoc-code .o{color:#f92672}.pdoc-code .x{color:#f8f8f2}.pdoc-code .p{color:#f8f8f2}.pdoc-code .ch{color:#75715e}.pdoc-code .cm{color:#75715e}.pdoc-code .cp{color:#75715e}.pdoc-code .cpf{color:#75715e}.pdoc-code .c1{color:#75715e}.pdoc-code .cs{color:#75715e}.pdoc-code .gd{color:#f92672}.pdoc-code .ge{color:#f8f8f2; font-style:italic}.pdoc-code .gr{color:#f8f8f2}.pdoc-code .gh{color:#f8f8f2}.pdoc-code .gi{color:#a6e22e}.pdoc-code .go{color:#66d9ef}.pdoc-code .gp{color:#f92672; font-weight:bold}.pdoc-code .gs{color:#f8f8f2; font-weight:bold}.pdoc-code .gu{color:#75715e}.pdoc-code .gt{color:#f8f8f2}.pdoc-code .kc{color:#66d9ef}.pdoc-code .kd{color:#66d9ef}.pdoc-code .kn{color:#f92672}.pdoc-code .kp{color:#66d9ef}.pdoc-code .kr{color:#66d9ef}.pdoc-code .kt{color:#66d9ef}.pdoc-code .ld{color:#e6db74}.pdoc-code .m{color:#ae81ff}.pdoc-code .s{color:#e6db74}.pdoc-code .na{color:#a6e22e}.pdoc-code .nb{color:#f8f8f2}.pdoc-code .nc{color:#a6e22e}.pdoc-code .no{color:#66d9ef}.pdoc-code .nd{color:#a6e22e}.pdoc-code .ni{color:#f8f8f2}.pdoc-code .ne{color:#a6e22e}.pdoc-code .nf{color:#a6e22e}.pdoc-code .nl{color:#f8f8f2}.pdoc-code .nn{color:#f8f8f2}.pdoc-code .nx{color:#a6e22e}.pdoc-code .py{color:#f8f8f2}.pdoc-code .nt{color:#f92672}.pdoc-code .nv{color:#f8f8f2}.pdoc-code .ow{color:#f92672}.pdoc-code .w{color:#f8f8f2}.pdoc-code .mb{color:#ae81ff}.pdoc-code .mf{color:#ae81ff}.pdoc-code .mh{color:#ae81ff}.pdoc-code .mi{color:#ae81ff}.pdoc-code .mo{color:#ae81ff}.pdoc-code .sa{color:#e6db74}.pdoc-code .sb{color:#e6db74}.pdoc-code .sc{color:#e6db74}.pdoc-code .dl{color:#e6db74}.pdoc-code .sd{color:#e6db74}.pdoc-code .s2{color:#e6db74}.pdoc-code .se{color:#ae81ff}.pdoc-code .sh{color:#e6db74}.pdoc-code .si{color:#e6db74}.pdoc-code .sx{color:#e6db74}.pdoc-code .sr{color:#e6db74}.pdoc-code .s1{color:#e6db74}.pdoc-code .ss{color:#e6db74}.pdoc-code .bp{color:#f8f8f2}.pdoc-code .fm{color:#a6e22e}.pdoc-code .vc{color:#f8f8f2}.pdoc-code .vg{color:#f8f8f2}.pdoc-code .vi{color:#f8f8f2}.pdoc-code .vm{color:#f8f8f2}</style>
+    <style>/*! theme.css */:root{--pdoc-background:#212529;}.pdoc{--text:#f7f7f7;--muted:#9d9d9d;--link:#58a6ff;--link-hover:#3989ff;--code:#333;--active:#555;--accent:#343434;--accent2:#555;--nav-hover:rgba(0, 0, 0, 0.1);--name:#77C1FF;--def:#0cdd0c;--annotation:#00c037;}</style>
+    <style>/*! layout.css */html, body{width:100%;height:100%;}html, main{scroll-behavior:smooth;}body{background-color:var(--pdoc-background);}@media (max-width:769px){#navtoggle{cursor:pointer;position:absolute;width:50px;height:40px;top:1rem;right:1rem;border-color:var(--text);color:var(--text);display:flex;opacity:0.8;z-index:999;}#navtoggle:hover{opacity:1;}#togglestate + div{display:none;}#togglestate:checked + div{display:inherit;}main, header{padding:2rem 3vw;}header + main{margin-top:-3rem;}.git-button{display:none !important;}nav input[type="search"]{max-width:77%;}nav input[type="search"]:first-child{margin-top:-6px;}nav input[type="search"]:valid ~ *{display:none !important;}}@media (min-width:770px){:root{--sidebar-width:clamp(12.5rem, 28vw, 22rem);}nav{position:fixed;overflow:auto;height:100vh;width:var(--sidebar-width);}main, header{padding:3rem 2rem 3rem calc(var(--sidebar-width) + 3rem);width:calc(54rem + var(--sidebar-width));max-width:100%;}header + main{margin-top:-4rem;}#navtoggle{display:none;}}#togglestate{position:absolute;height:0;opacity:0;}nav.pdoc{--pad:clamp(0.5rem, 2vw, 1.75rem);--indent:1.5rem;background-color:var(--accent);border-right:1px solid var(--accent2);box-shadow:0 0 20px rgba(50, 50, 50, .2) inset;padding:0 0 0 var(--pad);overflow-wrap:anywhere;scrollbar-width:thin; scrollbar-color:var(--accent2) transparent; z-index:1}nav.pdoc::-webkit-scrollbar{width:.4rem; }nav.pdoc::-webkit-scrollbar-thumb{background-color:var(--accent2); }nav.pdoc > div{padding:var(--pad) 0;}nav.pdoc .module-list-button{display:inline-flex;align-items:center;color:var(--text);border-color:var(--muted);margin-bottom:1rem;}nav.pdoc .module-list-button:hover{border-color:var(--text);}nav.pdoc input[type=search]{display:block;outline-offset:0;width:calc(100% - var(--pad));}nav.pdoc .logo{max-width:calc(100% - var(--pad));max-height:35vh;display:block;margin:0 auto 1rem;transform:translate(calc(-.5 * var(--pad)), 0);}nav.pdoc ul{list-style:none;padding-left:0;}nav.pdoc > div > ul{margin-left:calc(0px - var(--pad));}nav.pdoc li a{padding:.2rem 0 .2rem calc(var(--pad) + var(--indent));}nav.pdoc > div > ul > li > a{padding-left:var(--pad);}nav.pdoc li{transition:all 100ms;}nav.pdoc li:hover{background-color:var(--nav-hover);}nav.pdoc a, nav.pdoc a:hover{color:var(--text);}nav.pdoc a{display:block;}nav.pdoc > h2:first-of-type{margin-top:1.5rem;}nav.pdoc .class:before{content:"class ";color:var(--muted);}nav.pdoc .function:after{content:"()";color:var(--muted);}nav.pdoc footer:before{content:"";display:block;width:calc(100% - var(--pad));border-top:solid var(--accent2) 1px;margin-top:1.5rem;padding-top:.5rem;}nav.pdoc footer{font-size:small;}</style>
+    <style>/*! content.css */.pdoc{color:var(--text);box-sizing:border-box;line-height:1.5;background:none;}.pdoc .pdoc-button{cursor:pointer;display:inline-block;border:solid black 1px;border-radius:2px;font-size:.75rem;padding:calc(0.5em - 1px) 1em;transition:100ms all;}.pdoc .alert{padding:1rem 1rem 1rem calc(1.5rem + 24px);border:1px solid transparent;border-radius:.25rem;background-repeat:no-repeat;background-position:.75rem center;margin-bottom:1rem;}.pdoc .alert > em{display:none;}.pdoc .alert > *:last-child{margin-bottom:0;}.pdoc .alert.note {color:#084298;background-color:#cfe2ff;border-color:#b6d4fe;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22%23084298%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8%2016A8%208%200%201%200%208%200a8%208%200%200%200%200%2016zm.93-9.412-1%204.705c-.07.34.029.533.304.533.194%200%20.487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703%200-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381%202.29-.287zM8%205.5a1%201%200%201%201%200-2%201%201%200%200%201%200%202z%22/%3E%3C/svg%3E");}.pdoc .alert.warning{color:#664d03;background-color:#fff3cd;border-color:#ffecb5;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22%23664d03%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8.982%201.566a1.13%201.13%200%200%200-1.96%200L.165%2013.233c-.457.778.091%201.767.98%201.767h13.713c.889%200%201.438-.99.98-1.767L8.982%201.566zM8%205c.535%200%20.954.462.9.995l-.35%203.507a.552.552%200%200%201-1.1%200L7.1%205.995A.905.905%200%200%201%208%205zm.002%206a1%201%200%201%201%200%202%201%201%200%200%201%200-2z%22/%3E%3C/svg%3E");}.pdoc .alert.danger{color:#842029;background-color:#f8d7da;border-color:#f5c2c7;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22%23842029%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5.52.359A.5.5%200%200%201%206%200h4a.5.5%200%200%201%20.474.658L8.694%206H12.5a.5.5%200%200%201%20.395.807l-7%209a.5.5%200%200%201-.873-.454L6.823%209.5H3.5a.5.5%200%200%201-.48-.641l2.5-8.5z%22/%3E%3C/svg%3E");}.pdoc .visually-hidden{position:absolute !important;width:1px !important;height:1px !important;padding:0 !important;margin:-1px !important;overflow:hidden !important;clip:rect(0, 0, 0, 0) !important;white-space:nowrap !important;border:0 !important;}.pdoc h1, .pdoc h2, .pdoc h3{font-weight:300;margin:.3em 0;padding:.2em 0;}.pdoc > section:not(.module-info) h1{font-size:1.5rem;font-weight:500;}.pdoc > section:not(.module-info) h2{font-size:1.4rem;font-weight:500;}.pdoc > section:not(.module-info) h3{font-size:1.3rem;font-weight:500;}.pdoc > section:not(.module-info) h4{font-size:1.2rem;}.pdoc > section:not(.module-info) h5{font-size:1.1rem;}.pdoc a{text-decoration:none;color:var(--link);}.pdoc a:hover{color:var(--link-hover);}.pdoc blockquote{margin-left:2rem;}.pdoc pre{border-top:1px solid var(--accent2);border-bottom:1px solid var(--accent2);margin-top:0;margin-bottom:1em;padding:.5rem 0 .5rem .5rem;overflow-x:auto;background-color:var(--code);}.pdoc code{color:var(--text);padding:.2em .4em;margin:0;font-size:85%;background-color:var(--accent);border-radius:6px;}.pdoc a > code{color:inherit;}.pdoc pre > code{display:inline-block;font-size:inherit;background:none;border:none;padding:0;}.pdoc > section:not(.module-info){margin-bottom:1.5rem;}.pdoc .modulename{margin-top:0;font-weight:bold;}.pdoc .modulename a{color:var(--link);transition:100ms all;}.pdoc .git-button{float:right;border:solid var(--link) 1px;}.pdoc .git-button:hover{background-color:var(--link);color:var(--pdoc-background);}.view-source-toggle-state,.view-source-toggle-state ~ .pdoc-code{display:none;}.view-source-toggle-state:checked ~ .pdoc-code{display:block;}.view-source-button{display:inline-block;float:right;font-size:.75rem;line-height:1.5rem;color:var(--muted);padding:0 .4rem 0 1.3rem;cursor:pointer;text-indent:-2px;}.view-source-button > span{visibility:hidden;}.module-info .view-source-button{float:none;display:flex;justify-content:flex-end;margin:-1.2rem .4rem -.2rem 0;}.view-source-button::before{position:absolute;content:"View Source";display:list-item;list-style-type:disclosure-closed;}.view-source-toggle-state:checked ~ .attr .view-source-button::before,.view-source-toggle-state:checked ~ .view-source-button::before{list-style-type:disclosure-open;}.pdoc .docstring{margin-bottom:1.5rem;}.pdoc section:not(.module-info) .docstring{margin-left:clamp(0rem, 5vw - 2rem, 1rem);}.pdoc .docstring .pdoc-code{margin-left:1em;margin-right:1em;}.pdoc h1:target,.pdoc h2:target,.pdoc h3:target,.pdoc h4:target,.pdoc h5:target,.pdoc h6:target,.pdoc .pdoc-code > pre > span:target{background-color:var(--active);box-shadow:-1rem 0 0 0 var(--active);}.pdoc .pdoc-code > pre > span:target{display:block;}.pdoc div:target > .attr,.pdoc section:target > .attr,.pdoc dd:target > a{background-color:var(--active);}.pdoc *{scroll-margin:2rem;}.pdoc .pdoc-code .linenos{user-select:none;}.pdoc .attr:hover{filter:contrast(0.95);}.pdoc section, .pdoc .classattr{position:relative;}.pdoc .headerlink{--width:clamp(1rem, 3vw, 2rem);position:absolute;top:0;left:calc(0rem - var(--width));transition:all 100ms ease-in-out;opacity:0;}.pdoc .headerlink::before{content:"#";display:block;text-align:center;width:var(--width);height:2.3rem;line-height:2.3rem;font-size:1.5rem;}.pdoc .attr:hover ~ .headerlink,.pdoc *:target > .headerlink,.pdoc .headerlink:hover{opacity:1;}.pdoc .attr{display:block;margin:.5rem 0 .5rem;padding:.4rem .4rem .4rem 1rem;background-color:var(--accent);overflow-x:auto;}.pdoc .classattr{margin-left:2rem;}.pdoc .name{color:var(--name);font-weight:bold;}.pdoc .def{color:var(--def);font-weight:bold;}.pdoc .signature{background-color:transparent;}.pdoc .param, .pdoc .return-annotation{white-space:pre;}.pdoc .signature.multiline .param{display:block;}.pdoc .signature.condensed .param{display:inline-block;}.pdoc .annotation{color:var(--annotation);}.pdoc .view-value-toggle-state,.pdoc .view-value-toggle-state ~ .default_value{display:none;}.pdoc .view-value-toggle-state:checked ~ .default_value{display:inherit;}.pdoc .view-value-button{font-size:.5rem;vertical-align:middle;border-style:dashed;margin-top:-0.1rem;}.pdoc .view-value-button:hover{background:white;}.pdoc .view-value-button::before{content:"show";text-align:center;width:2.2em;display:inline-block;}.pdoc .view-value-toggle-state:checked ~ .view-value-button::before{content:"hide";}.pdoc .inherited{margin-left:2rem;}.pdoc .inherited dt{font-weight:700;}.pdoc .inherited dt, .pdoc .inherited dd{display:inline;margin-left:0;margin-bottom:.5rem;}.pdoc .inherited dd:not(:last-child):after{content:", ";}.pdoc .inherited .class:before{content:"class ";}.pdoc .inherited .function a:after{content:"()";}.pdoc .search-result .docstring{overflow:auto;max-height:25vh;}.pdoc .search-result.focused > .attr{background-color:var(--active);}.pdoc .attribution{margin-top:2rem;display:block;opacity:0.5;transition:all 200ms;filter:grayscale(100%);}.pdoc .attribution:hover{opacity:1;filter:grayscale(0%);}.pdoc .attribution img{margin-left:5px;height:35px;vertical-align:middle;width:70px;transition:all 200ms;}.pdoc table{display:block;width:max-content;max-width:100%;overflow:auto;margin-bottom:1rem;}.pdoc table th{font-weight:600;}.pdoc table th, .pdoc table td{padding:6px 13px;border:1px solid var(--accent2);}</style>
+    <style>/*! custom.css */</style></head>
+<body>
+    <nav class="pdoc">
+        <label id="navtoggle" for="togglestate" class="pdoc-button"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke-linecap='round' stroke="currentColor" stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg></label>
+        <input id="togglestate" type="checkbox" aria-hidden="true" tabindex="-1">
+        <div><!-- Remove pdoc-button -->
+
+
+
+
+
+            <h2>API Documentation</h2>
+                <ul class="memberlist">
+            <li>
+                    <a class="function" href="#ignore_case">ignore_case</a>
+            </li>
+            <li>
+                    <a class="function" href="#make_attrgetter">make_attrgetter</a>
+            </li>
+            <li>
+                    <a class="function" href="#make_multi_attrgetter">make_multi_attrgetter</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_forceescape">do_forceescape</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_urlencode">do_urlencode</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_replace">do_replace</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_upper">do_upper</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_lower">do_lower</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_items">do_items</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_xmlattr">do_xmlattr</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_capitalize">do_capitalize</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_title">do_title</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_dictsort">do_dictsort</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_sort">do_sort</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_unique">do_unique</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_min">do_min</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_max">do_max</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_default">do_default</a>
+            </li>
+            <li>
+                    <a class="function" href="#sync_do_join">sync_do_join</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_join">do_join</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_center">do_center</a>
+            </li>
+            <li>
+                    <a class="function" href="#sync_do_first">sync_do_first</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_first">do_first</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_last">do_last</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_random">do_random</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_filesizeformat">do_filesizeformat</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_pprint">do_pprint</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_urlize">do_urlize</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_indent">do_indent</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_truncate">do_truncate</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_wordwrap">do_wordwrap</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_wordcount">do_wordcount</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_int">do_int</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_float">do_float</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_format">do_format</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_trim">do_trim</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_striptags">do_striptags</a>
+            </li>
+            <li>
+                    <a class="function" href="#sync_do_slice">sync_do_slice</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_slice">do_slice</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_batch">do_batch</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_round">do_round</a>
+            </li>
+            <li>
+                    <a class="function" href="#sync_do_groupby">sync_do_groupby</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_groupby">do_groupby</a>
+            </li>
+            <li>
+                    <a class="function" href="#sync_do_sum">sync_do_sum</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_sum">do_sum</a>
+            </li>
+            <li>
+                    <a class="function" href="#sync_do_list">sync_do_list</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_list">do_list</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_mark_safe">do_mark_safe</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_mark_unsafe">do_mark_unsafe</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_reverse">do_reverse</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_attr">do_attr</a>
+            </li>
+            <li>
+                    <a class="function" href="#sync_do_map">sync_do_map</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_map">do_map</a>
+            </li>
+            <li>
+                    <a class="function" href="#sync_do_select">sync_do_select</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_select">do_select</a>
+            </li>
+            <li>
+                    <a class="function" href="#sync_do_reject">sync_do_reject</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_reject">do_reject</a>
+            </li>
+            <li>
+                    <a class="function" href="#sync_do_selectattr">sync_do_selectattr</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_selectattr">do_selectattr</a>
+            </li>
+            <li>
+                    <a class="function" href="#sync_do_rejectattr">sync_do_rejectattr</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_rejectattr">do_rejectattr</a>
+            </li>
+            <li>
+                    <a class="function" href="#do_tojson">do_tojson</a>
+            </li>
+            <li>
+                    <a class="function" href="#prepare_map">prepare_map</a>
+            </li>
+            <li>
+                    <a class="function" href="#prepare_select_or_reject">prepare_select_or_reject</a>
+            </li>
+            <li>
+                    <a class="function" href="#select_or_reject">select_or_reject</a>
+            </li>
+            <li>
+                    <a class="function" href="#async_select_or_reject">async_select_or_reject</a>
+            </li>
+            <li>
+                    <a class="variable" href="#FILTERS">FILTERS</a>
+            </li>
+    </ul>
+
+
+
+        <a class="attribution" title="pdoc: Python API documentation generator" href="https://pdoc.dev" target="_blank">
+            built with <span class="visually-hidden">pdoc</span><img
+                alt="pdoc logo"
+                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20role%3D%22img%22%20aria-label%3D%22pdoc%20logo%22%20width%3D%22300%22%20height%3D%22150%22%20viewBox%3D%22-1%200%2060%2030%22%3E%3Ctitle%3Epdoc%3C/title%3E%3Cpath%20d%3D%22M29.621%2021.293c-.011-.273-.214-.475-.511-.481a.5.5%200%200%200-.489.503l-.044%201.393c-.097.551-.695%201.215-1.566%201.704-.577.428-1.306.486-2.193.182-1.426-.617-2.467-1.654-3.304-2.487l-.173-.172a3.43%203.43%200%200%200-.365-.306.49.49%200%200%200-.286-.196c-1.718-1.06-4.931-1.47-7.353.191l-.219.15c-1.707%201.187-3.413%202.131-4.328%201.03-.02-.027-.49-.685-.141-1.763.233-.721.546-2.408.772-4.076.042-.09.067-.187.046-.288.166-1.347.277-2.625.241-3.351%201.378-1.008%202.271-2.586%202.271-4.362%200-.976-.272-1.935-.788-2.774-.057-.094-.122-.18-.184-.268.033-.167.052-.339.052-.516%200-1.477-1.202-2.679-2.679-2.679-.791%200-1.496.352-1.987.9a6.3%206.3%200%200%200-1.001.029c-.492-.564-1.207-.929-2.012-.929-1.477%200-2.679%201.202-2.679%202.679A2.65%202.65%200%200%200%20.97%206.554c-.383.747-.595%201.572-.595%202.41%200%202.311%201.507%204.29%203.635%205.107-.037.699-.147%202.27-.423%203.294l-.137.461c-.622%202.042-2.515%208.257%201.727%2010.643%201.614.908%203.06%201.248%204.317%201.248%202.665%200%204.492-1.524%205.322-2.401%201.476-1.559%202.886-1.854%206.491.82%201.877%201.393%203.514%201.753%204.861%201.068%202.223-1.713%202.811-3.867%203.399-6.374.077-.846.056-1.469.054-1.537zm-4.835%204.313c-.054.305-.156.586-.242.629-.034-.007-.131-.022-.307-.157-.145-.111-.314-.478-.456-.908.221.121.432.25.675.355.115.039.219.051.33.081zm-2.251-1.238c-.05.33-.158.648-.252.694-.022.001-.125-.018-.307-.157-.217-.166-.488-.906-.639-1.573.358.344.754.693%201.198%201.036zm-3.887-2.337c-.006-.116-.018-.231-.041-.342.635.145%201.189.368%201.599.625.097.231.166.481.174.642-.03.049-.055.101-.067.158-.046.013-.128.026-.298.004-.278-.037-.901-.57-1.367-1.087zm-1.127-.497c.116.306.176.625.12.71-.019.014-.117.045-.345.016-.206-.027-.604-.332-.986-.695.41-.051.816-.056%201.211-.031zm-4.535%201.535c.209.22.379.47.358.598-.006.041-.088.138-.351.234-.144.055-.539-.063-.979-.259a11.66%2011.66%200%200%200%20.972-.573zm.983-.664c.359-.237.738-.418%201.126-.554.25.237.479.548.457.694-.006.042-.087.138-.351.235-.174.064-.694-.105-1.232-.375zm-3.381%201.794c-.022.145-.061.29-.149.401-.133.166-.358.248-.69.251h-.002c-.133%200-.306-.26-.45-.621.417.091.854.07%201.291-.031zm-2.066-8.077a4.78%204.78%200%200%201-.775-.584c.172-.115.505-.254.88-.378l-.105.962zm-.331%202.302a10.32%2010.32%200%200%201-.828-.502c.202-.143.576-.328.984-.49l-.156.992zm-.45%202.157l-.701-.403c.214-.115.536-.249.891-.376a11.57%2011.57%200%200%201-.19.779zm-.181%201.716c.064.398.194.702.298.893-.194-.051-.435-.162-.736-.398.061-.119.224-.3.438-.495zM8.87%204.141c0%20.152-.123.276-.276.276s-.275-.124-.275-.276.123-.276.276-.276.275.124.275.276zm-.735-.389a1.15%201.15%200%200%200-.314.783%201.16%201.16%200%200%200%201.162%201.162c.457%200%20.842-.27%201.032-.653.026.117.042.238.042.362a1.68%201.68%200%200%201-1.679%201.679%201.68%201.68%200%200%201-1.679-1.679c0-.843.626-1.535%201.436-1.654zM5.059%205.406A1.68%201.68%200%200%201%203.38%207.085a1.68%201.68%200%200%201-1.679-1.679c0-.037.009-.072.011-.109.21.3.541.508.935.508a1.16%201.16%200%200%200%201.162-1.162%201.14%201.14%200%200%200-.474-.912c.015%200%20.03-.005.045-.005.926.001%201.679.754%201.679%201.68zM3.198%204.141c0%20.152-.123.276-.276.276s-.275-.124-.275-.276.123-.276.276-.276.275.124.275.276zM1.375%208.964c0-.52.103-1.035.288-1.52.466.394%201.06.64%201.717.64%201.144%200%202.116-.725%202.499-1.738.383%201.012%201.355%201.738%202.499%201.738.867%200%201.631-.421%202.121-1.062.307.605.478%201.267.478%201.942%200%202.486-2.153%204.51-4.801%204.51s-4.801-2.023-4.801-4.51zm24.342%2019.349c-.985.498-2.267.168-3.813-.979-3.073-2.281-5.453-3.199-7.813-.705-1.315%201.391-4.163%203.365-8.423.97-3.174-1.786-2.239-6.266-1.261-9.479l.146-.492c.276-1.02.395-2.457.444-3.268a6.11%206.11%200%200%200%201.18.115%206.01%206.01%200%200%200%202.536-.562l-.006.175c-.802.215-1.848.612-2.021%201.25-.079.295.021.601.274.837.219.203.415.364.598.501-.667.304-1.243.698-1.311%201.179-.02.144-.022.507.393.787.213.144.395.26.564.365-1.285.521-1.361.96-1.381%201.126-.018.142-.011.496.427.746l.854.489c-.473.389-.971.914-.999%201.429-.018.278.095.532.316.713.675.556%201.231.721%201.653.721.059%200%20.104-.014.158-.02.207.707.641%201.64%201.513%201.64h.013c.8-.008%201.236-.345%201.462-.626.173-.216.268-.457.325-.692.424.195.93.374%201.372.374.151%200%20.294-.021.423-.068.732-.27.944-.704.993-1.021.009-.061.003-.119.002-.179.266.086.538.147.789.147.15%200%20.294-.021.423-.069.542-.2.797-.489.914-.754.237.147.478.258.704.288.106.014.205.021.296.021.356%200%20.595-.101.767-.229.438.435%201.094.992%201.656%201.067.106.014.205.021.296.021a1.56%201.56%200%200%200%20.323-.035c.17.575.453%201.289.866%201.605.358.273.665.362.914.362a.99.99%200%200%200%20.421-.093%201.03%201.03%200%200%200%20.245-.164c.168.428.39.846.68%201.068.358.273.665.362.913.362a.99.99%200%200%200%20.421-.093c.317-.148.512-.448.639-.762.251.157.495.257.726.257.127%200%20.25-.024.37-.071.427-.17.706-.617.841-1.314.022-.015.047-.022.068-.038.067-.051.133-.104.196-.159-.443%201.486-1.107%202.761-2.086%203.257zM8.66%209.925a.5.5%200%201%200-1%200c0%20.653-.818%201.205-1.787%201.205s-1.787-.552-1.787-1.205a.5.5%200%201%200-1%200c0%201.216%201.25%202.205%202.787%202.205s2.787-.989%202.787-2.205zm4.4%2015.965l-.208.097c-2.661%201.258-4.708%201.436-6.086.527-1.542-1.017-1.88-3.19-1.844-4.198a.4.4%200%200%200-.385-.414c-.242-.029-.406.164-.414.385-.046%201.249.367%203.686%202.202%204.896.708.467%201.547.7%202.51.7%201.248%200%202.706-.392%204.362-1.174l.185-.086a.4.4%200%200%200%20.205-.527c-.089-.204-.326-.291-.527-.206zM9.547%202.292c.093.077.205.114.317.114a.5.5%200%200%200%20.318-.886L8.817.397a.5.5%200%200%200-.703.068.5.5%200%200%200%20.069.703l1.364%201.124zm-7.661-.065c.086%200%20.173-.022.253-.068l1.523-.893a.5.5%200%200%200-.506-.863l-1.523.892a.5.5%200%200%200-.179.685c.094.158.261.247.432.247z%22%20transform%3D%22matrix%28-1%200%200%201%2058%200%29%22%20fill%3D%22%233bb300%22/%3E%3Cpath%20d%3D%22M.3%2021.86V10.18q0-.46.02-.68.04-.22.18-.5.28-.54%201.34-.54%201.06%200%201.42.28.38.26.44.78.76-1.04%202.38-1.04%201.64%200%203.1%201.54%201.46%201.54%201.46%203.58%200%202.04-1.46%203.58-1.44%201.54-3.08%201.54-1.64%200-2.38-.92v4.04q0%20.46-.04.68-.02.22-.18.5-.14.3-.5.42-.36.12-.98.12-.62%200-1-.12-.36-.12-.52-.4-.14-.28-.18-.5-.02-.22-.02-.68zm3.96-9.42q-.46.54-.46%201.18%200%20.64.46%201.18.48.52%201.2.52.74%200%201.24-.52.52-.52.52-1.18%200-.66-.48-1.18-.48-.54-1.26-.54-.76%200-1.22.54zm14.741-8.36q.16-.3.54-.42.38-.12%201-.12.64%200%201.02.12.38.12.52.42.16.3.18.54.04.22.04.68v11.94q0%20.46-.04.7-.02.22-.18.5-.3.54-1.7.54-1.38%200-1.54-.98-.84.96-2.34.96-1.8%200-3.28-1.56-1.48-1.58-1.48-3.66%200-2.1%201.48-3.68%201.5-1.58%203.28-1.58%201.48%200%202.3%201v-4.2q0-.46.02-.68.04-.24.18-.52zm-3.24%2010.86q.52.54%201.26.54.74%200%201.22-.54.5-.54.5-1.18%200-.66-.48-1.22-.46-.56-1.26-.56-.8%200-1.28.56-.48.54-.48%201.2%200%20.66.52%201.2zm7.833-1.2q0-2.4%201.68-3.96%201.68-1.56%203.84-1.56%202.16%200%203.82%201.56%201.66%201.54%201.66%203.94%200%201.66-.86%202.96-.86%201.28-2.1%201.9-1.22.6-2.54.6-1.32%200-2.56-.64-1.24-.66-2.1-1.92-.84-1.28-.84-2.88zm4.18%201.44q.64.48%201.3.48.66%200%201.32-.5.66-.5.66-1.48%200-.98-.62-1.46-.62-.48-1.34-.48-.72%200-1.34.5-.62.5-.62%201.48%200%20.96.64%201.46zm11.412-1.44q0%20.84.56%201.32.56.46%201.18.46.64%200%201.18-.36.56-.38.9-.38.6%200%201.46%201.06.46.58.46%201.04%200%20.76-1.1%201.42-1.14.8-2.8.8-1.86%200-3.58-1.34-.82-.64-1.34-1.7-.52-1.08-.52-2.36%200-1.3.52-2.34.52-1.06%201.34-1.7%201.66-1.32%203.54-1.32.76%200%201.48.22.72.2%201.06.4l.32.2q.36.24.56.38.52.4.52.92%200%20.5-.42%201.14-.72%201.1-1.38%201.1-.38%200-1.08-.44-.36-.34-1.04-.34-.66%200-1.24.48-.58.48-.58%201.34z%22%20fill%3D%22green%22/%3E%3C/svg%3E"/>
+        </a>
+</div>
+    </nav>
+    <main class="pdoc">
+            <section class="module-info">
+                    <h1 class="modulename">
+<a href="./../jinja2.html">jinja2</a><wbr>.filters    </h1>
+
+                        <div class="docstring"><p>Built-in template filters used with the <code>|</code> operator.</p>
+</div>
+
+                
+                
+                
+            </section>
+                <section id="ignore_case">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">ignore_case</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="o">~</span><span class="n">V</span></span><span class="return-annotation">) -> <span class="o">~</span><span class="n">V</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#ignore_case"></a>
+    
+            <div class="docstring"><p>For use as a postprocessor for <code><a href="#make_attrgetter">make_attrgetter()</a></code>. Converts strings
+to lowercase and returns other types as-is.</p>
+</div>
+
+
+                </section>
+                <section id="make_attrgetter">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">make_attrgetter</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">attribute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span>,</span><span class="param">	<span class="n">postprocess</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">default</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#make_attrgetter"></a>
+    
+            <div class="docstring"><p>Returns a callable that looks up the given attribute from a
+passed object with the rules of the environment.  Dots are allowed
+to access attributes of attributes.  Integer parts in paths are
+looked up as integers.</p>
+</div>
+
+
+                </section>
+                <section id="make_multi_attrgetter">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">make_multi_attrgetter</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">attribute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span>,</span><span class="param">	<span class="n">postprocess</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#make_multi_attrgetter"></a>
+    
+            <div class="docstring"><p>Returns a callable that looks up the given comma separated
+attributes from a passed object with the rules of the environment.
+Dots are allowed to access attributes of each attribute.  Integer
+parts in paths are looked up as integers.</p>
+
+<p>The value returned by the returned callable is a list of extracted
+attribute values.</p>
+
+<p>Examples of attribute: "attr1,attr2", "attr1.inner1.0,attr2.inner2.0", etc.</p>
+</div>
+
+
+                </section>
+                <section id="do_forceescape">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_forceescape</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="s1">&#39;t.Union[str, HasHTML]&#39;</span></span><span class="return-annotation">) -> <span class="n">markupsafe</span><span class="o">.</span><span class="n">Markup</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_forceescape"></a>
+    
+            <div class="docstring"><p>Enforce HTML escaping.  This will probably double escape variables.</p>
+</div>
+
+
+                </section>
+                <section id="do_urlencode">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_urlencode</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_urlencode"></a>
+    
+            <div class="docstring"><p>Quote data for use in a URL path or query using UTF-8.</p>
+
+<p>Basic wrapper around <code>urllib.parse.quote()</code> when given a
+string, or <code>urllib.parse.urlencode()</code> for a dict or iterable.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>value</strong>:  Data to quote. A string will be quoted directly. A
+dict or iterable of <code>(key, value)</code> pairs will be joined as a
+query string.</li>
+</ul>
+
+<p>When given a string, "/" is not quoted. HTTP servers treat "/" and
+"%2F" equivalently in paths. If you need quoted slashes, use the
+<code>|replace("/", "%2F")</code> filter.</p>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                </section>
+                <section id="do_replace">
+                    <div class="attr function">
+                    <div class="decorator">@pass_eval_context</div>
+
+        <span class="def">def</span>
+        <span class="name">do_replace</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">eval_ctx</span><span class="p">:</span> <span class="s1">&#39;EvalContext&#39;</span>,</span><span class="param">	<span class="n">s</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">old</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">new</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_replace"></a>
+    
+            <div class="docstring"><p>Return a copy of the value with all occurrences of a substring
+replaced with a new one. The first argument is the substring
+that should be replaced, the second is the replacement string.
+If the optional third argument <code>count</code> is given, only the first
+<code>count</code> occurrences are replaced:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ "Hello World"|replace("Hello", "Goodbye") }}
+    -&gt; Goodbye World
+
+{{ "aaaaargh"|replace("a", "d'oh, ", 2) }}
+    -&gt; d'oh, d'oh, aaargh
+</code></pre>
+</div>
+
+
+                </section>
+                <section id="do_upper">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_upper</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">s</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_upper"></a>
+    
+            <div class="docstring"><p>Convert a value to uppercase.</p>
+</div>
+
+
+                </section>
+                <section id="do_lower">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_lower</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">s</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_lower"></a>
+    
+            <div class="docstring"><p>Convert a value to lowercase.</p>
+</div>
+
+
+                </section>
+                <section id="do_items">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_items</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="o">~</span><span class="n">K</span><span class="p">,</span> <span class="o">~</span><span class="n">V</span><span class="p">],</span> <span class="n"><a href="runtime.html#Undefined">jinja2.runtime.Undefined</a></span><span class="p">]</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="o">~</span><span class="n">K</span><span class="p">,</span> <span class="o">~</span><span class="n">V</span><span class="p">]]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_items"></a>
+    
+            <div class="docstring"><p>Return an iterator over the <code>(key, value)</code> items of a mapping.</p>
+
+<p><code>x|items</code> is the same as <code>x.items()</code>, except if <code>x</code> is
+undefined an empty iterator is returned.</p>
+
+<p>This filter is useful if you expect the template to be rendered with
+an implementation of Jinja in another programming language that does
+not have a <code>.items()</code> method on its mapping type.</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">&lt;</span><span class="nt">dl</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">for</span> <span class="nv">key</span><span class="o">,</span> <span class="nv">value</span> <span class="k">in</span> <span class="nv">my_dict</span><span class="o">|</span><span class="nf">items</span> <span class="cp">%}</span>
+    <span class="p">&lt;</span><span class="nt">dt</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">key</span> <span class="cp">}}</span>
+    <span class="p">&lt;</span><span class="nt">dd</span><span class="p">&gt;</span><span class="cp">{{</span> <span class="nv">value</span> <span class="cp">}}</span>
+<span class="cp">{%</span> <span class="k">endfor</span> <span class="cp">%}</span>
+<span class="p">&lt;/</span><span class="nt">dl</span><span class="p">&gt;</span>
+</code></pre>
+</div>
+
+<p><em>New in version 3.1.</em></p>
+</div>
+
+
+                </section>
+                <section id="do_xmlattr">
+                    <div class="attr function">
+                    <div class="decorator">@pass_eval_context</div>
+
+        <span class="def">def</span>
+        <span class="name">do_xmlattr</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">eval_ctx</span><span class="p">:</span> <span class="s1">&#39;EvalContext&#39;</span>,</span><span class="param">	<span class="n">d</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="n">autospace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_xmlattr"></a>
+    
+            <div class="docstring"><p>Create an SGML/XML attribute string based on the items in a dict.</p>
+
+<p><strong>Values</strong> that are neither <code>none</code> nor <code>undefined</code> are automatically
+escaped, safely allowing untrusted user input.</p>
+
+<p>User input should not be used as <strong>keys</strong> to this filter. If any key
+contains a space, <code>/</code> solidus, <code>&gt;</code> greater-than sign, or <code>=</code> equals
+sign, this fails with a <code>ValueError</code>. Regardless of this, user input
+should never be used as keys to this filter, or must be separately validated
+first.</p>
+
+<p>.. sourcecode:: html+jinja</p>
+
+<pre><code>&lt;ul{{ {'class': 'my_list', 'missing': none,
+        'id': 'list-%d'|format(variable)}|xmlattr }}&gt;
+...
+</code></pre>
+
+    </ul>
+
+Results in something like this:
+
+.. sourcecode:: html
+
+    <ul class="my_list" id="list-42">
+
+<pre><code>...
+&lt;/ul&gt;
+</code></pre>
+
+<p>As you can see it automatically prepends a space in front of the item
+if the filter returned something unless the second parameter is false.</p>
+
+<p><em>Changed in version 3.1.4:</em>
+Keys with <code>/</code> solidus, <code>&gt;</code> greater-than sign, or <code>=</code> equals sign
+are not allowed.</p>
+
+<p><em>Changed in version 3.1.3:</em>
+Keys with spaces are not allowed.</p>
+</div>
+
+
+                </section>
+                <section id="do_capitalize">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_capitalize</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">s</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_capitalize"></a>
+    
+            <div class="docstring"><p>Capitalize a value. The first character will be uppercase, all others
+lowercase.</p>
+</div>
+
+
+                </section>
+                <section id="do_title">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_title</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">s</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_title"></a>
+    
+            <div class="docstring"><p>Return a titlecased version of the value. I.e. words will start with
+uppercase letters, all remaining characters are lowercase.</p>
+</div>
+
+
+                </section>
+                <section id="do_dictsort">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_dictsort</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="o">~</span><span class="n">K</span><span class="p">,</span> <span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">by</span><span class="p">:</span> <span class="s1">&#39;te.Literal[&quot;key&quot;, &quot;value&quot;]&#39;</span> <span class="o">=</span> <span class="s1">&#39;key&#39;</span>,</span><span class="param">	<span class="n">reverse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></span><span class="return-annotation">) -> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="o">~</span><span class="n">K</span><span class="p">,</span> <span class="o">~</span><span class="n">V</span><span class="p">]]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_dictsort"></a>
+    
+            <div class="docstring"><p>Sort a dict and yield (key, value) pairs. Python dicts may not
+be in the order you want to display them in, so sort them first.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{% for key, value in mydict|dictsort %}
+    sort the dict by key, case insensitive
+
+{% for key, value in mydict|dictsort(reverse=true) %}
+    sort the dict by key, case insensitive, reverse order
+
+{% for key, value in mydict|dictsort(true) %}
+    sort the dict by key, case sensitive
+
+{% for key, value in mydict|dictsort(false, 'value') %}
+    sort the dict by value, case insensitive
+</code></pre>
+</div>
+
+
+                </section>
+                <section id="do_sort">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">do_sort</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">reverse</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">attribute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">List</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_sort"></a>
+    
+            <div class="docstring"><p>Sort an iterable using Python's <code>sorted()</code>.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{% for city in cities|sort %}
+    ...
+{% endfor %}
+</code></pre>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>reverse</strong>:  Sort descending instead of ascending.</li>
+<li><strong>case_sensitive</strong>:  When sorting strings, sort upper and lower
+case separately.</li>
+<li><strong>attribute</strong>:  When sorting objects or dicts, an attribute or
+key to sort by. Can use dot notation like <code>"address.city"</code>.
+Can be a list of attributes like <code>"age,name"</code>.</li>
+</ul>
+
+<p>The sort is stable, it does not change the relative order of
+elements that compare equal. This makes it is possible to chain
+sorts on different attributes and ordering.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{% for user in users|sort(attribute="name")
+    |sort(reverse=true, attribute="age") %}
+    ...
+{% endfor %}
+</code></pre>
+
+<p>As a shortcut to chaining when the direction is the same for all
+attributes, pass a comma separate list of attributes.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{% for user in users|sort(attribute="age,name") %}
+    ...
+{% endfor %}
+</code></pre>
+
+<p><em>Changed in version 2.11.0:</em>
+The <code>attribute</code> parameter can be a comma separated list of
+attributes, e.g. <code>"age,name"</code>.</p>
+
+<p><em>Changed in version 2.6:</em>
+The <code>attribute</code> parameter was added.</p>
+</div>
+
+
+                </section>
+                <section id="do_unique">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">do_unique</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">attribute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_unique"></a>
+    
+            <div class="docstring"><p>Returns a list of unique items from the given iterable.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ ['foo', 'bar', 'foobar', 'FooBar']|unique|list }}
+    -&gt; ['foo', 'bar', 'foobar']
+</code></pre>
+
+<p>The unique items are yielded in the same order as their first occurrence in
+the iterable passed to the filter.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>case_sensitive</strong>:  Treat upper and lower case strings as distinct.</li>
+<li><strong>attribute</strong>:  Filter objects with unique values for this attribute.</li>
+</ul>
+</div>
+
+
+                </section>
+                <section id="do_min">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">do_min</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">attribute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Union</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">,</span> <span class="n"><a href="runtime.html#Undefined">jinja2.runtime.Undefined</a></span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_min"></a>
+    
+            <div class="docstring"><p>Return the smallest item from the sequence.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ [1, 2, 3]|min }}
+    -&gt; 1
+</code></pre>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>case_sensitive</strong>:  Treat upper and lower case strings as distinct.</li>
+<li><strong>attribute</strong>:  Get the object with the min value of this attribute.</li>
+</ul>
+</div>
+
+
+                </section>
+                <section id="do_max">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">do_max</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">attribute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Union</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">,</span> <span class="n"><a href="runtime.html#Undefined">jinja2.runtime.Undefined</a></span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_max"></a>
+    
+            <div class="docstring"><p>Return the largest item from the sequence.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ [1, 2, 3]|max }}
+    -&gt; 3
+</code></pre>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>case_sensitive</strong>:  Treat upper and lower case strings as distinct.</li>
+<li><strong>attribute</strong>:  Get the object with the max value of this attribute.</li>
+</ul>
+</div>
+
+
+                </section>
+                <section id="do_default">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_default</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="o">~</span><span class="n">V</span>, </span><span class="param"><span class="n">default_value</span><span class="p">:</span> <span class="o">~</span><span class="n">V</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>, </span><span class="param"><span class="n">boolean</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></span><span class="return-annotation">) -> <span class="o">~</span><span class="n">V</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_default"></a>
+    
+            <div class="docstring"><p>If the value is undefined it will return the passed default value,
+otherwise the value of the variable:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ my_variable|default('my_variable is not defined') }}
+</code></pre>
+
+<p>This will output the value of <code>my_variable</code> if the variable was
+defined, otherwise <code>'my_variable is not defined'</code>. If you want
+to use default with variables that evaluate to false you have to
+set the second parameter to <code>true</code>:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ ''|default('the string was empty', true) }}
+</code></pre>
+
+<p><em>Changed in version 2.11:</em>
+It's now possible to configure the <code>~jinja2.Environment</code> with
+<code>~jinja2.ChainableUndefined</code> to make the <code>default</code> filter work
+on nested elements and attributes that may contain undefined values
+in the chain without getting an <code>~jinja2.UndefinedError</code>.</p>
+</div>
+
+
+                </section>
+                <section id="sync_do_join">
+                    <div class="attr function">
+                    <div class="decorator">@pass_eval_context</div>
+
+        <span class="def">def</span>
+        <span class="name">sync_do_join</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">eval_ctx</span><span class="p">:</span> <span class="s1">&#39;EvalContext&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="n">d</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>,</span><span class="param">	<span class="n">attribute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#sync_do_join"></a>
+    
+            <div class="docstring"><p>Return a string which is the concatenation of the strings in the
+sequence. The separator between elements is an empty string per
+default, you can define it with the optional parameter:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ [1, 2, 3]|join('|') }}
+    -&gt; 1|2|3
+
+{{ [1, 2, 3]|join }}
+    -&gt; 123
+</code></pre>
+
+<p>It is also possible to join certain attributes of an object:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ users|join(', ', attribute='username') }}
+</code></pre>
+
+<p><em>New in version 2.6:</em>
+The <code>attribute</code> parameter was added.</p>
+</div>
+
+
+                </section>
+                <section id="do_join">
+                    <div class="attr function">
+                    <div class="decorator">@pass_eval_context</div>
+
+        <span class="def">def</span>
+        <span class="name">do_join</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">eval_ctx</span><span class="p">:</span> <span class="s1">&#39;EvalContext&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="n">d</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>,</span><span class="param">	<span class="n">attribute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_join"></a>
+    
+            <div class="docstring"><p>Return a string which is the concatenation of the strings in the
+sequence. The separator between elements is an empty string per
+default, you can define it with the optional parameter:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ [1, 2, 3]|join('|') }}
+    -&gt; 1|2|3
+
+{{ [1, 2, 3]|join }}
+    -&gt; 123
+</code></pre>
+
+<p>It is also possible to join certain attributes of an object:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ users|join(', ', attribute='username') }}
+</code></pre>
+
+<p><em>New in version 2.6:</em>
+The <code>attribute</code> parameter was added.</p>
+</div>
+
+
+                </section>
+                <section id="do_center">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_center</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">80</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_center"></a>
+    
+            <div class="docstring"><p>Centers the value in a field of a given width.</p>
+</div>
+
+
+                </section>
+                <section id="sync_do_first">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">sync_do_first</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">seq</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="n">Union</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">,</span> <span class="n"><a href="runtime.html#Undefined">jinja2.runtime.Undefined</a></span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#sync_do_first"></a>
+    
+            <div class="docstring"><p>Return the first item of a sequence.</p>
+</div>
+
+
+                </section>
+                <section id="do_first">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">do_first</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">seq</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="n">Union</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">,</span> <span class="n"><a href="runtime.html#Undefined">jinja2.runtime.Undefined</a></span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_first"></a>
+    
+            <div class="docstring"><p>Return the first item of a sequence.</p>
+</div>
+
+
+                </section>
+                <section id="do_last">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">do_last</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">seq</span><span class="p">:</span> <span class="n">Reversible</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="n">Union</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">,</span> <span class="n"><a href="runtime.html#Undefined">jinja2.runtime.Undefined</a></span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_last"></a>
+    
+            <div class="docstring"><p>Return the last item of a sequence.</p>
+
+<p>Note: Does not work with generators. You may want to explicitly
+convert it to a list:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ data | selectattr('name', '==', 'Jinja') | list | last }}
+</code></pre>
+</div>
+
+
+                </section>
+                <section id="do_random">
+                    <div class="attr function">
+                    <div class="decorator">@pass_context</div>
+
+        <span class="def">def</span>
+        <span class="name">do_random</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">seq</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="n">Union</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">,</span> <span class="n"><a href="runtime.html#Undefined">jinja2.runtime.Undefined</a></span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_random"></a>
+    
+            <div class="docstring"><p>Return a random item from the sequence.</p>
+</div>
+
+
+                </section>
+                <section id="do_filesizeformat">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_filesizeformat</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>, </span><span class="param"><span class="n">binary</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_filesizeformat"></a>
+    
+            <div class="docstring"><p>Format the value like a 'human-readable' file size (i.e. 13 kB,
+4.1 MB, 102 Bytes, etc).  Per default decimal prefixes are used (Mega,
+Giga, etc.), if the second parameter is set to <code>True</code> the binary
+prefixes are used (Mebi, Gibi).</p>
+</div>
+
+
+                </section>
+                <section id="do_pprint">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_pprint</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_pprint"></a>
+    
+            <div class="docstring"><p>Pretty print a variable. Useful for debugging.</p>
+</div>
+
+
+                </section>
+                <section id="do_urlize">
+                    <div class="attr function">
+                    <div class="decorator">@pass_eval_context</div>
+
+        <span class="def">def</span>
+        <span class="name">do_urlize</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">eval_ctx</span><span class="p">:</span> <span class="s1">&#39;EvalContext&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">trim_url_limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">nofollow</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">target</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">rel</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">extra_schemes</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_urlize"></a>
+    
+            <div class="docstring"><p>Convert URLs in text into clickable links.</p>
+
+<p>This may not recognize links in some situations. Usually, a more
+comprehensive formatter, such as a Markdown library, is a better
+choice.</p>
+
+<p>Works on <code>http://</code>, <code>https://</code>, <code>www.</code>, <code>mailto:</code>, and email
+addresses. Links with trailing punctuation (periods, commas, closing
+parentheses) and leading punctuation (opening parentheses) are
+recognized excluding the punctuation. Email addresses that include
+header fields are not recognized (for example,
+<code>mailto:address@example.com?cc=copy@example.com</code>).</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>value</strong>:  Original text containing URLs to link.</li>
+<li><strong>trim_url_limit</strong>:  Shorten displayed URL values to this length.</li>
+<li><strong>nofollow</strong>:  Add the <code>rel=nofollow</code> attribute to links.</li>
+<li><strong>target</strong>:  Add the <code>target</code> attribute to links.</li>
+<li><strong>rel</strong>:  Add the <code>rel</code> attribute to links.</li>
+<li><strong>extra_schemes</strong>:  Recognize URLs that start with these schemes
+in addition to the default behavior. Defaults to
+<code>env.policies["urlize.extra_schemes"]</code>, which defaults to no
+extra schemes.</li>
+</ul>
+
+<p><em>Changed in version 3.0:</em>
+The <code>extra_schemes</code> parameter was added.</p>
+
+<p><em>Changed in version 3.0:</em>
+Generate <code>https://</code> links for URLs without a scheme.</p>
+
+<p><em>Changed in version 3.0:</em>
+The parsing rules were updated. Recognize email addresses with
+or without the <code>mailto:</code> scheme. Validate IP addresses. Ignore
+parentheses and brackets in more cases.</p>
+
+<p><em>Changed in version 2.8:</em>
+The <code>target</code> parameter was added.</p>
+</div>
+
+
+                </section>
+                <section id="do_indent">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_indent</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">s</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">width</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>,</span><span class="param">	<span class="n">first</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">blank</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_indent"></a>
+    
+            <div class="docstring"><p>Return a copy of the string with each line indented by 4 spaces. The
+first line and blank lines are not indented by default.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>width</strong>:  Number of spaces, or a string, to indent by.</li>
+<li><strong>first</strong>:  Don't skip indenting the first line.</li>
+<li><strong>blank</strong>:  Don't skip indenting empty lines.</li>
+</ul>
+
+<p><em>Changed in version 3.0:</em>
+<code>width</code> can be a string.</p>
+
+<p><em>Changed in version 2.10:</em>
+Blank lines are not indented by default.</p>
+
+<p>Rename the <code>indentfirst</code> argument to <code>first</code>.</p>
+</div>
+
+
+                </section>
+                <section id="do_truncate">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">do_truncate</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">env</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">s</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">255</span>,</span><span class="param">	<span class="n">killwords</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">end</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;...&#39;</span>,</span><span class="param">	<span class="n">leeway</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_truncate"></a>
+    
+            <div class="docstring"><p>Return a truncated copy of the string. The length is specified
+with the first parameter which defaults to <code>255</code>. If the second
+parameter is <code>true</code> the filter will cut the text at length. Otherwise
+it will discard the last word. If the text was in fact
+truncated it will append an ellipsis sign (<code>"..."</code>). If you want a
+different ellipsis sign than <code>"..."</code> you can specify it using the
+third parameter. Strings that only exceed the length by the tolerance
+margin given in the fourth parameter will not be truncated.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ "foo bar baz qux"|truncate(9) }}
+    -&gt; "foo..."
+{{ "foo bar baz qux"|truncate(9, True) }}
+    -&gt; "foo ba..."
+{{ "foo bar baz qux"|truncate(11) }}
+    -&gt; "foo bar baz qux"
+{{ "foo bar baz qux"|truncate(11, False, '...', 0) }}
+    -&gt; "foo bar..."
+</code></pre>
+
+<p>The default leeway on newer Jinja versions is 5 and was 0 before but
+can be reconfigured globally.</p>
+</div>
+
+
+                </section>
+                <section id="do_wordwrap">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">do_wordwrap</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">s</span><span class="p">:</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">79</span>,</span><span class="param">	<span class="n">break_long_words</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>,</span><span class="param">	<span class="n">wrapstring</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">break_on_hyphens</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_wordwrap"></a>
+    
+            <div class="docstring"><p>Wrap a string to the given width. Existing newlines are treated
+as paragraphs to be wrapped separately.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>s</strong>:  Original text to wrap.</li>
+<li><strong>width</strong>:  Maximum length of wrapped lines.</li>
+<li><strong>break_long_words</strong>:  If a word is longer than <code>width</code>, break
+it across lines.</li>
+<li><strong>break_on_hyphens</strong>:  If a word contains hyphens, it may be split
+across lines.</li>
+<li><strong>wrapstring</strong>:  String to join each wrapped line. Defaults to
+<code>Environment.newline_sequence</code>.</li>
+</ul>
+
+<p><em>Changed in version 2.11:</em>
+Existing newlines are treated as paragraphs wrapped separately.</p>
+
+<p><em>Changed in version 2.11:</em>
+Added the <code>break_on_hyphens</code> parameter.</p>
+
+<p><em>Changed in version 2.7:</em>
+Added the <code>wrapstring</code> parameter.</p>
+</div>
+
+
+                </section>
+                <section id="do_wordcount">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_wordcount</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">s</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">int</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_wordcount"></a>
+    
+            <div class="docstring"><p>Count the words in that string.</p>
+</div>
+
+
+                </section>
+                <section id="do_int">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_int</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="n">Any</span>, </span><span class="param"><span class="n">default</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>, </span><span class="param"><span class="n">base</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span></span><span class="return-annotation">) -> <span class="nb">int</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_int"></a>
+    
+            <div class="docstring"><p>Convert the value into an integer. If the
+conversion doesn't work it will return <code>0</code>. You can
+override this default using the first parameter. You
+can also override the default base (10) in the second
+parameter, which handles input with prefixes such as
+0b, 0o and 0x for bases 2, 8 and 16 respectively.
+The base is ignored for decimal numbers and non-string values.</p>
+</div>
+
+
+                </section>
+                <section id="do_float">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_float</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="n">Any</span>, </span><span class="param"><span class="n">default</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_float"></a>
+    
+            <div class="docstring"><p>Convert the value into a floating point number. If the
+conversion doesn't work it will return <code>0.0</code>. You can
+override this default using the first parameter.</p>
+</div>
+
+
+                </section>
+                <section id="do_format">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_format</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>, </span><span class="param"><span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_format"></a>
+    
+            <div class="docstring"><p>Apply the given values to a <a href="https://docs.python.org/library/stdtypes.html">printf-style</a> format string, like
+<code>string % values</code>.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ "%s, %s!"|format(greeting, name) }}
+Hello, World!
+</code></pre>
+
+<p>In most cases it should be more convenient and efficient to use the
+<code>%</code> operator or <code>str.format()</code>.</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code>{{ &quot;%s, %s!&quot; % (greeting, name) }}
+{{ &quot;{}, {}!&quot;.format(greeting, name) }}
+</code></pre>
+</div>
+
+<pre><code>#printf-style-string-formatting
+</code></pre>
+</div>
+
+
+                </section>
+                <section id="do_trim">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_trim</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="nb">str</span>, </span><span class="param"><span class="n">chars</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_trim"></a>
+    
+            <div class="docstring"><p>Strip leading and trailing characters, by default whitespace.</p>
+</div>
+
+
+                </section>
+                <section id="do_striptags">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_striptags</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="s1">&#39;t.Union[str, HasHTML]&#39;</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_striptags"></a>
+    
+            <div class="docstring"><p>Strip SGML/XML tags and replace adjacent whitespace by one space.</p>
+</div>
+
+
+                </section>
+                <section id="sync_do_slice">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">sync_do_slice</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">slices</span><span class="p">:</span> <span class="nb">int</span>,</span><span class="param">	<span class="n">fill_with</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#sync_do_slice"></a>
+    
+            <div class="docstring"><p>Slice an iterator and return a list of lists containing
+those items. Useful if you want to create a div containing
+three ul tags that represent columns:</p>
+
+<p>.. sourcecode:: html+jinja</p>
+
+<pre><code><div class="columnwrapper">
+  {%- for column in items|slice(3) %}
+    <ul class="column-{{ loop.index }}">
+    {%- for item in column %}
+      <li>{{ item }}</li>
+    {%- endfor %}
+    </ul>
+  {%- endfor %}
+</div>
+</code></pre>
+
+<p>If you pass it a second argument it's used to fill missing
+values on the last iteration.</p>
+</div>
+
+
+                </section>
+                <section id="do_slice">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_slice</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">slices</span><span class="p">:</span> <span class="nb">int</span>,</span><span class="param">	<span class="n">fill_with</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_slice"></a>
+    
+            <div class="docstring"><p>Slice an iterator and return a list of lists containing
+those items. Useful if you want to create a div containing
+three ul tags that represent columns:</p>
+
+<p>.. sourcecode:: html+jinja</p>
+
+<pre><code><div class="columnwrapper">
+  {%- for column in items|slice(3) %}
+    <ul class="column-{{ loop.index }}">
+    {%- for item in column %}
+      <li>{{ item }}</li>
+    {%- endfor %}
+    </ul>
+  {%- endfor %}
+</div>
+</code></pre>
+
+<p>If you pass it a second argument it's used to fill missing
+values on the last iteration.</p>
+</div>
+
+
+                </section>
+                <section id="do_batch">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_batch</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">linecount</span><span class="p">:</span> <span class="nb">int</span>,</span><span class="param">	<span class="n">fill_with</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_batch"></a>
+    
+            <div class="docstring"><p>A filter that batches items. It works pretty much like <code>slice</code>
+just the other way round. It returns a list of lists with the
+given number of items. If you provide a second parameter this
+is used to fill up missing items. See this example:</p>
+
+<p>.. sourcecode:: html+jinja</p>
+
+<pre><code><table>
+{%- for row in items|batch(3, '&nbsp;') %}
+  <tr>
+  {%- for column in row %}
+    <td>{{ column }}</td>
+  {%- endfor %}
+  </tr>
+{%- endfor %}
+</table>
+</code></pre>
+</div>
+
+
+                </section>
+                <section id="do_round">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_round</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">value</span><span class="p">:</span> <span class="nb">float</span>,</span><span class="param">	<span class="n">precision</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>,</span><span class="param">	<span class="n">method</span><span class="p">:</span> <span class="s1">&#39;te.Literal[&quot;common&quot;, &quot;ceil&quot;, &quot;floor&quot;]&#39;</span> <span class="o">=</span> <span class="s1">&#39;common&#39;</span></span><span class="return-annotation">) -> <span class="nb">float</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_round"></a>
+    
+            <div class="docstring"><p>Round the number to a given precision. The first
+parameter specifies the precision (default is <code>0</code>), the
+second the rounding method:</p>
+
+<ul>
+<li><code>'common'</code> rounds either up or down</li>
+<li><code>'ceil'</code> always rounds up</li>
+<li><code>'floor'</code> always rounds down</li>
+</ul>
+
+<p>If you don't specify a method <code>'common'</code> is used.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ 42.55|round }}
+    -&gt; 43.0
+{{ 42.55|round(1, 'floor') }}
+    -&gt; 42.5
+</code></pre>
+
+<p>Note that even if rounded to 0 precision, a float is returned.  If
+you need a real integer, pipe it through <code>int</code>:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ 42.55|round|int }}
+    -&gt; 43
+</code></pre>
+</div>
+
+
+                </section>
+                <section id="sync_do_groupby">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">sync_do_groupby</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">attribute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>,</span><span class="param">	<span class="n">default</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></span><span class="return-annotation">) -> <span class="n">List</span><span class="p">[</span><span class="n">jinja2</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">_GroupTuple</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#sync_do_groupby"></a>
+    
+            <div class="docstring"><p>Group a sequence of objects by an attribute using Python's
+<code>itertools.groupby()</code>. The attribute can use dot notation for
+nested access, like <code>"address.city"</code>. Unlike Python's <code>groupby</code>,
+the values are sorted first so only one group is returned for each
+unique value.</p>
+
+<p>For example, a list of <code>User</code> objects with a <code>city</code> attribute
+can be rendered in groups. In this example, <code>grouper</code> refers to
+the <code>city</code> value of the group.</p>
+
+<p>.. sourcecode:: html+jinja</p>
+
+<pre><code>&lt;ul&gt;{% for city, items in users|groupby("city") %}
+  &lt;li&gt;{{ city }}
+    &lt;ul&gt;{% for user in items %}
+      &lt;li&gt;{{ user.name }}
+    {% endfor %}&lt;/ul&gt;
+  &lt;/li&gt;
+{% endfor %}&lt;/ul&gt;
+</code></pre>
+
+<p><code>groupby</code> yields namedtuples of <code>(grouper, list)</code>, which
+can be used instead of the tuple unpacking above. <code>grouper</code> is the
+value of the attribute, and <code>list</code> is the items with that value.</p>
+
+<p>.. sourcecode:: html+jinja</p>
+
+<pre><code>&lt;ul&gt;{% for group in users|groupby("city") %}
+  &lt;li&gt;{{ group.grouper }}: {{ group.list|join(", ") }}
+{% endfor %}&lt;/ul&gt;
+</code></pre>
+
+<p>You can specify a <code>default</code> value to use if an object in the list
+does not have the given attribute.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>&lt;ul&gt;{% for city, items in users|groupby("city", default="NY") %}
+  &lt;li&gt;{{ city }}: {{ items|map(attribute="name")|join(", ") }}&lt;/li&gt;
+{% endfor %}&lt;/ul&gt;
+</code></pre>
+
+<p>Like the <code>~jinja-filters.sort()</code> filter, sorting and grouping is
+case-insensitive by default. The <code>key</code> for each group will have
+the case of the first item in that group of values. For example, if
+a list of users has cities <code>["CA", "NY", "ca"]</code>, the "CA" group
+will have two values. This can be disabled by passing
+<code>case_sensitive=True</code>.</p>
+
+<p><em>Changed in version 3.1:</em>
+Added the <code>case_sensitive</code> parameter. Sorting and grouping is
+case-insensitive by default, matching other filters that do
+comparisons.</p>
+
+<p><em>Changed in version 3.0:</em>
+Added the <code>default</code> parameter.</p>
+
+<p><em>Changed in version 2.6:</em>
+The attribute supports dot notation for nested access.</p>
+</div>
+
+
+                </section>
+                <section id="do_groupby">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">do_groupby</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">attribute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>,</span><span class="param">	<span class="n">default</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span></span><span class="return-annotation">) -> <span class="n">List</span><span class="p">[</span><span class="n">jinja2</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">_GroupTuple</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_groupby"></a>
+    
+            <div class="docstring"><p>Group a sequence of objects by an attribute using Python's
+<code>itertools.groupby()</code>. The attribute can use dot notation for
+nested access, like <code>"address.city"</code>. Unlike Python's <code>groupby</code>,
+the values are sorted first so only one group is returned for each
+unique value.</p>
+
+<p>For example, a list of <code>User</code> objects with a <code>city</code> attribute
+can be rendered in groups. In this example, <code>grouper</code> refers to
+the <code>city</code> value of the group.</p>
+
+<p>.. sourcecode:: html+jinja</p>
+
+<pre><code>&lt;ul&gt;{% for city, items in users|groupby("city") %}
+  &lt;li&gt;{{ city }}
+    &lt;ul&gt;{% for user in items %}
+      &lt;li&gt;{{ user.name }}
+    {% endfor %}&lt;/ul&gt;
+  &lt;/li&gt;
+{% endfor %}&lt;/ul&gt;
+</code></pre>
+
+<p><code>groupby</code> yields namedtuples of <code>(grouper, list)</code>, which
+can be used instead of the tuple unpacking above. <code>grouper</code> is the
+value of the attribute, and <code>list</code> is the items with that value.</p>
+
+<p>.. sourcecode:: html+jinja</p>
+
+<pre><code>&lt;ul&gt;{% for group in users|groupby("city") %}
+  &lt;li&gt;{{ group.grouper }}: {{ group.list|join(", ") }}
+{% endfor %}&lt;/ul&gt;
+</code></pre>
+
+<p>You can specify a <code>default</code> value to use if an object in the list
+does not have the given attribute.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>&lt;ul&gt;{% for city, items in users|groupby("city", default="NY") %}
+  &lt;li&gt;{{ city }}: {{ items|map(attribute="name")|join(", ") }}&lt;/li&gt;
+{% endfor %}&lt;/ul&gt;
+</code></pre>
+
+<p>Like the <code>~jinja-filters.sort()</code> filter, sorting and grouping is
+case-insensitive by default. The <code>key</code> for each group will have
+the case of the first item in that group of values. For example, if
+a list of users has cities <code>["CA", "NY", "ca"]</code>, the "CA" group
+will have two values. This can be disabled by passing
+<code>case_sensitive=True</code>.</p>
+
+<p><em>Changed in version 3.1:</em>
+Added the <code>case_sensitive</code> parameter. Sorting and grouping is
+case-insensitive by default, matching other filters that do
+comparisons.</p>
+
+<p><em>Changed in version 3.0:</em>
+Added the <code>default</code> parameter.</p>
+
+<p><em>Changed in version 2.6:</em>
+The attribute supports dot notation for nested access.</p>
+</div>
+
+
+                </section>
+                <section id="sync_do_sum">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">sync_do_sum</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">attribute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">start</span><span class="p">:</span> <span class="o">~</span><span class="n">V</span> <span class="o">=</span> <span class="mi">0</span></span><span class="return-annotation">) -> <span class="o">~</span><span class="n">V</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#sync_do_sum"></a>
+    
+            <div class="docstring"><p>Returns the sum of a sequence of numbers plus the value of parameter
+'start' (which defaults to 0).  When the sequence is empty it returns
+start.</p>
+
+<p>It is also possible to sum up only certain attributes:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>Total: {{ items|sum(attribute='price') }}
+</code></pre>
+
+<p><em>Changed in version 2.6:</em>
+The <code>attribute</code> parameter was added to allow summing up over
+attributes.  Also the <code>start</code> parameter was moved on to the right.</p>
+</div>
+
+
+                </section>
+                <section id="do_sum">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">do_sum</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">iterable</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">attribute</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="n">NoneType</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>,</span><span class="param">	<span class="n">start</span><span class="p">:</span> <span class="o">~</span><span class="n">V</span> <span class="o">=</span> <span class="mi">0</span></span><span class="return-annotation">) -> <span class="o">~</span><span class="n">V</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_sum"></a>
+    
+            <div class="docstring"><p>Returns the sum of a sequence of numbers plus the value of parameter
+'start' (which defaults to 0).  When the sequence is empty it returns
+start.</p>
+
+<p>It is also possible to sum up only certain attributes:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>Total: {{ items|sum(attribute='price') }}
+</code></pre>
+
+<p><em>Changed in version 2.6:</em>
+The <code>attribute</code> parameter was added to allow summing up over
+attributes.  Also the <code>start</code> parameter was moved on to the right.</p>
+</div>
+
+
+                </section>
+                <section id="sync_do_list">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">sync_do_list</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="n">List</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#sync_do_list"></a>
+    
+            <div class="docstring"><p>Convert the value into a list.  If it was a string the returned list
+will be a list of characters.</p>
+</div>
+
+
+                </section>
+                <section id="do_list">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_list</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="n">List</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_list"></a>
+    
+            <div class="docstring"><p>Convert the value into a list.  If it was a string the returned list
+will be a list of characters.</p>
+</div>
+
+
+                </section>
+                <section id="do_mark_safe">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_mark_safe</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="n">markupsafe</span><span class="o">.</span><span class="n">Markup</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_mark_safe"></a>
+    
+            <div class="docstring"><p>Mark the value as safe which means that in an environment with automatic
+escaping enabled this variable will not be escaped.</p>
+</div>
+
+
+                </section>
+                <section id="do_mark_unsafe">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_mark_unsafe</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">str</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_mark_unsafe"></a>
+    
+            <div class="docstring"><p>Mark a value as unsafe.  This is the reverse operation for <code>safe()</code>.</p>
+</div>
+
+
+                </section>
+                <section id="do_reverse">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">do_reverse</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]]</span></span><span class="return-annotation">) -> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_reverse"></a>
+    
+            <div class="docstring"><p>Reverse the object or return an iterator that iterates over it the other
+way round.</p>
+</div>
+
+
+                </section>
+                <section id="do_attr">
+                    <div class="attr function">
+                    <div class="decorator">@pass_environment</div>
+
+        <span class="def">def</span>
+        <span class="name">do_attr</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">environment</span><span class="p">:</span> <span class="s1">&#39;Environment&#39;</span>,</span><span class="param">	<span class="n">obj</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="n">name</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="n">Union</span><span class="p">[</span><span class="n"><a href="runtime.html#Undefined">jinja2.runtime.Undefined</a></span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_attr"></a>
+    
+            <div class="docstring"><p>Get an attribute of an object.  <code>foo|attr("bar")</code> works like
+<code>foo.bar</code> just that always an attribute is returned and items are not
+looked up.</p>
+
+<p>See :ref:<code>Notes on subscriptions &lt;notes-on-subscriptions&gt;</code> for more details.</p>
+</div>
+
+
+                </section>
+                <section id="sync_do_map">
+                    <div class="attr function">
+                    <div class="decorator">@pass_context</div>
+
+        <span class="def">def</span>
+        <span class="name">sync_do_map</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#sync_do_map"></a>
+    
+            <div class="docstring"><p>Applies a filter on a sequence of objects or looks up an attribute.
+This is useful when dealing with lists of objects but you are really
+only interested in a certain value of it.</p>
+
+<p>The basic usage is mapping on an attribute.  Imagine you have a list
+of users but you are only interested in a list of usernames:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>Users on this page: {{ users|map(attribute='username')|join(', ') }}
+</code></pre>
+
+<p>You can specify a <code>default</code> value to use if an object in the list
+does not have the given attribute.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ users|map(attribute="username", default="Anonymous")|join(", ") }}
+</code></pre>
+
+<p>Alternatively you can let it invoke a filter by passing the name of the
+filter and the arguments afterwards.  A good example would be applying a
+text conversion filter on a sequence:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>Users on this page: {{ titles|map('lower')|join(', ') }}
+</code></pre>
+
+<p>Similar to a generator comprehension such as:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">username</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;Anonymous&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span><span class="p">)</span>
+<span class="p">(</span><span class="n">do_lower</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p><em>Changed in version 2.11.0:</em>
+Added the <code>default</code> parameter.</p>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                </section>
+                <section id="do_map">
+                    <div class="attr function">
+                    <div class="decorator">@pass_context</div>
+
+        <span class="def">def</span>
+        <span class="name">do_map</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_map"></a>
+    
+            <div class="docstring"><p>Applies a filter on a sequence of objects or looks up an attribute.
+This is useful when dealing with lists of objects but you are really
+only interested in a certain value of it.</p>
+
+<p>The basic usage is mapping on an attribute.  Imagine you have a list
+of users but you are only interested in a list of usernames:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>Users on this page: {{ users|map(attribute='username')|join(', ') }}
+</code></pre>
+
+<p>You can specify a <code>default</code> value to use if an object in the list
+does not have the given attribute.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ users|map(attribute="username", default="Anonymous")|join(", ") }}
+</code></pre>
+
+<p>Alternatively you can let it invoke a filter by passing the name of the
+filter and the arguments afterwards.  A good example would be applying a
+text conversion filter on a sequence:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>Users on this page: {{ titles|map('lower')|join(', ') }}
+</code></pre>
+
+<p>Similar to a generator comprehension such as:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">username</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="s2">&quot;username&quot;</span><span class="p">,</span> <span class="s2">&quot;Anonymous&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">users</span><span class="p">)</span>
+<span class="p">(</span><span class="n">do_lower</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">titles</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p><em>Changed in version 2.11.0:</em>
+Added the <code>default</code> parameter.</p>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                </section>
+                <section id="sync_do_select">
+                    <div class="attr function">
+                    <div class="decorator">@pass_context</div>
+
+        <span class="def">def</span>
+        <span class="name">sync_do_select</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#sync_do_select"></a>
+    
+            <div class="docstring"><p>Filters a sequence of objects by applying a test to each object,
+and only selecting the objects with the test succeeding.</p>
+
+<p>If no test is specified, each object will be evaluated as a boolean.</p>
+
+<p>Example usage:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ numbers|select("odd") }}
+{{ numbers|select("odd") }}
+{{ numbers|select("divisibleby", 3) }}
+{{ numbers|select("lessthan", 42) }}
+{{ strings|select("equalto", "mystring") }}
+</code></pre>
+
+<p>Similar to a generator comprehension such as:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">(</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span> <span class="k">if</span> <span class="n">test_odd</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="p">(</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span> <span class="k">if</span> <span class="n">test_divisibleby</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                </section>
+                <section id="do_select">
+                    <div class="attr function">
+                    <div class="decorator">@pass_context</div>
+
+        <span class="def">def</span>
+        <span class="name">do_select</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_select"></a>
+    
+            <div class="docstring"><p>Filters a sequence of objects by applying a test to each object,
+and only selecting the objects with the test succeeding.</p>
+
+<p>If no test is specified, each object will be evaluated as a boolean.</p>
+
+<p>Example usage:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ numbers|select("odd") }}
+{{ numbers|select("odd") }}
+{{ numbers|select("divisibleby", 3) }}
+{{ numbers|select("lessthan", 42) }}
+{{ strings|select("equalto", "mystring") }}
+</code></pre>
+
+<p>Similar to a generator comprehension such as:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">(</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span> <span class="k">if</span> <span class="n">test_odd</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<span class="p">(</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span> <span class="k">if</span> <span class="n">test_divisibleby</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                </section>
+                <section id="sync_do_reject">
+                    <div class="attr function">
+                    <div class="decorator">@pass_context</div>
+
+        <span class="def">def</span>
+        <span class="name">sync_do_reject</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#sync_do_reject"></a>
+    
+            <div class="docstring"><p>Filters a sequence of objects by applying a test to each object,
+and rejecting the objects with the test succeeding.</p>
+
+<p>If no test is specified, each object will be evaluated as a boolean.</p>
+
+<p>Example usage:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ numbers|reject("odd") }}
+</code></pre>
+
+<p>Similar to a generator comprehension such as:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">(</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">test_odd</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                </section>
+                <section id="do_reject">
+                    <div class="attr function">
+                    <div class="decorator">@pass_context</div>
+
+        <span class="def">def</span>
+        <span class="name">do_reject</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_reject"></a>
+    
+            <div class="docstring"><p>Filters a sequence of objects by applying a test to each object,
+and rejecting the objects with the test succeeding.</p>
+
+<p>If no test is specified, each object will be evaluated as a boolean.</p>
+
+<p>Example usage:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ numbers|reject("odd") }}
+</code></pre>
+
+<p>Similar to a generator comprehension such as:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">(</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">test_odd</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                </section>
+                <section id="sync_do_selectattr">
+                    <div class="attr function">
+                    <div class="decorator">@pass_context</div>
+
+        <span class="def">def</span>
+        <span class="name">sync_do_selectattr</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#sync_do_selectattr"></a>
+    
+            <div class="docstring"><p>Filters a sequence of objects by applying a test to the specified
+attribute of each object, and only selecting the objects with the
+test succeeding.</p>
+
+<p>If no test is specified, the attribute's value will be evaluated as
+a boolean.</p>
+
+<p>Example usage:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ users|selectattr("is_active") }}
+{{ users|selectattr("email", "none") }}
+</code></pre>
+
+<p>Similar to a generator comprehension such as:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">(</span><span class="n">u</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span> <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_active</span><span class="p">)</span>
+<span class="p">(</span><span class="n">u</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span> <span class="k">if</span> <span class="n">test_none</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                </section>
+                <section id="do_selectattr">
+                    <div class="attr function">
+                    <div class="decorator">@pass_context</div>
+
+        <span class="def">def</span>
+        <span class="name">do_selectattr</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_selectattr"></a>
+    
+            <div class="docstring"><p>Filters a sequence of objects by applying a test to the specified
+attribute of each object, and only selecting the objects with the
+test succeeding.</p>
+
+<p>If no test is specified, the attribute's value will be evaluated as
+a boolean.</p>
+
+<p>Example usage:</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ users|selectattr("is_active") }}
+{{ users|selectattr("email", "none") }}
+</code></pre>
+
+<p>Similar to a generator comprehension such as:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">(</span><span class="n">u</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span> <span class="k">if</span> <span class="n">user</span><span class="o">.</span><span class="n">is_active</span><span class="p">)</span>
+<span class="p">(</span><span class="n">u</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span> <span class="k">if</span> <span class="n">test_none</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                </section>
+                <section id="sync_do_rejectattr">
+                    <div class="attr function">
+                    <div class="decorator">@pass_context</div>
+
+        <span class="def">def</span>
+        <span class="name">sync_do_rejectattr</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#sync_do_rejectattr"></a>
+    
+            <div class="docstring"><p>Filters a sequence of objects by applying a test to the specified
+attribute of each object, and rejecting the objects with the test
+succeeding.</p>
+
+<p>If no test is specified, the attribute's value will be evaluated as
+a boolean.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ users|rejectattr("is_active") }}
+{{ users|rejectattr("email", "none") }}
+</code></pre>
+
+<p>Similar to a generator comprehension such as:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">(</span><span class="n">u</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="o">.</span><span class="n">is_active</span><span class="p">)</span>
+<span class="p">(</span><span class="n">u</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">test_none</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                </section>
+                <section id="do_rejectattr">
+                    <div class="attr function">
+                    <div class="decorator">@pass_context</div>
+
+        <span class="def">def</span>
+        <span class="name">do_rejectattr</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="o">*</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_rejectattr"></a>
+    
+            <div class="docstring"><p>Filters a sequence of objects by applying a test to the specified
+attribute of each object, and rejecting the objects with the test
+succeeding.</p>
+
+<p>If no test is specified, the attribute's value will be evaluated as
+a boolean.</p>
+
+<p>.. sourcecode:: jinja</p>
+
+<pre><code>{{ users|rejectattr("is_active") }}
+{{ users|rejectattr("email", "none") }}
+</code></pre>
+
+<p>Similar to a generator comprehension such as:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="p">(</span><span class="n">u</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="o">.</span><span class="n">is_active</span><span class="p">)</span>
+<span class="p">(</span><span class="n">u</span> <span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">users</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">test_none</span><span class="p">(</span><span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="p">))</span>
+</code></pre>
+</div>
+
+<p><em>New in version 2.7.</em></p>
+</div>
+
+
+                </section>
+                <section id="do_tojson">
+                    <div class="attr function">
+                    <div class="decorator">@pass_eval_context</div>
+
+        <span class="def">def</span>
+        <span class="name">do_tojson</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">eval_ctx</span><span class="p">:</span> <span class="s1">&#39;EvalContext&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Any</span>,</span><span class="param">	<span class="n">indent</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="n">markupsafe</span><span class="o">.</span><span class="n">Markup</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#do_tojson"></a>
+    
+            <div class="docstring"><p>Serialize an object to a string of JSON, and mark it safe to
+render in HTML. This filter is only for use in HTML documents.</p>
+
+<p>The returned string is safe to render in HTML documents and
+<code>&lt;script&gt;</code> tags. The exception is in HTML attributes that are
+double quoted; either use single quotes or the <code>|forceescape</code>
+filter.</p>
+
+<h6 id="parameters">Parameters</h6>
+
+<ul>
+<li><strong>value</strong>:  The object to serialize to JSON.</li>
+<li><strong>indent</strong>:  The <code>indent</code> parameter passed to <code>dumps</code>, for
+pretty-printing the value.</li>
+</ul>
+
+<p><em>New in version 2.9.</em></p>
+</div>
+
+
+                </section>
+                <section id="prepare_map">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">prepare_map</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>,</span><span class="param">	<span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span></span><span class="return-annotation">) -> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#prepare_map"></a>
+    
+    
+
+                </section>
+                <section id="prepare_select_or_reject">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">prepare_select_or_reject</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>,</span><span class="param">	<span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="n">modfunc</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="n">lookup_attr</span><span class="p">:</span> <span class="nb">bool</span></span><span class="return-annotation">) -> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#prepare_select_or_reject"></a>
+    
+    
+
+                </section>
+                <section id="select_or_reject">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">select_or_reject</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>,</span><span class="param">	<span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>,</span><span class="param">	<span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="n">modfunc</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="n">lookup_attr</span><span class="p">:</span> <span class="nb">bool</span></span><span class="return-annotation">) -> <span class="n">Iterator</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#select_or_reject"></a>
+    
+    
+
+                </section>
+                <section id="async_select_or_reject">
+                    <div class="attr function">
+            
+        <span class="def">async def</span>
+        <span class="name">async_select_or_reject</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">context</span><span class="p">:</span> <span class="s1">&#39;Context&#39;</span>,</span><span class="param">	<span class="n">value</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">AsyncIterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">],</span> <span class="n">Iterable</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]]</span>,</span><span class="param">	<span class="n">args</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>,</span><span class="param">	<span class="n">kwargs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="n">modfunc</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">Any</span><span class="p">],</span> <span class="n">Any</span><span class="p">]</span>,</span><span class="param">	<span class="n">lookup_attr</span><span class="p">:</span> <span class="nb">bool</span></span><span class="return-annotation">) -> <span class="n">AsyncIterator</span><span class="p">[</span><span class="o">~</span><span class="n">V</span><span class="p">]</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#async_select_or_reject"></a>
+    
+    
+
+                </section>
+                <section id="FILTERS">
+                    <div class="attr variable">
+            <span class="name">FILTERS</span>        =
+<input id="FILTERS-view-value" class="view-value-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+            <label class="view-value-button pdoc-button" for="FILTERS-view-value"></label><span class="default_value">{&#39;abs&#39;: &lt;built-in function abs&gt;, &#39;attr&#39;: &lt;function do_attr&gt;, &#39;batch&#39;: &lt;function do_batch&gt;, &#39;capitalize&#39;: &lt;function do_capitalize&gt;, &#39;center&#39;: &lt;function do_center&gt;, &#39;count&#39;: &lt;built-in function len&gt;, &#39;d&#39;: &lt;function do_default&gt;, &#39;default&#39;: &lt;function do_default&gt;, &#39;dictsort&#39;: &lt;function do_dictsort&gt;, &#39;e&#39;: &lt;built-in function escape&gt;, &#39;escape&#39;: &lt;built-in function escape&gt;, &#39;filesizeformat&#39;: &lt;function do_filesizeformat&gt;, &#39;first&#39;: &lt;function do_first&gt;, &#39;float&#39;: &lt;function do_float&gt;, &#39;forceescape&#39;: &lt;function do_forceescape&gt;, &#39;format&#39;: &lt;function do_format&gt;, &#39;groupby&#39;: &lt;function do_groupby&gt;, &#39;indent&#39;: &lt;function do_indent&gt;, &#39;int&#39;: &lt;function do_int&gt;, &#39;join&#39;: &lt;function do_join&gt;, &#39;last&#39;: &lt;function do_last&gt;, &#39;length&#39;: &lt;built-in function len&gt;, &#39;list&#39;: &lt;function do_list&gt;, &#39;lower&#39;: &lt;function do_lower&gt;, &#39;items&#39;: &lt;function do_items&gt;, &#39;map&#39;: &lt;function do_map&gt;, &#39;min&#39;: &lt;function do_min&gt;, &#39;max&#39;: &lt;function do_max&gt;, &#39;pprint&#39;: &lt;function do_pprint&gt;, &#39;random&#39;: &lt;function do_random&gt;, &#39;reject&#39;: &lt;function do_reject&gt;, &#39;rejectattr&#39;: &lt;function do_rejectattr&gt;, &#39;replace&#39;: &lt;function do_replace&gt;, &#39;reverse&#39;: &lt;function do_reverse&gt;, &#39;round&#39;: &lt;function do_round&gt;, &#39;safe&#39;: &lt;function do_mark_safe&gt;, &#39;select&#39;: &lt;function do_select&gt;, &#39;selectattr&#39;: &lt;function do_selectattr&gt;, &#39;slice&#39;: &lt;function do_slice&gt;, &#39;sort&#39;: &lt;function do_sort&gt;, &#39;string&#39;: &lt;built-in function soft_str&gt;, &#39;striptags&#39;: &lt;function do_striptags&gt;, &#39;sum&#39;: &lt;function do_sum&gt;, &#39;title&#39;: &lt;function do_title&gt;, &#39;trim&#39;: &lt;function do_trim&gt;, &#39;truncate&#39;: &lt;function do_truncate&gt;, &#39;unique&#39;: &lt;function do_unique&gt;, &#39;upper&#39;: &lt;function do_upper&gt;, &#39;urlencode&#39;: &lt;function do_urlencode&gt;, &#39;urlize&#39;: &lt;function do_urlize&gt;, &#39;wordcount&#39;: &lt;function do_wordcount&gt;, &#39;wordwrap&#39;: &lt;function do_wordwrap&gt;, &#39;xmlattr&#39;: &lt;function do_xmlattr&gt;, &#39;tojson&#39;: &lt;function do_tojson&gt;}</span>
+
+        
+    </div>
+    <a class="headerlink" href="#FILTERS"></a>
+    
+    
+
+                </section>
+    </main>
+</body>
+</html>

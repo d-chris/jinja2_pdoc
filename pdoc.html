@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="pdoc 14.6.0"/>
+    <title>pdoc API documentation</title>
+
+    <style>/*! * Bootstrap Reboot v5.0.0 (https://getbootstrap.com/) * Copyright 2011-2021 The Bootstrap Authors * Copyright 2011-2021 Twitter, Inc. * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE) * Forked from Normalize.css, licensed MIT (https://github.com/necolas/normalize.css/blob/master/LICENSE.md) */*,::after,::before{box-sizing:border-box}@media (prefers-reduced-motion:no-preference){:root{scroll-behavior:smooth}}body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}hr{margin:1rem 0;color:inherit;background-color:currentColor;border:0;opacity:.25}hr:not([size]){height:1px}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:500;line-height:1.2}h1{font-size:calc(1.375rem + 1.5vw)}@media (min-width:1200px){h1{font-size:2.5rem}}h2{font-size:calc(1.325rem + .9vw)}@media (min-width:1200px){h2{font-size:2rem}}h3{font-size:calc(1.3rem + .6vw)}@media (min-width:1200px){h3{font-size:1.75rem}}h4{font-size:calc(1.275rem + .3vw)}@media (min-width:1200px){h4{font-size:1.5rem}}h5{font-size:1.25rem}h6{font-size:1rem}p{margin-top:0;margin-bottom:1rem}abbr[data-bs-original-title],abbr[title]{-webkit-text-decoration:underline dotted;text-decoration:underline dotted;cursor:help;-webkit-text-decoration-skip-ink:none;text-decoration-skip-ink:none}address{margin-bottom:1rem;font-style:normal;line-height:inherit}ol,ul{padding-left:2rem}dl,ol,ul{margin-top:0;margin-bottom:1rem}ol ol,ol ul,ul ol,ul ul{margin-bottom:0}dt{font-weight:700}dd{margin-bottom:.5rem;margin-left:0}blockquote{margin:0 0 1rem}b,strong{font-weight:bolder}small{font-size:.875em}mark{padding:.2em;background-color:#fcf8e3}sub,sup{position:relative;font-size:.75em;line-height:0;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}a{color:#0d6efd;text-decoration:underline}a:hover{color:#0a58ca}a:not([href]):not([class]),a:not([href]):not([class]):hover{color:inherit;text-decoration:none}code,kbd,pre,samp{font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:1em;direction:ltr;unicode-bidi:bidi-override}pre{display:block;margin-top:0;margin-bottom:1rem;overflow:auto;font-size:.875em}pre code{font-size:inherit;color:inherit;word-break:normal}code{font-size:.875em;color:#d63384;word-wrap:break-word}a>code{color:inherit}kbd{padding:.2rem .4rem;font-size:.875em;color:#fff;background-color:#212529;border-radius:.2rem}kbd kbd{padding:0;font-size:1em;font-weight:700}figure{margin:0 0 1rem}img,svg{vertical-align:middle}table{caption-side:bottom;border-collapse:collapse}caption{padding-top:.5rem;padding-bottom:.5rem;color:#6c757d;text-align:left}th{text-align:inherit;text-align:-webkit-match-parent}tbody,td,tfoot,th,thead,tr{border-color:inherit;border-style:solid;border-width:0}label{display:inline-block}button{border-radius:0}button:focus:not(:focus-visible){outline:0}button,input,optgroup,select,textarea{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button,select{text-transform:none}[role=button]{cursor:pointer}select{word-wrap:normal}select:disabled{opacity:1}[list]::-webkit-calendar-picker-indicator{display:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}::-moz-focus-inner{padding:0;border-style:none}textarea{resize:vertical}fieldset{min-width:0;padding:0;margin:0;border:0}legend{float:left;width:100%;padding:0;margin-bottom:.5rem;font-size:calc(1.275rem + .3vw);line-height:inherit}@media (min-width:1200px){legend{font-size:1.5rem}}legend+*{clear:left}::-webkit-datetime-edit-day-field,::-webkit-datetime-edit-fields-wrapper,::-webkit-datetime-edit-hour-field,::-webkit-datetime-edit-minute,::-webkit-datetime-edit-month-field,::-webkit-datetime-edit-text,::-webkit-datetime-edit-year-field{padding:0}::-webkit-inner-spin-button{height:auto}[type=search]{outline-offset:-2px;-webkit-appearance:textfield}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-color-swatch-wrapper{padding:0}::file-selector-button{font:inherit}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}iframe{border:0}summary{display:list-item;cursor:pointer}progress{vertical-align:baseline}[hidden]{display:none!important}</style>
+    <style>/*! syntax-highlighting.css */pre{line-height:125%;}span.linenos{color:inherit; background-color:transparent; padding-left:5px; padding-right:20px;}.pdoc-code .hll{background-color:#49483e}.pdoc-code{background:#272822; color:#f8f8f2}.pdoc-code .c{color:#75715e}.pdoc-code .err{color:#960050; background-color:#1e0010}.pdoc-code .esc{color:#f8f8f2}.pdoc-code .g{color:#f8f8f2}.pdoc-code .k{color:#66d9ef}.pdoc-code .l{color:#ae81ff}.pdoc-code .n{color:#f8f8f2}.pdoc-code .o{color:#f92672}.pdoc-code .x{color:#f8f8f2}.pdoc-code .p{color:#f8f8f2}.pdoc-code .ch{color:#75715e}.pdoc-code .cm{color:#75715e}.pdoc-code .cp{color:#75715e}.pdoc-code .cpf{color:#75715e}.pdoc-code .c1{color:#75715e}.pdoc-code .cs{color:#75715e}.pdoc-code .gd{color:#f92672}.pdoc-code .ge{color:#f8f8f2; font-style:italic}.pdoc-code .gr{color:#f8f8f2}.pdoc-code .gh{color:#f8f8f2}.pdoc-code .gi{color:#a6e22e}.pdoc-code .go{color:#66d9ef}.pdoc-code .gp{color:#f92672; font-weight:bold}.pdoc-code .gs{color:#f8f8f2; font-weight:bold}.pdoc-code .gu{color:#75715e}.pdoc-code .gt{color:#f8f8f2}.pdoc-code .kc{color:#66d9ef}.pdoc-code .kd{color:#66d9ef}.pdoc-code .kn{color:#f92672}.pdoc-code .kp{color:#66d9ef}.pdoc-code .kr{color:#66d9ef}.pdoc-code .kt{color:#66d9ef}.pdoc-code .ld{color:#e6db74}.pdoc-code .m{color:#ae81ff}.pdoc-code .s{color:#e6db74}.pdoc-code .na{color:#a6e22e}.pdoc-code .nb{color:#f8f8f2}.pdoc-code .nc{color:#a6e22e}.pdoc-code .no{color:#66d9ef}.pdoc-code .nd{color:#a6e22e}.pdoc-code .ni{color:#f8f8f2}.pdoc-code .ne{color:#a6e22e}.pdoc-code .nf{color:#a6e22e}.pdoc-code .nl{color:#f8f8f2}.pdoc-code .nn{color:#f8f8f2}.pdoc-code .nx{color:#a6e22e}.pdoc-code .py{color:#f8f8f2}.pdoc-code .nt{color:#f92672}.pdoc-code .nv{color:#f8f8f2}.pdoc-code .ow{color:#f92672}.pdoc-code .w{color:#f8f8f2}.pdoc-code .mb{color:#ae81ff}.pdoc-code .mf{color:#ae81ff}.pdoc-code .mh{color:#ae81ff}.pdoc-code .mi{color:#ae81ff}.pdoc-code .mo{color:#ae81ff}.pdoc-code .sa{color:#e6db74}.pdoc-code .sb{color:#e6db74}.pdoc-code .sc{color:#e6db74}.pdoc-code .dl{color:#e6db74}.pdoc-code .sd{color:#e6db74}.pdoc-code .s2{color:#e6db74}.pdoc-code .se{color:#ae81ff}.pdoc-code .sh{color:#e6db74}.pdoc-code .si{color:#e6db74}.pdoc-code .sx{color:#e6db74}.pdoc-code .sr{color:#e6db74}.pdoc-code .s1{color:#e6db74}.pdoc-code .ss{color:#e6db74}.pdoc-code .bp{color:#f8f8f2}.pdoc-code .fm{color:#a6e22e}.pdoc-code .vc{color:#f8f8f2}.pdoc-code .vg{color:#f8f8f2}.pdoc-code .vi{color:#f8f8f2}.pdoc-code .vm{color:#f8f8f2}</style>
+    <style>/*! theme.css */:root{--pdoc-background:#212529;}.pdoc{--text:#f7f7f7;--muted:#9d9d9d;--link:#58a6ff;--link-hover:#3989ff;--code:#333;--active:#555;--accent:#343434;--accent2:#555;--nav-hover:rgba(0, 0, 0, 0.1);--name:#77C1FF;--def:#0cdd0c;--annotation:#00c037;}</style>
+    <style>/*! layout.css */html, body{width:100%;height:100%;}html, main{scroll-behavior:smooth;}body{background-color:var(--pdoc-background);}@media (max-width:769px){#navtoggle{cursor:pointer;position:absolute;width:50px;height:40px;top:1rem;right:1rem;border-color:var(--text);color:var(--text);display:flex;opacity:0.8;z-index:999;}#navtoggle:hover{opacity:1;}#togglestate + div{display:none;}#togglestate:checked + div{display:inherit;}main, header{padding:2rem 3vw;}header + main{margin-top:-3rem;}.git-button{display:none !important;}nav input[type="search"]{max-width:77%;}nav input[type="search"]:first-child{margin-top:-6px;}nav input[type="search"]:valid ~ *{display:none !important;}}@media (min-width:770px){:root{--sidebar-width:clamp(12.5rem, 28vw, 22rem);}nav{position:fixed;overflow:auto;height:100vh;width:var(--sidebar-width);}main, header{padding:3rem 2rem 3rem calc(var(--sidebar-width) + 3rem);width:calc(54rem + var(--sidebar-width));max-width:100%;}header + main{margin-top:-4rem;}#navtoggle{display:none;}}#togglestate{position:absolute;height:0;opacity:0;}nav.pdoc{--pad:clamp(0.5rem, 2vw, 1.75rem);--indent:1.5rem;background-color:var(--accent);border-right:1px solid var(--accent2);box-shadow:0 0 20px rgba(50, 50, 50, .2) inset;padding:0 0 0 var(--pad);overflow-wrap:anywhere;scrollbar-width:thin; scrollbar-color:var(--accent2) transparent; z-index:1}nav.pdoc::-webkit-scrollbar{width:.4rem; }nav.pdoc::-webkit-scrollbar-thumb{background-color:var(--accent2); }nav.pdoc > div{padding:var(--pad) 0;}nav.pdoc .module-list-button{display:inline-flex;align-items:center;color:var(--text);border-color:var(--muted);margin-bottom:1rem;}nav.pdoc .module-list-button:hover{border-color:var(--text);}nav.pdoc input[type=search]{display:block;outline-offset:0;width:calc(100% - var(--pad));}nav.pdoc .logo{max-width:calc(100% - var(--pad));max-height:35vh;display:block;margin:0 auto 1rem;transform:translate(calc(-.5 * var(--pad)), 0);}nav.pdoc ul{list-style:none;padding-left:0;}nav.pdoc > div > ul{margin-left:calc(0px - var(--pad));}nav.pdoc li a{padding:.2rem 0 .2rem calc(var(--pad) + var(--indent));}nav.pdoc > div > ul > li > a{padding-left:var(--pad);}nav.pdoc li{transition:all 100ms;}nav.pdoc li:hover{background-color:var(--nav-hover);}nav.pdoc a, nav.pdoc a:hover{color:var(--text);}nav.pdoc a{display:block;}nav.pdoc > h2:first-of-type{margin-top:1.5rem;}nav.pdoc .class:before{content:"class ";color:var(--muted);}nav.pdoc .function:after{content:"()";color:var(--muted);}nav.pdoc footer:before{content:"";display:block;width:calc(100% - var(--pad));border-top:solid var(--accent2) 1px;margin-top:1.5rem;padding-top:.5rem;}nav.pdoc footer{font-size:small;}</style>
+    <style>/*! content.css */.pdoc{color:var(--text);box-sizing:border-box;line-height:1.5;background:none;}.pdoc .pdoc-button{cursor:pointer;display:inline-block;border:solid black 1px;border-radius:2px;font-size:.75rem;padding:calc(0.5em - 1px) 1em;transition:100ms all;}.pdoc .alert{padding:1rem 1rem 1rem calc(1.5rem + 24px);border:1px solid transparent;border-radius:.25rem;background-repeat:no-repeat;background-position:.75rem center;margin-bottom:1rem;}.pdoc .alert > em{display:none;}.pdoc .alert > *:last-child{margin-bottom:0;}.pdoc .alert.note {color:#084298;background-color:#cfe2ff;border-color:#b6d4fe;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22%23084298%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8%2016A8%208%200%201%200%208%200a8%208%200%200%200%200%2016zm.93-9.412-1%204.705c-.07.34.029.533.304.533.194%200%20.487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703%200-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381%202.29-.287zM8%205.5a1%201%200%201%201%200-2%201%201%200%200%201%200%202z%22/%3E%3C/svg%3E");}.pdoc .alert.warning{color:#664d03;background-color:#fff3cd;border-color:#ffecb5;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22%23664d03%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M8.982%201.566a1.13%201.13%200%200%200-1.96%200L.165%2013.233c-.457.778.091%201.767.98%201.767h13.713c.889%200%201.438-.99.98-1.767L8.982%201.566zM8%205c.535%200%20.954.462.9.995l-.35%203.507a.552.552%200%200%201-1.1%200L7.1%205.995A.905.905%200%200%201%208%205zm.002%206a1%201%200%201%201%200%202%201%201%200%200%201%200-2z%22/%3E%3C/svg%3E");}.pdoc .alert.danger{color:#842029;background-color:#f8d7da;border-color:#f5c2c7;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20fill%3D%22%23842029%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M5.52.359A.5.5%200%200%201%206%200h4a.5.5%200%200%201%20.474.658L8.694%206H12.5a.5.5%200%200%201%20.395.807l-7%209a.5.5%200%200%201-.873-.454L6.823%209.5H3.5a.5.5%200%200%201-.48-.641l2.5-8.5z%22/%3E%3C/svg%3E");}.pdoc .visually-hidden{position:absolute !important;width:1px !important;height:1px !important;padding:0 !important;margin:-1px !important;overflow:hidden !important;clip:rect(0, 0, 0, 0) !important;white-space:nowrap !important;border:0 !important;}.pdoc h1, .pdoc h2, .pdoc h3{font-weight:300;margin:.3em 0;padding:.2em 0;}.pdoc > section:not(.module-info) h1{font-size:1.5rem;font-weight:500;}.pdoc > section:not(.module-info) h2{font-size:1.4rem;font-weight:500;}.pdoc > section:not(.module-info) h3{font-size:1.3rem;font-weight:500;}.pdoc > section:not(.module-info) h4{font-size:1.2rem;}.pdoc > section:not(.module-info) h5{font-size:1.1rem;}.pdoc a{text-decoration:none;color:var(--link);}.pdoc a:hover{color:var(--link-hover);}.pdoc blockquote{margin-left:2rem;}.pdoc pre{border-top:1px solid var(--accent2);border-bottom:1px solid var(--accent2);margin-top:0;margin-bottom:1em;padding:.5rem 0 .5rem .5rem;overflow-x:auto;background-color:var(--code);}.pdoc code{color:var(--text);padding:.2em .4em;margin:0;font-size:85%;background-color:var(--accent);border-radius:6px;}.pdoc a > code{color:inherit;}.pdoc pre > code{display:inline-block;font-size:inherit;background:none;border:none;padding:0;}.pdoc > section:not(.module-info){margin-bottom:1.5rem;}.pdoc .modulename{margin-top:0;font-weight:bold;}.pdoc .modulename a{color:var(--link);transition:100ms all;}.pdoc .git-button{float:right;border:solid var(--link) 1px;}.pdoc .git-button:hover{background-color:var(--link);color:var(--pdoc-background);}.view-source-toggle-state,.view-source-toggle-state ~ .pdoc-code{display:none;}.view-source-toggle-state:checked ~ .pdoc-code{display:block;}.view-source-button{display:inline-block;float:right;font-size:.75rem;line-height:1.5rem;color:var(--muted);padding:0 .4rem 0 1.3rem;cursor:pointer;text-indent:-2px;}.view-source-button > span{visibility:hidden;}.module-info .view-source-button{float:none;display:flex;justify-content:flex-end;margin:-1.2rem .4rem -.2rem 0;}.view-source-button::before{position:absolute;content:"View Source";display:list-item;list-style-type:disclosure-closed;}.view-source-toggle-state:checked ~ .attr .view-source-button::before,.view-source-toggle-state:checked ~ .view-source-button::before{list-style-type:disclosure-open;}.pdoc .docstring{margin-bottom:1.5rem;}.pdoc section:not(.module-info) .docstring{margin-left:clamp(0rem, 5vw - 2rem, 1rem);}.pdoc .docstring .pdoc-code{margin-left:1em;margin-right:1em;}.pdoc h1:target,.pdoc h2:target,.pdoc h3:target,.pdoc h4:target,.pdoc h5:target,.pdoc h6:target,.pdoc .pdoc-code > pre > span:target{background-color:var(--active);box-shadow:-1rem 0 0 0 var(--active);}.pdoc .pdoc-code > pre > span:target{display:block;}.pdoc div:target > .attr,.pdoc section:target > .attr,.pdoc dd:target > a{background-color:var(--active);}.pdoc *{scroll-margin:2rem;}.pdoc .pdoc-code .linenos{user-select:none;}.pdoc .attr:hover{filter:contrast(0.95);}.pdoc section, .pdoc .classattr{position:relative;}.pdoc .headerlink{--width:clamp(1rem, 3vw, 2rem);position:absolute;top:0;left:calc(0rem - var(--width));transition:all 100ms ease-in-out;opacity:0;}.pdoc .headerlink::before{content:"#";display:block;text-align:center;width:var(--width);height:2.3rem;line-height:2.3rem;font-size:1.5rem;}.pdoc .attr:hover ~ .headerlink,.pdoc *:target > .headerlink,.pdoc .headerlink:hover{opacity:1;}.pdoc .attr{display:block;margin:.5rem 0 .5rem;padding:.4rem .4rem .4rem 1rem;background-color:var(--accent);overflow-x:auto;}.pdoc .classattr{margin-left:2rem;}.pdoc .name{color:var(--name);font-weight:bold;}.pdoc .def{color:var(--def);font-weight:bold;}.pdoc .signature{background-color:transparent;}.pdoc .param, .pdoc .return-annotation{white-space:pre;}.pdoc .signature.multiline .param{display:block;}.pdoc .signature.condensed .param{display:inline-block;}.pdoc .annotation{color:var(--annotation);}.pdoc .view-value-toggle-state,.pdoc .view-value-toggle-state ~ .default_value{display:none;}.pdoc .view-value-toggle-state:checked ~ .default_value{display:inherit;}.pdoc .view-value-button{font-size:.5rem;vertical-align:middle;border-style:dashed;margin-top:-0.1rem;}.pdoc .view-value-button:hover{background:white;}.pdoc .view-value-button::before{content:"show";text-align:center;width:2.2em;display:inline-block;}.pdoc .view-value-toggle-state:checked ~ .view-value-button::before{content:"hide";}.pdoc .inherited{margin-left:2rem;}.pdoc .inherited dt{font-weight:700;}.pdoc .inherited dt, .pdoc .inherited dd{display:inline;margin-left:0;margin-bottom:.5rem;}.pdoc .inherited dd:not(:last-child):after{content:", ";}.pdoc .inherited .class:before{content:"class ";}.pdoc .inherited .function a:after{content:"()";}.pdoc .search-result .docstring{overflow:auto;max-height:25vh;}.pdoc .search-result.focused > .attr{background-color:var(--active);}.pdoc .attribution{margin-top:2rem;display:block;opacity:0.5;transition:all 200ms;filter:grayscale(100%);}.pdoc .attribution:hover{opacity:1;filter:grayscale(0%);}.pdoc .attribution img{margin-left:5px;height:35px;vertical-align:middle;width:70px;transition:all 200ms;}.pdoc table{display:block;width:max-content;max-width:100%;overflow:auto;margin-bottom:1rem;}.pdoc table th{font-weight:600;}.pdoc table th, .pdoc table td{padding:6px 13px;border:1px solid var(--accent2);}</style>
+    <style>/*! custom.css */</style></head>
+<body>
+    <nav class="pdoc">
+        <label id="navtoggle" for="togglestate" class="pdoc-button"><svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'><path stroke-linecap='round' stroke="currentColor" stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/></svg></label>
+        <input id="togglestate" type="checkbox" aria-hidden="true" tabindex="-1">
+        <div><!-- Remove pdoc-button -->
+
+
+
+            <h2>Contents</h2>
+            <ul>
+  <li><a href="#what-is-pdoc">What is pdoc?</a></li>
+  <li><a href="#quickstart">Quickstart</a>
+  <ul>
+    <li><a href="#customizing-pdoc">Customizing pdoc</a></li>
+    <li><a href="#deploying-to-github-pages">Deploying to GitHub Pages</a></li>
+  </ul></li>
+  <li><a href="#how-can-i">How can I ... ?</a>
+  <ul>
+    <li><a href="#add-documentation">...add documentation?</a></li>
+    <li><a href="#document-variables">...document variables?</a></li>
+    <li><a href="#control-what-is-documented">...control what is documented?</a></li>
+    <li><a href="#exclude-submodules-from-being-documented">...exclude submodules from being documented?</a></li>
+    <li><a href="#link-to-other-identifiers">...link to other identifiers?</a></li>
+    <li><a href="#change-the-item-order">...change the item order?</a></li>
+    <li><a href="#use-numpydoc-or-google-docstrings">...use numpydoc or Google docstrings?</a></li>
+    <li><a href="#render-math-formulas">...render math formulas?</a></li>
+    <li><a href="#render-mermaid-diagrams">...render Mermaid diagrams?</a></li>
+    <li><a href="#add-my-projects-logo">...add my project's logo?</a></li>
+    <li><a href="#include-markdown-files">...include Markdown files?</a></li>
+    <li><a href="#add-a-title-page">...add a title page?</a></li>
+    <li><a href="#edit-pdocs-html-template">...edit pdoc's HTML template?</a></li>
+    <li><a href="#pass-arguments-to-the-jinja2-template">...pass arguments to the Jinja2 template?</a></li>
+    <li><a href="#integrate-pdoc-into-other-systems">...integrate pdoc into other systems?</a></li>
+  </ul></li>
+  <li><a href="#docstring-inheritance">Docstring Inheritance</a></li>
+  <li><a href="#limitations">Limitations</a></li>
+  <li><a href="#markdown-support">Markdown Support</a></li>
+  <li><a href="#using-pdoc-as-a-library">Using pdoc as a library</a></li>
+</ul>
+
+
+            <h2>Submodules</h2>
+            <ul>
+                    <li><a href="pdoc/doc.html">doc</a></li>
+                    <li><a href="pdoc/doc_ast.html">doc_ast</a></li>
+                    <li><a href="pdoc/doc_pyi.html">doc_pyi</a></li>
+                    <li><a href="pdoc/doc_types.html">doc_types</a></li>
+                    <li><a href="pdoc/docstrings.html">docstrings</a></li>
+                    <li><a href="pdoc/extract.html">extract</a></li>
+                    <li><a href="pdoc/markdown2.html">markdown2</a></li>
+                    <li><a href="pdoc/render.html">render</a></li>
+                    <li><a href="pdoc/render_helpers.html">render_helpers</a></li>
+                    <li><a href="pdoc/search.html">search</a></li>
+                    <li><a href="pdoc/web.html">web</a></li>
+            </ul>
+
+            <h2>API Documentation</h2>
+                <ul class="memberlist">
+            <li>
+                    <a class="function" href="#pdoc">pdoc</a>
+            </li>
+    </ul>
+
+
+
+        <a class="attribution" title="pdoc: Python API documentation generator" href="https://pdoc.dev" target="_blank">
+            built with <span class="visually-hidden">pdoc</span><img
+                alt="pdoc logo"
+                src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20role%3D%22img%22%20aria-label%3D%22pdoc%20logo%22%20width%3D%22300%22%20height%3D%22150%22%20viewBox%3D%22-1%200%2060%2030%22%3E%3Ctitle%3Epdoc%3C/title%3E%3Cpath%20d%3D%22M29.621%2021.293c-.011-.273-.214-.475-.511-.481a.5.5%200%200%200-.489.503l-.044%201.393c-.097.551-.695%201.215-1.566%201.704-.577.428-1.306.486-2.193.182-1.426-.617-2.467-1.654-3.304-2.487l-.173-.172a3.43%203.43%200%200%200-.365-.306.49.49%200%200%200-.286-.196c-1.718-1.06-4.931-1.47-7.353.191l-.219.15c-1.707%201.187-3.413%202.131-4.328%201.03-.02-.027-.49-.685-.141-1.763.233-.721.546-2.408.772-4.076.042-.09.067-.187.046-.288.166-1.347.277-2.625.241-3.351%201.378-1.008%202.271-2.586%202.271-4.362%200-.976-.272-1.935-.788-2.774-.057-.094-.122-.18-.184-.268.033-.167.052-.339.052-.516%200-1.477-1.202-2.679-2.679-2.679-.791%200-1.496.352-1.987.9a6.3%206.3%200%200%200-1.001.029c-.492-.564-1.207-.929-2.012-.929-1.477%200-2.679%201.202-2.679%202.679A2.65%202.65%200%200%200%20.97%206.554c-.383.747-.595%201.572-.595%202.41%200%202.311%201.507%204.29%203.635%205.107-.037.699-.147%202.27-.423%203.294l-.137.461c-.622%202.042-2.515%208.257%201.727%2010.643%201.614.908%203.06%201.248%204.317%201.248%202.665%200%204.492-1.524%205.322-2.401%201.476-1.559%202.886-1.854%206.491.82%201.877%201.393%203.514%201.753%204.861%201.068%202.223-1.713%202.811-3.867%203.399-6.374.077-.846.056-1.469.054-1.537zm-4.835%204.313c-.054.305-.156.586-.242.629-.034-.007-.131-.022-.307-.157-.145-.111-.314-.478-.456-.908.221.121.432.25.675.355.115.039.219.051.33.081zm-2.251-1.238c-.05.33-.158.648-.252.694-.022.001-.125-.018-.307-.157-.217-.166-.488-.906-.639-1.573.358.344.754.693%201.198%201.036zm-3.887-2.337c-.006-.116-.018-.231-.041-.342.635.145%201.189.368%201.599.625.097.231.166.481.174.642-.03.049-.055.101-.067.158-.046.013-.128.026-.298.004-.278-.037-.901-.57-1.367-1.087zm-1.127-.497c.116.306.176.625.12.71-.019.014-.117.045-.345.016-.206-.027-.604-.332-.986-.695.41-.051.816-.056%201.211-.031zm-4.535%201.535c.209.22.379.47.358.598-.006.041-.088.138-.351.234-.144.055-.539-.063-.979-.259a11.66%2011.66%200%200%200%20.972-.573zm.983-.664c.359-.237.738-.418%201.126-.554.25.237.479.548.457.694-.006.042-.087.138-.351.235-.174.064-.694-.105-1.232-.375zm-3.381%201.794c-.022.145-.061.29-.149.401-.133.166-.358.248-.69.251h-.002c-.133%200-.306-.26-.45-.621.417.091.854.07%201.291-.031zm-2.066-8.077a4.78%204.78%200%200%201-.775-.584c.172-.115.505-.254.88-.378l-.105.962zm-.331%202.302a10.32%2010.32%200%200%201-.828-.502c.202-.143.576-.328.984-.49l-.156.992zm-.45%202.157l-.701-.403c.214-.115.536-.249.891-.376a11.57%2011.57%200%200%201-.19.779zm-.181%201.716c.064.398.194.702.298.893-.194-.051-.435-.162-.736-.398.061-.119.224-.3.438-.495zM8.87%204.141c0%20.152-.123.276-.276.276s-.275-.124-.275-.276.123-.276.276-.276.275.124.275.276zm-.735-.389a1.15%201.15%200%200%200-.314.783%201.16%201.16%200%200%200%201.162%201.162c.457%200%20.842-.27%201.032-.653.026.117.042.238.042.362a1.68%201.68%200%200%201-1.679%201.679%201.68%201.68%200%200%201-1.679-1.679c0-.843.626-1.535%201.436-1.654zM5.059%205.406A1.68%201.68%200%200%201%203.38%207.085a1.68%201.68%200%200%201-1.679-1.679c0-.037.009-.072.011-.109.21.3.541.508.935.508a1.16%201.16%200%200%200%201.162-1.162%201.14%201.14%200%200%200-.474-.912c.015%200%20.03-.005.045-.005.926.001%201.679.754%201.679%201.68zM3.198%204.141c0%20.152-.123.276-.276.276s-.275-.124-.275-.276.123-.276.276-.276.275.124.275.276zM1.375%208.964c0-.52.103-1.035.288-1.52.466.394%201.06.64%201.717.64%201.144%200%202.116-.725%202.499-1.738.383%201.012%201.355%201.738%202.499%201.738.867%200%201.631-.421%202.121-1.062.307.605.478%201.267.478%201.942%200%202.486-2.153%204.51-4.801%204.51s-4.801-2.023-4.801-4.51zm24.342%2019.349c-.985.498-2.267.168-3.813-.979-3.073-2.281-5.453-3.199-7.813-.705-1.315%201.391-4.163%203.365-8.423.97-3.174-1.786-2.239-6.266-1.261-9.479l.146-.492c.276-1.02.395-2.457.444-3.268a6.11%206.11%200%200%200%201.18.115%206.01%206.01%200%200%200%202.536-.562l-.006.175c-.802.215-1.848.612-2.021%201.25-.079.295.021.601.274.837.219.203.415.364.598.501-.667.304-1.243.698-1.311%201.179-.02.144-.022.507.393.787.213.144.395.26.564.365-1.285.521-1.361.96-1.381%201.126-.018.142-.011.496.427.746l.854.489c-.473.389-.971.914-.999%201.429-.018.278.095.532.316.713.675.556%201.231.721%201.653.721.059%200%20.104-.014.158-.02.207.707.641%201.64%201.513%201.64h.013c.8-.008%201.236-.345%201.462-.626.173-.216.268-.457.325-.692.424.195.93.374%201.372.374.151%200%20.294-.021.423-.068.732-.27.944-.704.993-1.021.009-.061.003-.119.002-.179.266.086.538.147.789.147.15%200%20.294-.021.423-.069.542-.2.797-.489.914-.754.237.147.478.258.704.288.106.014.205.021.296.021.356%200%20.595-.101.767-.229.438.435%201.094.992%201.656%201.067.106.014.205.021.296.021a1.56%201.56%200%200%200%20.323-.035c.17.575.453%201.289.866%201.605.358.273.665.362.914.362a.99.99%200%200%200%20.421-.093%201.03%201.03%200%200%200%20.245-.164c.168.428.39.846.68%201.068.358.273.665.362.913.362a.99.99%200%200%200%20.421-.093c.317-.148.512-.448.639-.762.251.157.495.257.726.257.127%200%20.25-.024.37-.071.427-.17.706-.617.841-1.314.022-.015.047-.022.068-.038.067-.051.133-.104.196-.159-.443%201.486-1.107%202.761-2.086%203.257zM8.66%209.925a.5.5%200%201%200-1%200c0%20.653-.818%201.205-1.787%201.205s-1.787-.552-1.787-1.205a.5.5%200%201%200-1%200c0%201.216%201.25%202.205%202.787%202.205s2.787-.989%202.787-2.205zm4.4%2015.965l-.208.097c-2.661%201.258-4.708%201.436-6.086.527-1.542-1.017-1.88-3.19-1.844-4.198a.4.4%200%200%200-.385-.414c-.242-.029-.406.164-.414.385-.046%201.249.367%203.686%202.202%204.896.708.467%201.547.7%202.51.7%201.248%200%202.706-.392%204.362-1.174l.185-.086a.4.4%200%200%200%20.205-.527c-.089-.204-.326-.291-.527-.206zM9.547%202.292c.093.077.205.114.317.114a.5.5%200%200%200%20.318-.886L8.817.397a.5.5%200%200%200-.703.068.5.5%200%200%200%20.069.703l1.364%201.124zm-7.661-.065c.086%200%20.173-.022.253-.068l1.523-.893a.5.5%200%200%200-.506-.863l-1.523.892a.5.5%200%200%200-.179.685c.094.158.261.247.432.247z%22%20transform%3D%22matrix%28-1%200%200%201%2058%200%29%22%20fill%3D%22%233bb300%22/%3E%3Cpath%20d%3D%22M.3%2021.86V10.18q0-.46.02-.68.04-.22.18-.5.28-.54%201.34-.54%201.06%200%201.42.28.38.26.44.78.76-1.04%202.38-1.04%201.64%200%203.1%201.54%201.46%201.54%201.46%203.58%200%202.04-1.46%203.58-1.44%201.54-3.08%201.54-1.64%200-2.38-.92v4.04q0%20.46-.04.68-.02.22-.18.5-.14.3-.5.42-.36.12-.98.12-.62%200-1-.12-.36-.12-.52-.4-.14-.28-.18-.5-.02-.22-.02-.68zm3.96-9.42q-.46.54-.46%201.18%200%20.64.46%201.18.48.52%201.2.52.74%200%201.24-.52.52-.52.52-1.18%200-.66-.48-1.18-.48-.54-1.26-.54-.76%200-1.22.54zm14.741-8.36q.16-.3.54-.42.38-.12%201-.12.64%200%201.02.12.38.12.52.42.16.3.18.54.04.22.04.68v11.94q0%20.46-.04.7-.02.22-.18.5-.3.54-1.7.54-1.38%200-1.54-.98-.84.96-2.34.96-1.8%200-3.28-1.56-1.48-1.58-1.48-3.66%200-2.1%201.48-3.68%201.5-1.58%203.28-1.58%201.48%200%202.3%201v-4.2q0-.46.02-.68.04-.24.18-.52zm-3.24%2010.86q.52.54%201.26.54.74%200%201.22-.54.5-.54.5-1.18%200-.66-.48-1.22-.46-.56-1.26-.56-.8%200-1.28.56-.48.54-.48%201.2%200%20.66.52%201.2zm7.833-1.2q0-2.4%201.68-3.96%201.68-1.56%203.84-1.56%202.16%200%203.82%201.56%201.66%201.54%201.66%203.94%200%201.66-.86%202.96-.86%201.28-2.1%201.9-1.22.6-2.54.6-1.32%200-2.56-.64-1.24-.66-2.1-1.92-.84-1.28-.84-2.88zm4.18%201.44q.64.48%201.3.48.66%200%201.32-.5.66-.5.66-1.48%200-.98-.62-1.46-.62-.48-1.34-.48-.72%200-1.34.5-.62.5-.62%201.48%200%20.96.64%201.46zm11.412-1.44q0%20.84.56%201.32.56.46%201.18.46.64%200%201.18-.36.56-.38.9-.38.6%200%201.46%201.06.46.58.46%201.04%200%20.76-1.1%201.42-1.14.8-2.8.8-1.86%200-3.58-1.34-.82-.64-1.34-1.7-.52-1.08-.52-2.36%200-1.3.52-2.34.52-1.06%201.34-1.7%201.66-1.32%203.54-1.32.76%200%201.48.22.72.2%201.06.4l.32.2q.36.24.56.38.52.4.52.92%200%20.5-.42%201.14-.72%201.1-1.38%201.1-.38%200-1.08-.44-.36-.34-1.04-.34-.66%200-1.24.48-.58.48-.58%201.34z%22%20fill%3D%22green%22/%3E%3C/svg%3E"/>
+        </a>
+</div>
+    </nav>
+    <main class="pdoc">
+            <section class="module-info">
+                    <h1 class="modulename">
+pdoc    </h1>
+
+                        <div class="docstring"><h1 id="what-is-pdoc">What is pdoc?</h1>
+
+<p>pdoc auto-generates API documentation that follows your project's Python module hierarchy.</p>
+
+<p>pdoc's main feature is a focus on simplicity: pdoc aims to do one thing and do it well.</p>
+
+<ul>
+<li>Easy setup, no configuration necessary.</li>
+<li>Documentation is plain <a href="#markdown-support">Markdown</a>.</li>
+<li>First-class support for type annotations.</li>
+<li>Builtin web server with live reloading.</li>
+<li>Customizable HTML templates.</li>
+<li>Understands numpydoc and Google-style docstrings.</li>
+</ul>
+
+<h1 id="quickstart">Quickstart</h1>
+
+<p>As an example, we want to generate API documentation for <code>demo.py</code>.
+Our demo module already includes a bunch of docstrings:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">A small `pdoc` example.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;🐕&quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The name of our dog.&quot;&quot;&quot;</span>
+    <span class="n">friends</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="s2">&quot;Dog&quot;</span><span class="p">]</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The friends of our dog.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Make a Dog without any friends (yet).&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">friends</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">bark</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loud</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;*woof*&quot;&quot;&quot;</span>
+</code></pre>
+</div>
+
+<p>We can invoke pdoc to take our docstrings and render them into a standalone HTML document:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code>pdoc<span class="w"> </span>./demo.py<span class="w">  </span><span class="c1"># or: pdoc my_module_name</span>
+</code></pre>
+</div>
+
+<p>This opens a browser with our module documentation. Here's a copy of what you should see:</p>
+
+<iframe style="
+    width: 100%;
+    height: 250px;
+    border: solid gray 1px;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 5px;"
+    title="rendered demo.py documentation"
+    src="https://pdoc.dev/docs/demo-standalone.html"></iframe>
+
+<p>If you look closely, you'll notice that docstrings are interpreted as Markdown.
+For example, `pdoc` is rendered as <code>pdoc﻿</code>. Additionally, identifiers such as the type annotation
+for <code>Dog.friends</code> are automatically linked.</p>
+
+<p>If we edit <code>demo.py</code> now, the page will reload automatically.
+Once we are happy with everything, we can export the documentation to an HTML file:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code>pdoc<span class="w"> </span>./demo.py<span class="w"> </span>-o<span class="w"> </span>./docs
+</code></pre>
+</div>
+
+<p>This will create an HTML file at <code>docs/demo.html</code> which contains our module documentation. 🎉</p>
+
+<h2 id="customizing-pdoc">Customizing pdoc</h2>
+
+<p>We can optionally configure pdoc's output via command line flags.
+For example, we can add a project logo to the documentation:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code>pdoc<span class="w"> </span>./demo.py<span class="w"> </span>--logo<span class="w"> </span><span class="s2">&quot;https://placedog.net/300?random&quot;</span>
+</code></pre>
+</div>
+
+<p>To get a list of all available rendering options, run:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code>pdoc<span class="w"> </span>--help
+</code></pre>
+</div>
+
+<p>If you need more advanced customization options, see <a href="#edit-pdocs-html-template"><em>How can I edit pdoc's HTML template?</em></a>.</p>
+
+<h2 id="deploying-to-github-pages">Deploying to GitHub Pages</h2>
+
+<p><em>In this example we'll deploy pdoc's documentation to GitHub Pages. Of course, you can distribute
+the generated documentation however you want! pdoc's job is to "just" produce self-contained HTML files for you.</em></p>
+
+<p>A very simple way to host your API documentation is to set up a continuous integration job which
+pushes your documentation to GitHub Pages. This keeps your docs updated automatically.</p>
+
+<ol>
+<li>Enable GitHub Actions and GitHub Pages for your project.</li>
+<li>In the GitHub Pages settings, select GitHub Actions as your build and deployment source.</li>
+<li>Copy pdoc's GitHub Actions workflow into your own repository and adjust it to how you build your docs:
+<a href="https://github.com/mitmproxy/pdoc/blob/main/.github/workflows/docs.yml"><code>.github/workflows/docs.yml</code></a></li>
+</ol>
+
+<p>That's it – no need to fiddle with any secrets or set up any <code>gh-pages</code> branches. 🥳</p>
+
+<h1 id="how-can-i">How can I ... ?</h1>
+
+<h2 id="add-documentation">...add documentation?</h2>
+
+<p>In Python, objects like modules, functions and classes have
+a special attribute named <code>__doc__</code> which contains that object's
+<em>docstring</em>.  The docstring comes from a special placement of a string
+in your source code.  For example, the following code shows how to
+define a function with a docstring and access the contents of that
+docstring:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="k">def</span> <span class="nf">test</span><span class="p">():</span>
+<span class="o">...</span>     <span class="s2">&quot;&quot;&quot;This is a docstring.&quot;&quot;&quot;</span>
+<span class="o">...</span>     <span class="k">pass</span>
+<span class="o">...</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">test</span><span class="o">.</span><span class="vm">__doc__</span>
+<span class="s1">&#39;This is a docstring.&#39;</span>
+</code></pre>
+</div>
+
+<p>Something similar can be done for classes and modules too. For classes,
+the docstring should come on the line immediately following <code>class
+...</code>. For modules, the docstring should start on the first line of
+the file. These docstrings are what you see for each module, class,
+function and method listed in the documentation produced by pdoc.</p>
+
+<h2 id="document-variables">...document variables?</h2>
+
+<p>Python itself <a href="https://www.python.org/dev/peps/pep-0224/">does not attach docstrings to
+variables</a>. For example:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="n">variable</span> <span class="o">=</span> <span class="s2">&quot;SomeValue&quot;</span>
+<span class="sd">&quot;&quot;&quot;Docstring for variable.&quot;&quot;&quot;</span>
+</code></pre>
+</div>
+
+<p>The resulting <code>variable</code> will have no <code>__doc__</code> attribute.
+To compensate, pdoc will read the abstract syntax tree (an abstract representation of the source code)
+and include all assignment statements immediately followed by a docstring. This approach is not formally standardized,
+but followed by many tools, including Sphinx's autodoc extension in case you ever decide to migrate off pdoc.
+Docstring detection is limited to the current module, docstrings for variables imported from other modules are not
+picked up.</p>
+
+<p>Something similar is done for instance variables, which are either type-annotated in the class
+or defined in a class's <code>__init__</code>. Here is an example showing both conventions detected by pdoc:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">GoldenRetriever</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Full Name&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Weight in kilograms&quot;&quot;&quot;</span>
+</code></pre>
+</div>
+
+<p>If you would like to distinguish an instance variable from a class variable,
+you can use <a href="https://docs.python.org/3/library/typing.html#typing.ClassVar"><code>typing.ClassVar</code></a>:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">GoldenRetriever</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="n">breed_code</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;GOLD&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;International breed code (same for all instances)&quot;&quot;&quot;</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Full Name (different for each instance)&quot;&quot;&quot;</span>
+</code></pre>
+</div>
+
+<h2 id="control-what-is-documented">...control what is documented?</h2>
+
+<p>The public interface of a module is determined through one of two
+ways.</p>
+
+<ul>
+<li>If <code>__all__</code> is defined in the module, then all identifiers in that list will be considered public.
+No other identifiers will be considered public.</li>
+<li>If <code>__all__</code> is not defined, then pdoc will consider all items public that do not start with an
+underscore and that are defined in the current module (i.e. they are not imported).</li>
+</ul>
+
+<p>If you want to override the default behavior for a particular item,
+you can do so by including an annotation in its docstring:</p>
+
+<ul>
+<li><code>@private</code> hides an item unconditionally.</li>
+<li><code>&#64;public</code> shows an item unconditionally.</li>
+</ul>
+
+<p>In general, we recommend keeping the following conventions:</p>
+
+<ul>
+<li>If you want to document a private member, consider making it public.</li>
+<li>If you want to hide a public member, consider making it private.</li>
+<li>If you want to document a special <code>__dunder__</code> method, the recommended way to do so is
+to not document the dunder method specifically, but to add some usage examples in the class documentation.</li>
+</ul>
+
+<div class="alert note">
+<em>Note</em>
+<p>Hiding an item only removes it from documentation.
+  It is still displayed in the source code when clicking the "View Source" button.</p>
+</div>
+
+<p>As a last resort, you can override pdoc's behavior with a custom module template (see
+<a href="#edit-pdocs-html-template"><em>How can I edit pdoc's HTML template?</em></a>).
+You can find an example at
+<a href="https://github.com/mitmproxy/pdoc/blob/main/examples/custom-template/module.html.jinja2"><code>examples/custom-template/module.html.jinja2</code></a>.</p>
+
+<p>Hiding an item only removes it from documentation. It is still displayed in the source code when clicking the "View Source" button.</p>
+
+<h2 id="exclude-submodules-from-being-documented">...exclude submodules from being documented?</h2>
+
+<p>If you would like to exclude specific submodules from the documentation, the recommended way is to specify <code>__all__</code> as
+shown in the previous section. Alternatively, you can pass negative regular expression <code>!patterns</code> as part of the
+module specification. Each pattern removes all previously specified (sub)module names that match. For example, the following
+invocation documents <code>foo</code> and all submodules of <code>foo</code>, but not <code>foo.bar</code>:</p>
+
+<pre><code>pdoc foo !foo.bar
+</code></pre>
+
+<p>Likewise, <code>pdoc pdoc !pdoc.</code> would document the pdoc module itself, but none of its submodules. Patterns are always
+matched on the final module name, even if modules are passed as file paths.</p>
+
+<h2 id="link-to-other-identifiers">...link to other identifiers?</h2>
+
+<p>In your documentation, you can link to other identifiers by enclosing them in backticks:
+<code>`pdoc`</code> will link to <code><a href="#pdoc">pdoc</a></code>.
+When linking to identifiers in other modules, the identifier name must be fully qualified.
+For example, <code>`<a href="pdoc/doc.html#Doc">pdoc.doc.Doc</a>`</code> will be automatically linked to <code><a href="pdoc/doc.html#Doc">pdoc.doc.Doc</a></code>,
+while <code>`Doc`</code> only works within the <code><a href="pdoc/doc.html">pdoc.doc</a></code> module.</p>
+
+<p>pdoc will link all identifiers that are rendered in the current run.
+This means that you need to run <code>pdoc module_a module_b</code> to have interlinking between module_a and module_b.
+If you run <code>pdoc module_a</code> followed by <code>pdoc module_b</code>, there will be no cross-linking between the two modules.</p>
+
+<h2 id="change-the-item-order">...change the item order?</h2>
+
+<p>By default, documentation items are sorted in order of (first) appearance in the source code.
+This means that if you want to move a particular function to the beginning of your documentation,
+you need to move it there in your source code. This is not only useful to the readers of your documentation,
+but also useful to the consumers of your source code.</p>
+
+<h2 id="use-numpydoc-or-google-docstrings">...use numpydoc or Google docstrings?</h2>
+
+<p>While pdoc prefers docstrings that are plain Markdown, it also understands numpydoc and Google-style docstrings.
+If your documentation follows one of these styles, you can:</p>
+
+<ol>
+<li>Run <code>pdoc --docformat ...</code> to enable a particular docstring flavor globally, or</li>
+<li>Add <code>__docformat__ = "..."</code> at the top-level of the module you are documenting.</li>
+</ol>
+
+<p>The following values are supported:</p>
+
+<ul>
+<li><code>markdown</code>: Process Markdown syntax only.</li>
+<li><code>restructuredtext</code>: Process reStructuredText elements, then Markdown (default setting).</li>
+<li><code>google</code>: Process reStructuredText elements, then Google-style syntax, then Markdown.</li>
+<li><code>numpy</code>: Process reStructuredText elements, then Numpydoc syntax, then Markdown.</li>
+</ul>
+
+<p>pdoc only interprets a subset of the reStructuredText specification.
+Adding additional syntax elements is usually easy. If you feel that pdoc doesn't parse a docstring element properly,
+please amend <code><a href="pdoc/docstrings.html">pdoc.docstrings</a></code> and send us a pull request!</p>
+
+<h2 id="render-math-formulas">...render math formulas?</h2>
+
+<p>Run <code>pdoc --math</code>, and pdoc will render formulas in your docstrings. See
+<a href="https://pdoc.dev/docs/math/math_demo.html"><code>math_demo</code></a> for details.</p>
+
+<h2 id="render-mermaid-diagrams">...render Mermaid diagrams?</h2>
+
+<p>Run <code>pdoc --mermaid</code>, and pdoc will render mermaid diagrams in your docstrings. See
+<a href="https://pdoc.dev/docs/mermaid/mermaid_demo.html"><code>mermaid_demo</code></a> for details.</p>
+
+<h2 id="add-my-projects-logo">...add my project's logo?</h2>
+
+<p>See <a href="#customizing-pdoc"><em>Customizing pdoc</em></a>.</p>
+
+<h2 id="include-markdown-files">...include Markdown files?</h2>
+
+<p>You can include external Markdown files in your documentation by using reStructuredText's
+<code>.. include::</code> directive. For example, a common pattern is to include your project's README in your top-level <code>__init__.py</code> like this:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. include:: ../README.md</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</code></pre>
+</div>
+
+<p>You can also include only parts of a file with the
+<a href="https://docutils.sourceforge.io/docs/ref/rst/directives.html#including-an-external-document-fragment"><code>start-line</code>, <code>end-line</code>, <code>start-after</code>, and <code>end-after</code> options</a>:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. include:: ../README.md</span>
+<span class="sd">   :start-line: 1</span>
+<span class="sd">   :end-before: Changelog</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</code></pre>
+</div>
+
+<h2 id="add-a-title-page">...add a title page?</h2>
+
+<p>The landing page for your documentation is your project's top-level <code>&lt;modulename&gt;/__init__.py</code> file.
+Adding a module-level docstring here is a great way to introduce users to your project.
+For example, the documentation you are reading right now is sourced from
+<a href="https://github.com/mitmproxy/pdoc/blob/main/pdoc/__init__.py"><code>pdoc/__init__.py</code></a>.
+You can also include your title page from a <a href="#include-markdown-files">Markdown file</a>.</p>
+
+<p>If you have multiple top-level modules, a custom title page requires modifying the <code>index.html.jinja2</code> template.
+You can find an example in <a href="https://github.com/mitmproxy/pdoc/issues/410">#410</a>.</p>
+
+<h2 id="edit-pdocs-html-template">...edit pdoc's HTML template?</h2>
+
+<p>For more advanced customization, we can edit pdoc's
+<a href="https://github.com/mitmproxy/pdoc/blob/main/pdoc/templates/default/module.html.jinja2">default HTML template</a>,
+which uses the
+<a href="https://jinja.palletsprojects.com/">Jinja2</a> templating language.</p>
+
+<p>Let's assume you want to replace the logo with a custom button. We first find the right location in the template by searching
+for "logo", which shows us that the logo is defined in a Jinja2 block named <code>nav_title</code>.
+We now extend the default template by creating a file titled <code>module.html.jinja2</code> in the current directory
+ with the following contents:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;default/module.html.jinja2&quot;</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">nav_title</span> <span class="cp">%}</span>
+<span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>Donate dog food<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+</code></pre>
+</div>
+
+<p>We then specify our custom template directory when invoking pdoc...</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code>pdoc<span class="w"> </span>-t<span class="w"> </span>.<span class="w"> </span>./demo.py
+</code></pre>
+</div>
+
+<p>...and the updated documentation – with button – renders! 🎉</p>
+
+<p>See <a href="https://github.com/mitmproxy/pdoc/tree/main/examples/"><code>examples/</code></a>
+for more examples.</p>
+
+<h2 id="pass-arguments-to-the-jinja2-template">...pass arguments to the Jinja2 template?</h2>
+
+<p>If you need to pass additional data to pdoc's Jinja2 templates,
+you can use system environment variables.
+For example,
+<a href="https://github.com/mitmproxy/pdoc/blob/main/examples/custom-template/module.html.jinja2"><code>examples/custom-template/module.html.jinja2</code></a>
+shows how to include a version number in the rendered HTML.</p>
+
+<h2 id="integrate-pdoc-into-other-systems">...integrate pdoc into other systems?</h2>
+
+<p>pdoc's HTML and CSS are written in a way that the default template can be easily adjusted
+to produce standalone HTML fragments that can be embedded in other systems.
+This makes it possible to integrate pdoc with almost every CMS or static site generator.
+The only limitation is that you need to retain pdoc's directory structure
+if you would like to link between modules.</p>
+
+<p>To do so, <a href="#edit-pdocs-html-template">create a custom <code>frame.html.jinja2</code> template</a> which only emits CSS and the main
+page contents instead of a full standalone HTML document:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="cp">{%</span> <span class="k">block</span> <span class="nv">content</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+
+<span class="cp">{%</span> <span class="k">filter</span> <span class="nf">minify_css</span> <span class="cp">%}</span>
+    <span class="cp">{%</span> <span class="k">block</span> <span class="nv">style</span> <span class="cp">%}</span>
+        <span class="c">{# The same CSS files as in pdoc&#39;s default template, except for layout.css.</span>
+<span class="c">        You may leave out Bootstrap Reboot, which corrects inconsistences across browsers</span>
+<span class="c">        but may conflict with you website&#39;s stylesheet. #}</span>
+        <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">include</span> <span class="s2">&quot;resources/bootstrap-reboot.min.css&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">include</span> <span class="s2">&quot;syntax-highlighting.css&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">include</span> <span class="s2">&quot;theme.css&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">style</span><span class="p">&gt;</span><span class="cp">{%</span> <span class="k">include</span> <span class="s2">&quot;content.css&quot;</span> <span class="cp">%}</span><span class="p">&lt;/</span><span class="nt">style</span><span class="p">&gt;</span>
+    <span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
+<span class="cp">{%</span> <span class="k">endfilter</span> <span class="cp">%}</span>
+</code></pre>
+</div>
+
+<p>This should be enough to produce HTML files that can be embedded into other pages.
+All CSS selectors are prefixed with <code><a href="#pdoc">pdoc</a></code> so that pdoc's page style does not interfere with the rest of your website.</p>
+
+<p>You can find a full example for mkdocs in <a href="https://github.com/mitmproxy/pdoc/tree/main/examples/mkdocs/"><code>examples/mkdocs</code></a>.</p>
+
+<h1 id="docstring-inheritance">Docstring Inheritance</h1>
+
+<p>pdoc extends the standard use of docstrings in two important ways:
+by introducing variable docstrings (see <a href="#document-variables"><em>How can I document variables?</em></a>),
+and by allowing functions and classes to inherit docstrings and type annotations.</p>
+
+<p>This is useful to not unnecessarily repeat information. Consider this example:</p>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="k">class</span> <span class="nc">Dog</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">bark</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loud</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Make the dog bark. If `loud` is True,</span>
+<span class="sd">        use full volume. Not supported by all breeds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+<span class="k">class</span> <span class="nc">GoldenRetriever</span><span class="p">(</span><span class="n">Dog</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">bark</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">loud</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Woof Woof&quot;</span><span class="p">)</span>
+</code></pre>
+</div>
+
+<p>In Python, the docstring for <code>GoldenRetriever.bark</code> is empty, even though one was
+defined in <code>Dog.bark</code>. If pdoc generates documentation for the above
+code, then it will automatically attach the docstring for <code>Dog.bark</code> to
+<code>GoldenRetriever.bark</code> if it does not have a docstring.</p>
+
+<h1 id="limitations">Limitations</h1>
+
+<ul>
+<li><strong>Scope:</strong> pdoc main use case is API documentation.
+If you have substantially more complex documentation needs, we recommend using <a href="https://www.sphinx-doc.org/">Sphinx</a>!</li>
+<li><strong>Dynamic analysis:</strong> pdoc makes heavy use of dynamic analysis to extract docstrings.
+This means your Python modules will be executed/imported when pdoc runs.</li>
+<li><strong>HTML Output:</strong> pdoc only supports HTML as an output format. If you want to use pdoc with a static site
+generator that only accepts Markdown, that may work nonetheless – take a look at
+<a href="https://pdoc.dev/docs/pdoc.html#integrate-pdoc-into-other-systems">integrating pdoc into other systems</a>.</li>
+</ul>
+
+<h1 id="markdown-support">Markdown Support</h1>
+
+<p><a href="https://guides.github.com/features/mastering-markdown/">Markdown</a> is a lightweight and popular markup language for text
+formatting. There are many versions or <em>"flavors"</em> of Markdown.
+pdoc uses the <a href="https://github.com/trentm/python-markdown2">markdown2</a> library, which closely matches
+the behavior of the original <a href="https://daringfireball.net/projects/markdown/">Markdown 1.0.1 spec</a>.
+In addition, the following extra syntax elements are enabled:</p>
+
+<ul>
+<li><strong><a href="https://github.com/trentm/python-markdown2/wiki/code-friendly">code-friendly</a>:</strong> Disable <code>_</code> and <code>__</code> for <code>em</code> and <code>strong</code>.</li>
+<li><strong><a href="https://github.com/trentm/python-markdown2/wiki/cuddled-lists">cuddled-lists</a>:</strong> Allow lists to be cuddled to the preceding
+paragraph.</li>
+<li><strong><a href="https://github.com/trentm/python-markdown2/wiki/fenced-code-blocks">fenced-code-blocks</a>:</strong> Allows a code block to not have to be
+indented by fencing it with <code>```</code> on a line before and after.
+Based on <a href="https://github.github.com/gfm/">GitHub-Flavored Markdown</a> with support for syntax highlighting.</li>
+<li><strong><a href="https://github.com/trentm/python-markdown2/wiki/footnotes">footnotes</a>:</strong> Support footnotes as in use on daringfireball.net
+and implemented in other Markdown processors.</li>
+<li><strong><a href="https://github.com/trentm/python-markdown2/wiki/header-ids">header-ids</a>:</strong> Adds "id" attributes to headers. The id value
+is a slug of the header text.</li>
+<li><strong><a href="https://github.com/trentm/python-markdown2/wiki/markdown-in-html">markdown-in-html</a>:</strong> Allow the use of <code>markdown="1"</code> in a
+block HTML tag to have markdown processing be done on its contents.
+Similar to <a href="https://michelf.ca/projects/php-markdown/extra/#table">PHP-Markdown Extra</a> but with some limitations.</li>
+<li><strong><a href="https://github.com/trentm/python-markdown2/wiki/mermaid">mermaid</a>:</strong> Allows rendering Mermaid diagrams from included Markdown files using <code>```mermaid</code> fence blocks.</li>
+<li><strong><a href="https://github.com/trentm/python-markdown2/wiki/pyshell">pyshell</a>:</strong> Treats unindented Python interactive shell
+sessions as <code>&lt;code&gt;</code> blocks.</li>
+<li><strong>strike:</strong> Parse <code>~~strikethrough~~</code> formatting.</li>
+<li><strong><a href="https://github.com/trentm/python-markdown2/wiki/tables">tables</a>:</strong> Tables using the same format as <a href="https://github.github.com/gfm/">GitHub-Flavored Markdown</a> and
+<a href="https://michelf.ca/projects/php-markdown/extra/#table">PHP-Markdown Extra</a>.</li>
+<li><strong>task_list:</strong> Allows GitHub-style task lists (i.e. check boxes)</li>
+<li><strong>toc:</strong> The returned HTML string gets a new "toc_html"
+attribute which is a Table of Contents for the document.</li>
+</ul>
+
+<p>It is possible (but not recommended) to use another Markdown library with pdoc.
+See <a href="https://github.com/mitmproxy/pdoc/issues/401#issuecomment-1148661829">#401</a> for details.</p>
+
+<h1 id="using-pdoc-as-a-library">Using pdoc as a library</h1>
+
+<p>pdoc provides the high-level <code><a href="#pdoc">pdoc()</a></code> interface explained below. This makes it possible to do custom adjustments
+to your Python code before pdoc is used.</p>
+
+<p>It is also possible to create <code><a href="pdoc/doc.html#Module">pdoc.doc.Module</a></code> objects directly and modify them before rendering.
+You can find an example in <a href="https://github.com/mitmproxy/pdoc/tree/main/examples/library-usage"><code>examples/library-usage</code></a>.</p>
+</div>
+
+                
+                
+                
+            </section>
+                <section id="pdoc">
+                    <div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">pdoc</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="o">*</span><span class="n">modules</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">|</span> <span class="nb">str</span>,</span><span class="param">	<span class="n">output_directory</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span></span><span class="return-annotation">) -> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>:</span></span>
+
+        
+    </div>
+    <a class="headerlink" href="#pdoc"></a>
+    
+            <div class="docstring"><p>Render the documentation for a list of modules.</p>
+
+<ul>
+<li>If <code>output_directory</code> is <code>None</code>, returns the rendered documentation
+for the first module in the list.</li>
+<li>If <code>output_directory</code> is set, recursively writes the rendered output
+for all specified modules and their submodules to the target destination.</li>
+</ul>
+
+<p>Rendering options can be configured by calling <code><a href="pdoc/render.html#configure">pdoc.render.configure</a></code> in advance.</p>
+</div>
+
+
+                </section>
+    </main>
+</body>
+</html>
