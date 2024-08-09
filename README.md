@@ -150,7 +150,7 @@ Example:
 
 ## Command Line Interface
 
-```cmd
+```console
 >>> jinja2pdoc --help
 
 Usage: jinja2pdoc [OPTIONS] [FILES]...
@@ -166,8 +166,7 @@ Usage: jinja2pdoc [OPTIONS] [FILES]...
 
 Options:
   -o, --output PATH           output directory for files, if no 'filename' is
-                              provided in the frontmatter.  [default:
-                              K:\jinja2_pdoc]
+                              provided in the frontmatter.  [default: cwd]
   -e, --encoding TEXT         encoding of the files  [default: utf-8]
   -s, --suffixes TEXT         suffixes which will be removed from templates,
                               if no 'filename' is provided in the frontmatter
@@ -177,10 +176,11 @@ Options:
                               for 'filename'  [default: meta]
   --rerender / --no-rerender  Each file is rendered only once.  [default: no-
                               rerender]
+  --silent                    suppress console output
   --help                      Show this message and exit.
 ```
 
-```cmd
+```console
 >>> jinja2pdoc .\examples\*.jinja2
 rendered         examples\example.md.jinja2......................   .\example.md
 ```

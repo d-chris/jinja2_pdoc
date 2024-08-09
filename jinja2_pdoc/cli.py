@@ -45,10 +45,13 @@ def expand(files: List[str], duplicates: bool = False) -> Generator[Path, None, 
             yield from wrapper(file)
 
 
-def echo(tag, file, out):
+def echo(tag, file, out, silent=False):
     """
     print a message to the console
     """
+    if silent:
+        return
+
     if isinstance(tag, Exception):
         out = str(tag)[:48]
         tag = type(tag).__name__
@@ -77,6 +80,7 @@ def jinja2pdoc(
     fail_fast: bool = False,
     frontmatter: bool = True,
     rerender: bool = False,
+    silent: bool = True,
 ) -> None:
     """
     Render jinja2 one or multiple template files, wildcards in filenames are allowed,
@@ -118,7 +122,7 @@ def jinja2pdoc(
 
     for i, file in enumerate(expand(files, duplicates=rerender), start=1):
         try:
-            echo("rendering", file, render_file(file))
+            echo("rendering", file, render_file(file), silent)
         except Exception as e:
             echo(e, file, "")
 
@@ -139,9 +143,11 @@ def jinja2pdoc(
     "-o",
     "--output",
     default=Path.cwd(),
-    show_default=True,
     type=click.Path(),
-    help="output directory for files, if no 'filename' is provided in the frontmatter.",
+    help=(
+        "output directory for files, if no 'filename' is provided in the frontmatter."
+        "  [default: cwd]"
+    ),
 )
 @click.option(
     "-e",
@@ -180,6 +186,13 @@ def jinja2pdoc(
     default=False,
     show_default=True,
     help="Each file is rendered only once.",
+)
+@click.option(
+    "--silent",
+    is_flag=True,
+    default=False,
+    show_default=True,
+    help="suppress console output",
 )
 def cli(**kwargs):
     return jinja2pdoc(*kwargs.pop("files"), **kwargs)

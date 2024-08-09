@@ -7,7 +7,7 @@ requires = [ "poetry-core" ]
 name = "jinja2-pdoc"
 version = "0.0.0"
 description = "jinja2 extension to embedd python code directly from module using pdoc"
-authors = [ "Christoph Dörrer <d-chris@web.d>" ]
+authors = [ "Christoph Dörrer <d-chris@web.de>" ]
 license = "MIT"
 readme = "README.md"
 classifiers = [
@@ -64,6 +64,7 @@ testpaths = "tests"
 addopts = [
   "--random-order",
   "--color=yes",
+  "-s",
   "--cov=jinja2_pdoc",
   "--cov-report=term-missing:skip-covered",
   "--cov-report=xml",

@@ -22,6 +22,7 @@ from jinja2_pdoc import Jinja2Pdoc, jinja2, pdoc
         ("a:b:c.", {"module": "a", "name": "b", "attr": "c"}),
         ("a::.b", {"module": "a", "name": "", "attr": "source", "frmt": "b"}),
     ],
+    ids=lambda x: str(x),
 )
 def test_syntax(arg, ret):
     assert Jinja2Pdoc._pdoc_syntax(arg) == ret
