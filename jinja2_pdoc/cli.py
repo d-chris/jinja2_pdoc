@@ -7,7 +7,7 @@ import jinja2_pdoc.meta as meta
 from jinja2_pdoc import Environment
 
 
-def expand(files: List[str]) -> Generator[Path, None, None]:
+def expand(files: List[str], duplicates: bool = False) -> Generator[Path, None, None]:
     """
     yields only an existing file.
 
@@ -31,8 +31,17 @@ def expand(files: List[str]) -> Generator[Path, None, None]:
         else:
             yield file
 
-    for file in files:
-        yield from wrapper(file)
+    if not duplicates:
+        seen = set()
+
+        for file in files:
+            for item in wrapper(file):
+                if item not in seen:
+                    seen.add(item)
+                    yield item
+    else:
+        for file in files:
+            yield from wrapper(file)
 
 
 def echo(tag, file, out):
