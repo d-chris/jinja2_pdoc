@@ -64,7 +64,6 @@ testpaths = "tests"
 addopts = [
   "--random-order",
   "--color=yes",
-  "-s",
   "--cov=jinja2_pdoc",
   "--cov-report=term-missing:skip-covered",
   "--cov-report=xml",

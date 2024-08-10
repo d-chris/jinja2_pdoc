@@ -131,7 +131,7 @@ def jinja2pdoc(
         try:
             echo("rendering", file, render_file(file), silent)
         except Exception as e:
-            echo(e, file, "")
+            echo(e, file, "", silent)
 
             if fail_fast:
                 return 1
@@ -209,14 +209,12 @@ def jinja2pdoc(
 )
 def cli(**kwargs):
 
-    files = kwargs.pop("files", ())
+    result = jinja2pdoc(*kwargs.pop("files"), **kwargs)
 
-    if not files:
-        raise click.UsageError("no files provided")
+    if result == -1 and kwargs["silent"] is False:
+        click.echo("No files found.")
 
-    raise SystemExit(
-        jinja2pdoc(*files, **kwargs),
-    )
+    raise SystemExit(result)
 
 
 if __name__ == "__main__":

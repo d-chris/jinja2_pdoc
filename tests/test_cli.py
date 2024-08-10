@@ -8,10 +8,28 @@ def test_cli_folder(tmp_path):
     runner = CliRunner()
     result = runner.invoke(
         cli,
-        ["examples/*.jinja2", "--output", str(tmp_path)],
+        [
+            "examples/*.jinja2",
+            "--output",
+            str(tmp_path),
+        ],
     )
     assert result.exit_code == 0
+    assert "rendering" in result.output
     assert tmp_path.joinpath("example.md").is_file()
+
+
+def test_cli_nofile(tmp_path):
+    runner = CliRunner()
+    result = runner.invoke(
+        cli,
+        [
+            "--output",
+            str(tmp_path),
+        ],
+    )
+    assert result.exit_code == -1
+    assert result.output == "No files found.\n"
 
 
 def test_main(tmp_path):
@@ -50,6 +68,7 @@ def test_jinja2pdoc_fail(mocker, tmp_path, files, failfast):
             output=tmp_path,
             fail_fast=failfast,
             rerender=True,
+            silent=False,
         )
         == 1
     )
