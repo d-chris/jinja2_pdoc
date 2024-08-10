@@ -1,3 +1,4 @@
+import sys
 from pathlib import Path
 from typing import Generator, List, Set
 
@@ -81,6 +82,7 @@ def jinja2pdoc(
     frontmatter: bool = True,
     rerender: bool = False,
     silent: bool = True,
+    load_path: bool = False,
 ) -> None:
     """
     Render jinja2 one or multiple template files, wildcards in filenames are allowed,
@@ -93,7 +95,12 @@ def jinja2pdoc(
     To ignore the frontmatter section use the `--no-meta` flag.
     """
 
-    root = Path(output) if output else Path.cwd()
+    cwd = Path.cwd()
+
+    if load_path and str(cwd) not in sys.path:
+        sys.path.append(str(cwd))
+
+    root = Path(output) if output else cwd
 
     env = Environment()
 
@@ -194,8 +201,22 @@ def jinja2pdoc(
     show_default=True,
     help="suppress console output",
 )
+@click.option(
+    "--load-path/--no-load-path",
+    default=True,
+    show_default=True,
+    help="add the current working directory to path",
+)
 def cli(**kwargs):
-    return jinja2pdoc(*kwargs.pop("files"), **kwargs)
+
+    files = kwargs.pop("files", ())
+
+    if not files:
+        raise click.UsageError("no files provided")
+
+    raise SystemExit(
+        jinja2pdoc(*files, **kwargs),
+    )
 
 
 if __name__ == "__main__":

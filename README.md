@@ -29,9 +29,9 @@ Create a markdown file with `docstrings` and `source code` from `pathlib.Path` u
 ### Python
 
 ````python
-from jinja2_pdoc import jinja2, Jinja2Pdoc
+from jinja2_pdoc import Environment
 
-env = jinja2.Environment(extensions=[Jinja2Pdoc])
+env = Environment()
 
 s = """
     # jinja2-pdoc
@@ -165,19 +165,23 @@ Usage: jinja2pdoc [OPTIONS] [FILES]...
   To ignore the frontmatter section use the `--no-meta` flag.
 
 Options:
-  -o, --output PATH           output directory for files, if no 'filename' is
-                              provided in the frontmatter.  [default: cwd]
-  -e, --encoding TEXT         encoding of the files  [default: utf-8]
-  -s, --suffixes TEXT         suffixes which will be removed from templates,
-                              if no 'filename' is provided in the frontmatter
-                              [default: .jinja2, .j2]
-  --fail-fast                 exit on first error when rendering multiple file
-  --meta / --no-meta          parse frontmatter from the template, to search
-                              for 'filename'  [default: meta]
-  --rerender / --no-rerender  Each file is rendered only once.  [default: no-
-                              rerender]
-  --silent                    suppress console output
-  --help                      Show this message and exit.
+  -o, --output PATH             output directory for files, if no 'filename'
+                                is provided in the frontmatter.  [default:
+                                cwd]
+  -e, --encoding TEXT           encoding of the files  [default: utf-8]
+  -s, --suffixes TEXT           suffixes which will be removed from templates,
+                                if no 'filename' is provided in the
+                                frontmatter  [default: .jinja2, .j2]
+  --fail-fast                   exit on first error when rendering multiple
+                                file
+  --meta / --no-meta            parse frontmatter from the template, to search
+                                for 'filename'  [default: meta]
+  --rerender / --no-rerender    Each file is rendered only once.  [default:
+                                no-rerender]
+  --silent                      suppress console output
+  --load-path / --no-load-path  add the current working directory to path
+                                [default: load-path]
+  --help                        Show this message and exit.
 ```
 
 ```console
@@ -187,7 +191,7 @@ rendered         examples\example.md.jinja2......................   .\example.md
 
 ## pre-commit hook
 
-**Per default the hook is not registered to any `type` or `files`!**
+**Per default the hook is not registered to `files`!**
 
 To render all template files from `docs` using `.pre-commit-config.yaml` add the following.
 
@@ -196,7 +200,7 @@ You may add a `frontmatter` section at the beginning of in your templates to spe
 ```yaml
 repos:
   - repo: https://github.com/d-chris/jinja2_pdoc/
-    rev: v1.0.0
+    rev: v1.1.0
     hooks:
       - id: jinja2pdoc
         files: docs/.*\.jinja2$
