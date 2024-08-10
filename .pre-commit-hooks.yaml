@@ -3,3 +3,5 @@
   description: render jinja2 templates to embedd python code directly from module using pdoc.
   entry: jinja2pdoc
   language: python
+  types: [jinja]
+  files: ^$
