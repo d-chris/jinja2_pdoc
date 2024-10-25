@@ -227,6 +227,7 @@ but cannot instantiate a WindowsPath on a POSIX system or vice versa.
 <li><code>indent</code> - format code with 2 spaces for indentation, see <code>autopep8.fix_code</code></li>
 <li><code>upper</code> - converts to upper case</li>
 <li><code>lower</code> - converts to lower case</li>
+<li><code>nodoc</code> - removes shebang and docstring</li>
 </ul>
 
 <p>Example:</p>
@@ -292,6 +293,23 @@ but cannot instantiate a WindowsPath on a POSIX system or vice versa.
 <span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jinja2pdoc</span>
 <span class="w">        </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docs/.*\.jinja2$</span>
+</code></pre>
+</div>
+
+<p>Use <code>additional_dependencies</code> to add extra dependencies to the pre-commit environment. Example see below.</p>
+
+<blockquote>
+  <p>This is necessary when a module or source code rendered into your template contains modules that are not part of the standard library.</p>
+</blockquote>
+
+<div class="pdoc-code codehilite">
+<pre><span></span><code><span class="nt">repos</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">repo</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://github.com/d-chris/jinja2_pdoc/</span>
+<span class="w">    </span><span class="nt">rev</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1.1.0</span>
+<span class="w">    </span><span class="nt">hooks</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jinja2pdoc</span>
+<span class="w">        </span><span class="nt">files</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">docs/.*\.jinja2$</span>
+<span class="w">        </span><span class="nt">additional_dependencies</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">pathlibutil</span><span class="p p-Indicator">]</span>
 </code></pre>
 </div>
 
