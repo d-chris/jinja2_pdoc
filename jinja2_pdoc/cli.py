@@ -102,7 +102,9 @@ def jinja2pdoc(
 
     root = Path(output) if output else cwd
 
-    env = Environment()
+    env = Environment(
+        keep_trailing_newline=True,
+    )
 
     def render_file(file):
         template = file.read_text(encoding)

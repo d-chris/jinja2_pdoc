@@ -4,50 +4,34 @@ from jinja2_pdoc.wrapper import Function, Module, PdocStr
 
 
 @pytest.fixture
-def doc() -> Module:
+def module() -> Module:
     return Module.from_name("pathlib")
 
 
 @pytest.fixture
-def open(doc: Module) -> Function:
-    return doc.get("Path.open")
+def function(module: Module) -> Function:
+    return module.get("Path.open")
 
 
 @pytest.fixture
-def funcstr() -> PdocStr:
+def pdocstr() -> PdocStr:
     return PdocStr("\n".join(["    def dummy():", "        pass"]))
 
 
-def test_module(doc: Module):
-    assert isinstance(doc, Module)
+@pytest.fixture(params=["indent", "dedent", "nodoc", "lower", "upper"])
+def pdocstr_attr(request):
+    return request.param
 
 
-def test_class(doc: Module):
-    cls = doc.get("Path")
-
-    assert cls.name == "Path"
-    assert isinstance(cls, Function)
-
-    cls = doc.get("NotAClass")
-    assert cls is None
-
-    func = doc.get("Path.notafunction")
-    assert func is None
+@pytest.fixture(params=["source", "code", "docstring"])
+def function_prop(request):
+    return request.param
 
 
-def test_func(open: Function):
-    assert open.name == "open"
-    assert isinstance(open, Function)
-    assert hasattr(open, "code")
+def test_module():
+    m = Module.from_name("pathlib")
 
-
-def test_str(open: Function):
-    sourcecode = open.code
-
-    assert isinstance(sourcecode, PdocStr)
-    assert hasattr(sourcecode, "dedent")
-
-    assert isinstance(open.docstring, PdocStr)
+    assert isinstance(m, Module)
 
 
 def test_module_raises():
@@ -55,15 +39,98 @@ def test_module_raises():
         Module.from_name("not_a_module")
 
 
-def test_dedent(funcstr: PdocStr):
-    s = funcstr.dedent()
+@pytest.mark.parametrize(
+    "name, returntype",
+    [
+        ("Path", Function),
+        ("Path.open", Function),
+        ("NotAClass", type(None)),
+        ("Path.notafunction", type(None)),
+    ],
+)
+def test_module_returntype(module: Module, name: str, returntype: type):
+    obj = module.get(name)
+    assert isinstance(obj, returntype)
 
-    assert isinstance(s, PdocStr)
+
+def test_pdocstr_attributes(pdocstr_attr: str, pdocstr: PdocStr):
+
+    assert hasattr(pdocstr, pdocstr_attr)
+
+
+def test_pdocstr_returntypes(pdocstr_attr, pdocstr: PdocStr):
+    method = getattr(pdocstr, pdocstr_attr)
+
+    assert isinstance(method(), PdocStr)
+
+
+def test_pdocstr_callable(pdocstr_attr, pdocstr: PdocStr):
+    method = getattr(pdocstr, pdocstr_attr)
+
+    assert callable(method)
+
+
+def test_pdocstr_nodoc():
+    text = [
+        "",
+        '"""docstring"""',
+        "",
+        "def dummy():",  # 3
+        "    pass",
+        "",
+    ]
+
+    funcstr = PdocStr("\n".join(text))
+
+    assert funcstr.nodoc() == "\n".join(text[3:5])
+
+
+def test_pdocstr_shebang():
+    text = [
+        "#! python3",
+        "",
+        '"""docstring"""',
+        "",
+        "def dummy():",  # 4
+        "    pass",
+        "",
+    ]
+
+    funcstr = PdocStr("\n".join(text))
+
+    assert funcstr.nodoc() == "\n".join(text[4:6])
+
+
+def test_pdocstr_indent(pdocstr: PdocStr):
+    s = pdocstr.indent()
+
+    assert s.startswith("def dummy():\n  pass")
+
+
+def test_pdocstr_dedent(pdocstr: PdocStr):
+    s = pdocstr.dedent()
+
     assert s.startswith("def dummy():\n    pass")
 
 
-def test_autopep8(funcstr: PdocStr):
-    s = funcstr.indent()
+def test_function_attributes(function_prop, function):
+    assert hasattr(function, function_prop)
 
-    assert isinstance(s, PdocStr)
-    assert s.startswith("def dummy():\n  pass")
+
+def test_function_returntypes(function_prop, function):
+    prop = getattr(function, function_prop)
+
+    assert isinstance(prop, PdocStr)
+
+
+def test_function_property(function_prop, function):
+    prop = getattr(function, function_prop)
+
+    assert not callable(prop)
+
+
+def test_function_code(function):
+    doc = function.docstring
+
+    assert doc, "testing function should have a docstring"
+    assert doc not in function.code

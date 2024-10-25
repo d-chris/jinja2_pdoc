@@ -141,6 +141,7 @@ optional `str` functions can be added to `<pdoc_attr>` with a dot
 - `indent` - format code with 2 spaces for indentation, see `autopep8.fix_code`
 - `upper` - converts to upper case
 - `lower` - converts to lower case
+- `nodoc` - removes shebang and docstring
 
 Example:
 
@@ -204,6 +205,20 @@ repos:
     hooks:
       - id: jinja2pdoc
         files: docs/.*\.jinja2$
+```
+
+Use `additional_dependencies` to add extra dependencies to the pre-commit environment. Example see below.
+
+> This is necessary when a module or source code rendered into your template contains modules that are not part of the standard library.
+
+```yaml
+repos:
+  - repo: https://github.com/d-chris/jinja2_pdoc/
+    rev: v1.1.0
+    hooks:
+      - id: jinja2pdoc
+        files: docs/.*\.jinja2$
+        additional_dependencies: [pathlibutil]
 ```
 
 ## Dependencies

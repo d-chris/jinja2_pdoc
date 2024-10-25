@@ -96,6 +96,11 @@ class PdocStr(str):
     inhertits from `str` with a `dedent` method
     """
 
+    _regex_doc = re.compile(
+        r"^(?:#!.*?)?(?P<doc>\"{3}|\'{3}).*?(?P=doc)\s*$",
+        re.MULTILINE | re.DOTALL,
+    )
+
     def dedent(self) -> str:
         """
         remove common whitespace from the left of every line in the string,
@@ -110,3 +115,30 @@ class PdocStr(str):
         """
         s = autopep8.fix_code(self.dedent(), options={"indent_size": 2})
         return self.__class__(s)
+
+    def nodoc(self) -> str:
+        """
+        remove shebang and docstring and from the string
+        """
+        s = self._regex_doc.sub("", self.dedent(), 1)
+
+        return self.__class__(s.strip("\n"))
+
+    def __getattribute__(self, name: str) -> Any:
+        """
+        get all known attributes and cast `str` to `PdocStr`
+        """
+        attr = super().__getattribute__(name)
+
+        if callable(attr):
+
+            def wrapper(*args, **kwargs):
+                result = attr(*args, **kwargs)
+                if isinstance(result, str):
+                    cls = object.__getattribute__(self, "__class__")
+                    return cls(result)
+                return result
+
+            return wrapper
+
+        return attr
