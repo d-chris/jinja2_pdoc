@@ -29,6 +29,7 @@ class Environment(jinja2.Environment):
 
         self.add_filter("shell", self.shell)
         self.add_filter("include", self.include)
+        self.add_filter("strip", self.strip)
 
     def add_filter(self, name: str, func: Callable) -> None:
         """
@@ -91,7 +92,8 @@ class Environment(jinja2.Environment):
                 prefix = f"{promt}{cmd}\n"
 
             output = f"{prefix}\n{output}"
-        return output
+
+        return Environment.strip(output)
 
     @staticmethod
     def include(
@@ -107,7 +109,7 @@ class Environment(jinja2.Environment):
             file (str): The file to include.
             enc (str, optional): The encoding to use with `pathlib.Path.read_text()`.
             attr (str, optional): The string method to call on the file
-                content, e.g. `include(attr="strip")`.
+                content, e.g. `include(attr="upper")`.
 
         Returns:
             str: The content of the file.
@@ -125,4 +127,19 @@ class Environment(jinja2.Environment):
         if attr is not None:
             content = getattr(content, attr)()
 
-        return content
+        return Environment.strip(content)
+
+    @staticmethod
+    def strip(text: str, chars: str = "\n ") -> str:
+        """
+        Strips the specified characters from the beginning and end of the given text.
+
+        Args:
+            text (str): The text to be stripped.
+            chars (str, optional): The characters to be stripped from the text.
+            Defaults to `"\n "`.
+
+        Returns:
+            str: The stripped text.
+        """
+        return text.strip(chars)

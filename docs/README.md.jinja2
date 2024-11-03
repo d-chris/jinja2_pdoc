@@ -1,0 +1,87 @@
+# jinja2-pdoc
+
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/jinja2_pdoc)](https://pypi.org/project/jinja2_pdoc/)
+[![PyPI - jinja2_pdoc](https://img.shields.io/pypi/v/jinja2_pdoc)](https://pypi.org/project/jinja2_pdoc/)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/jinja2_pdoc)](https://pypi.org/project/jinja2_pdoc/)
+[![PyPI - License](https://img.shields.io/pypi/l/jinja2_pdoc)](https://raw.githubusercontent.com/d-chris/jinja2_pdoc/main/LICENSE)
+[![GitHub - pytest](https://img.shields.io/github/actions/workflow/status/d-chris/jinja2_pdoc/pytest.yml?logo=github&label=pytest)](https://github.com/d-chris/jinja2_pdoc/actions/workflows/pytest.yml)
+[![GitHub - Page](https://img.shields.io/website?url=https%3A%2F%2Fd-chris.github.io%2Fjinja2_pdoc%2F&up_message=pdoc&logo=github&label=documentation)](https://d-chris.github.io/jinja2_pdoc)
+[![GitHub tag (with filter)](https://img.shields.io/github/v/tag/d-chris/jinja2_pdoc?logo=github&label=github)](https://github.com/d-chris/jinja2_pdoc)
+[![codecov](https://codecov.io/gh/d-chris/jinja2_pdoc/graph/badge.svg?token=19YB50ZL63)](https://codecov.io/gh/d-chris/jinja2_pdoc)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
+
+---
+
+[`jinja2`](https://www.pypi.org/project/jinja2) extension based on [`pdoc`](https://pypi.org/project/pdoc/) to embedd python code directly from modules or files into your `jinja` template.
+
+Lazy loading of `docstrings`, `code` and `functions` directly from python modules into your `jinja2 template`.
+
+## Installation
+
+```cmd
+pip install jinja2_pdoc
+```
+
+## Example
+
+Create a markdown file with `docstrings` and `source code` from `pathlib.Path` using `jinja2` with `jinja2_pdoc` extension.
+
+### Python
+
+````python
+{{ "examples/example.py" | include }}
+````
+
+### Markdown
+
+output of the [python code](#python) above.
+
+````markdown
+{{ "python examples/example.py" | shell }}
+````
+
+## Syntax
+
+{{ "docs/syntax.md" | include }}
+
+## Command Line Interface
+
+```cmd
+{{ "jinja2pdoc --help" | shell(promt="$ ") | indent(2) }}
+```
+
+```cmd
+{{ "jinja2pdoc .\examples\*.jinja2" | shell(promt="$ ") | indent(2) }}
+```
+
+## pre-commit-config
+
+**Per default the hook is not registered to `files`!**
+
+To render all template files from `docs` using `.pre-commit-config.yaml` add the following.
+
+You may add a `frontmatter` section at the beginning of in your templates to specify output directory and filename, e.g. `<!--filename: example.md-->`. If no metadata are at the beginning of the  template, the rendered file is written to the `output` directory which is default the current working direktory.
+
+```yaml
+{{ ".pre-commit-sample.yaml" | include }}
+```
+
+Use [`additional_dependencies`](https://pre-commit.com/#config-additional_dependencies) to add extra dependencies to the pre-commit environment.
+
+> This is necessary when a module or source code rendered into your template contains modules that are not part of the standard library.
+
+# pre-commit-hooks
+
+```yaml
+{{ ".pre-commit-hooks.yaml" | include }}
+```
+
+## Dependencies
+
+[![PyPI - autopep8](https://img.shields.io/pypi/v/autopep8?logo=pypi&logoColor=white&label=autopep8)](https://pypi.org/project/autopep8/)
+[![PyPI - click](https://img.shields.io/pypi/v/click?logo=pypi&logoColor=white&label=click)](https://pypi.org/project/click/)
+[![PyPI - jinja2](https://img.shields.io/pypi/v/jinja2?logo=jinja&logoColor=white&label=jinja2)](https://pypi.org/project/jinja2/)
+[![PyPI - pdoc](https://img.shields.io/pypi/v/pdoc?logo=pypi&logoColor=white&label=pdoc)](https://pypi.org/project/pdoc/)
+[![Pypi - PyYAML](https://img.shields.io/pypi/v/PyYAML?logo=pypi&logoColor=white&label=PyYAML)](https://pypi.org/project/PyYAML/)
+
+---

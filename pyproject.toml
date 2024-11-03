@@ -76,4 +76,5 @@ addopts = [
 omit = [
   "*/tests/*",
   "*/docs/*",
+  "*/examples/*",
 ]

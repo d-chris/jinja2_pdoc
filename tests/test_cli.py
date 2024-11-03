@@ -9,14 +9,14 @@ def test_cli_folder(tmp_path):
     result = runner.invoke(
         cli,
         [
-            "examples/*.jinja2",
+            "docs/*.jinja2",
             "--output",
             str(tmp_path),
         ],
     )
     assert result.exit_code == 0
     assert "rendering" in result.output
-    assert tmp_path.joinpath("example.md").is_file()
+    assert tmp_path.joinpath("README.md").is_file()
 
 
 def test_cli_nofile(tmp_path):

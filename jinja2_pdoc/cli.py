@@ -53,6 +53,8 @@ def echo(tag, file, out, silent=False):
     if silent:
         return
 
+    color = "yellow"
+
     if isinstance(tag, Exception):
         out = str(tag)[:48]
         tag = type(tag).__name__
@@ -63,9 +65,7 @@ def echo(tag, file, out, silent=False):
         except ValueError:
             out = str(out)[-48:]
 
-        if tag == "skip":
-            color = "yellow"
-        else:
+        if tag != "skip":
             color = "green"
 
     tag = click.style(f"{tag[:16]:<16}", fg=color)

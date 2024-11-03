@@ -33,25 +33,25 @@ from jinja2_pdoc import Environment
 
 env = Environment()
 
-s = """
-    # jinja2-pdoc
+template = """\
+# jinja2-pdoc
 
-    embedd python code directly from pathlib using a jinja2 extension based on pdoc
+embedd python code directly from pathlib using a jinja2 extension based on pdoc
 
-    ## docstring from pathlib.Path
+## docstring from pathlib.Path
 
-    {% pdoc pathlib:Path:docstring %}
+{% pdoc pathlib:Path:docstring %}
 
-    ## source from pathlib.Path.open
+## source from pathlib.Path.open
 
-    ```python
-    {% pdoc pathlib:Path.open:source.indent -%}
-    ```
-    """
+```python
+{% pdoc pathlib:Path.open:source.indent -%}
+```
+"""
 
-code = env.from_string(textwrap.dedent(s)).render()
+code = env.from_string(template).render()
 
-Path("example.md").write_text(code)
+print(code)
 ````
 
 ### Markdown
@@ -59,7 +59,6 @@ Path("example.md").write_text(code)
 output of the [python code](#python) above.
 
 ````markdown
-
 # jinja2-pdoc
 
 embedd python code directly from pathlib using a jinja2 extension based on pdoc
@@ -151,46 +150,47 @@ Example:
 
 ## Command Line Interface
 
-```console
->>> jinja2pdoc --help
+```cmd
+$ jinja2pdoc --help
 
-Usage: jinja2pdoc [OPTIONS] [FILES]...
+  Usage: jinja2pdoc [OPTIONS] [FILES]...
 
-  Render jinja2 one or multiple template files, wildcards in filenames are
-  allowed, e.g. `examples/*.jinja2`.
+    Render jinja2 one or multiple template files, wildcards in filenames are
+    allowed, e.g. `examples/*.jinja2`.
 
-  If no 'filename' is provided in the frontmatter section of your file, e.g.
-  '<!--filename: example.md-->'. All files are written to `output` directory
-  and `suffixes` will be removed.
+    If no 'filename' is provided in the frontmatter section of your file, e.g.
+    '<!--filename: example.md-->'. All files are written to `output` directory
+    and `suffixes` will be removed.
 
-  To ignore the frontmatter section use the `--no-meta` flag.
+    To ignore the frontmatter section use the `--no-meta` flag.
 
-Options:
-  -o, --output PATH             output directory for files, if no 'filename'
-                                is provided in the frontmatter.  [default:
-                                cwd]
-  -e, --encoding TEXT           encoding of the files  [default: utf-8]
-  -s, --suffixes TEXT           suffixes which will be removed from templates,
-                                if no 'filename' is provided in the
-                                frontmatter  [default: .jinja2, .j2]
-  --fail-fast                   exit on first error when rendering multiple
-                                file
-  --meta / --no-meta            parse frontmatter from the template, to search
-                                for 'filename'  [default: meta]
-  --rerender / --no-rerender    Each file is rendered only once.  [default:
-                                no-rerender]
-  --silent                      suppress console output
-  --load-path / --no-load-path  add the current working directory to path
-                                [default: load-path]
-  --help                        Show this message and exit.
+  Options:
+    -o, --output PATH             output directory for files, if no 'filename'
+                                  is provided in the frontmatter.  [default:
+                                  cwd]
+    -e, --encoding TEXT           encoding of the files  [default: utf-8]
+    -s, --suffixes TEXT           suffixes which will be removed from templates,
+                                  if no 'filename' is provided in the
+                                  frontmatter  [default: .jinja2, .j2]
+    --fail-fast                   exit on first error when rendering multiple
+                                  file
+    --meta / --no-meta            parse frontmatter from the template, to search
+                                  for 'filename'  [default: meta]
+    --rerender / --no-rerender    Each file is rendered only once.  [default:
+                                  no-rerender]
+    --silent                      suppress console output
+    --load-path / --no-load-path  add the current working directory to path
+                                  [default: load-path]
+    --help                        Show this message and exit.
 ```
 
-```console
->>> jinja2pdoc .\examples\*.jinja2
-rendered         examples\example.md.jinja2......................   .\example.md
+```cmd
+$ jinja2pdoc .\examples\*.jinja2
+
+  rendering        examples\example.md.jinja2......................   examples\example.md
 ```
 
-## pre-commit hook
+## pre-commit-config
 
 **Per default the hook is not registered to `files`!**
 
@@ -207,18 +207,20 @@ repos:
         files: docs/.*\.jinja2$
 ```
 
-Use `additional_dependencies` to add extra dependencies to the pre-commit environment. Example see below.
+Use [`additional_dependencies`](https://pre-commit.com/#config-additional_dependencies) to add extra dependencies to the pre-commit environment.
 
 > This is necessary when a module or source code rendered into your template contains modules that are not part of the standard library.
 
+# pre-commit-hooks
+
 ```yaml
-repos:
-  - repo: https://github.com/d-chris/jinja2_pdoc/
-    rev: v1.1.0
-    hooks:
-      - id: jinja2pdoc
-        files: docs/.*\.jinja2$
-        additional_dependencies: [pathlibutil]
+- id: jinja2pdoc
+  name: render jinja2pdoc
+  description: render jinja2 templates to embedd python code directly from module using pdoc.
+  entry: jinja2pdoc
+  language: python
+  types: [jinja]
+  files: ^$
 ```
 
 ## Dependencies

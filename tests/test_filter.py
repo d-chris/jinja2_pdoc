@@ -29,6 +29,7 @@ def mock_include(mocker):
     [
         "shell",
         "include",
+        "strip",
     ],
 )
 def test_filter(filter):
@@ -69,6 +70,15 @@ def test_render_shell(mock_shell):
     assert code == "testing.."
 
 
+def test_render_strip():
+
+    template = '{{ "  testing..  \n" | strip }}'
+
+    code = Environment().from_string(template).render()
+
+    assert code == "testing.."
+
+
 @pytest.mark.parametrize(
     "attr",
     [
@@ -102,3 +112,10 @@ def test_include_attr(mock_include):
     content = Environment.include("", attr="upper")
 
     assert content == "TESTING.."
+
+
+def test_strip_chars():
+
+    content = Environment.strip("testing..", chars=".")
+
+    assert content == "testing"
