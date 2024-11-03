@@ -148,6 +148,34 @@ Example:
 {% pdoc pathlib:Path.open:code.dedent %}
 ```
 
+## Filter
+
+Filter to use in `jinja2` template.
+
+### include
+
+`Environment.include` - returns the content of the file.
+
+```jinja
+{{ "path/to/file" | include(enc="utf-8") }}
+```
+
+### shell
+
+`Environment.shell` - run shell command and return the selected result from `subprocess.CompletedProcess`.
+
+```jinja
+{{ "python --version" | shell(promt=">>> %s\n") }}
+```
+
+### strip
+
+`Environment.strip` - remove leading and trailing whitespace and newlines from a string.
+
+```jinja
+{{ "path/to/file" | include | strip }}
+```
+
 ## Command Line Interface
 
 ```cmd
@@ -192,8 +220,6 @@ $ jinja2pdoc .\examples\*.jinja2
 
 ## pre-commit-config
 
-**Per default the hook is not registered to `files`!**
-
 To render all template files from `docs` using `.pre-commit-config.yaml` add the following.
 
 You may add a `frontmatter` section at the beginning of in your templates to specify output directory and filename, e.g. `<!--filename: example.md-->`. If no metadata are at the beginning of the  template, the rendered file is written to the `output` directory which is default the current working direktory.
@@ -212,6 +238,8 @@ Use [`additional_dependencies`](https://pre-commit.com/#config-additional_depend
 > This is necessary when a module or source code rendered into your template contains modules that are not part of the standard library.
 
 ## pre-commit-hooks
+
+**Per default the hook is not registered to `files`!**
 
 ```yaml
 - id: jinja2pdoc

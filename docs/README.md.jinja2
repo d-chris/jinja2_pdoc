@@ -44,6 +44,10 @@ output of the [python code](#python) above.
 
 {{ "docs/syntax.md" | include }}
 
+## Filter
+
+{{ "docs/filter.md" | include }}
+
 ## Command Line Interface
 
 ```cmd
@@ -55,8 +59,6 @@ output of the [python code](#python) above.
 ```
 
 ## pre-commit-config
-
-**Per default the hook is not registered to `files`!**
 
 To render all template files from `docs` using `.pre-commit-config.yaml` add the following.
 
@@ -71,6 +73,8 @@ Use [`additional_dependencies`](https://pre-commit.com/#config-additional_depend
 > This is necessary when a module or source code rendered into your template contains modules that are not part of the standard library.
 
 ## pre-commit-hooks
+
+**Per default the hook is not registered to `files`!**
 
 ```yaml
 {{ ".pre-commit-hooks.yaml" | include }}

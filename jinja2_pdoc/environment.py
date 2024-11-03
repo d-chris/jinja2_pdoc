@@ -115,11 +115,9 @@ class Environment(jinja2.Environment):
             str: The content of the file.
 
         Example:
-            ````jinja2
-            ```yaml
+            ```jinja2
             {{ ".pre-commit-hool.yaml" | include }}
             ```
-            ````
         """
 
         content = Path(file).read_text(encoding=enc)
@@ -137,9 +135,14 @@ class Environment(jinja2.Environment):
         Args:
             text (str): The text to be stripped.
             chars (str, optional): The characters to be stripped from the text.
-            Defaults to `"\n "`.
+            Defaults to `"\\n "`.
 
         Returns:
             str: The stripped text.
+
+        Example:
+            ```jinja2
+            {{ "  hello world.  \\n" | strip }}
+            ```
         """
         return text.strip(chars)
