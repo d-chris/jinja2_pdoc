@@ -66,12 +66,15 @@ def main() -> int:
                 "template_directory": cwd / "dark-mode",
                 "show_source": False,
                 "search": False,
+                "docformat": "google",
             }
 
             modules = [
                 "jinja2_pdoc",
                 "pdoc",
                 "jinja2",
+                "pathlib",
+                "subprocess",
             ]
 
             with warnings.catch_warnings(record=True) as messages:
