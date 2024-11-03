@@ -49,6 +49,9 @@ pytest-mock = "^3.14.0"
 [tool.poetry.group.dev.dependencies]
 tox = "^4.11.4"
 
+[tool.poetry.group.docs.dependencies]
+pathlibutil = "0.3.0"
+
 [[tool.poetry.source]]
 name = "testpypi"
 url = "https://test.pypi.org/legacy/"
