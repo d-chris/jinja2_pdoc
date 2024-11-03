@@ -315,16 +315,17 @@ files = [
 
 [[package]]
 name = "pathlibutil"
-version = "0.3.0"
+version = "0.3.4"
 description = "inherits from pathlib.Path with methods for hashing, copying, deleting and more"
 optional = false
 python-versions = "<4.0.0,>=3.8.1"
 files = [
-    {file = "pathlibutil-0.3.0-py3-none-any.whl", hash = "sha256:2769b8312b80470c62c1afb408a99af0f20495d8436401bb035e986a295ff747"},
+    {file = "pathlibutil-0.3.4-py3-none-any.whl", hash = "sha256:7f5b9575ca785dc4e61bacf3d707c3eac70df9b8e05103c00fe1727b0f0a777f"},
+    {file = "pathlibutil-0.3.4.tar.gz", hash = "sha256:e866c106af6034924f2e7cb4a16d0e543100009381a943c85d20c899af8982ad"},
 ]
 
 [package.extras]
-7z = ["py7zr (>=0.20.2,<0.21.0)"]
+7z = ["py7zr (>=0.20.2)"]
 
 [[package]]
 name = "pdoc"
@@ -667,4 +668,4 @@ test = ["pytest (>=6.0.0)", "setuptools (>=65)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8.1"
-content-hash = "3947637c822f4c7f0ced703d1198cf11033641cc69f2e2311892bf2434c9f8c1"
+content-hash = "a10ccf0ec34aadaae32d99e08869fcab391d18270ad960354fe0d87e5bd23bc5"

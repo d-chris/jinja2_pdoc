@@ -16,7 +16,7 @@ repos:
     hooks:
       - id: add-trailing-comma
   - repo: https://github.com/tox-dev/pyproject-fmt
-    rev: v2.4.3
+    rev: v2.5.0
     hooks:
       - id: pyproject-fmt
   - repo: https://github.com/tox-dev/tox-ini-fmt
@@ -46,7 +46,7 @@ repos:
       - id: poetry-check
       - id: poetry-lock
   - repo: https://github.com/google/yamlfmt
-    rev: v0.13.0
+    rev: v0.14.0
     hooks:
       - id: yamlfmt
   - repo: https://github.com/PyCQA/flake8
@@ -54,3 +54,11 @@ repos:
     hooks:
       - id: flake8
         args: ["--max-line-length", "88"]
+  - repo: local
+    hooks:
+      - id: readme
+        name: rendering readme
+        entry: poetry run python docs/readme.py
+        pass_filenames: false
+        always_run: true
+        language: system

@@ -50,7 +50,7 @@ pytest-mock = "^3.14.0"
 tox = "^4.11.4"
 
 [tool.poetry.group.docs.dependencies]
-pathlibutil = "0.3.0"
+pathlibutil = "^0.3.0"
 
 [[tool.poetry.source]]
 name = "testpypi"
