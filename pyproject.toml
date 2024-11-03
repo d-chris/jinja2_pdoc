@@ -29,7 +29,10 @@ documentation = "https://d-chris.github.io/jinja2_pdoc"
 [tool.poetry.dependencies]
 python = "^3.8.1"
 Jinja2 = "^3.1.2"
-pdoc = "^14.3.0"
+pdoc = [
+  { version = "^14.3.0", python = "<3.9" },
+  { version = ">=14.3.0", python = "^3.9" },
+]
 click = "^8.1.7"
 autopep8 = "^2.0.4"
 pyyaml = "^6.0.1"
@@ -38,13 +41,16 @@ pyyaml = "^6.0.1"
 jinja2pdoc = "jinja2_pdoc.cli:cli"
 
 [tool.poetry.group.test.dependencies]
-pytest = "^8.3.3"
+pytest = "^8.0.0"
 pytest-random-order = "^1.1.0"
-pytest-cov = "^4.1.0"
+pytest-cov = ">=4.1.0"
 pytest-mock = "^3.14.0"
 
 [tool.poetry.group.dev.dependencies]
 tox = "^4.11.4"
+
+[tool.poetry.group.docs.dependencies]
+pathlibutil = "^0.3.0"
 
 [[tool.poetry.source]]
 name = "testpypi"
@@ -67,4 +73,11 @@ addopts = [
   "--cov=jinja2_pdoc",
   "--cov-report=term-missing:skip-covered",
   "--cov-report=xml",
+]
+
+[tool.coverage.run]
+omit = [
+  "*/tests/*",
+  "*/docs/*",
+  "*/examples/*",
 ]

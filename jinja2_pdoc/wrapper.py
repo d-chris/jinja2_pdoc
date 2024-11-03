@@ -101,7 +101,7 @@ class PdocStr(str):
         re.MULTILINE | re.DOTALL,
     )
 
-    def dedent(self) -> str:
+    def dedent(self) -> "PdocStr":
         """
         remove common whitespace from the left of every line in the string,
         see `textwrap.dedent` for more information.
@@ -109,14 +109,14 @@ class PdocStr(str):
         s = textwrap.dedent(self)
         return self.__class__(s)
 
-    def indent(self) -> str:
+    def indent(self) -> "PdocStr":
         """
         remove leading spaces and change indent size to 2 spaces, instead of 4.
         """
         s = autopep8.fix_code(self.dedent(), options={"indent_size": 2})
         return self.__class__(s)
 
-    def nodoc(self) -> str:
+    def nodoc(self) -> "PdocStr":
         """
         remove shebang and docstring and from the string
         """

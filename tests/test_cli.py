@@ -1,3 +1,5 @@
+import warnings
+
 import pytest
 from click.testing import CliRunner
 
@@ -6,17 +8,22 @@ from jinja2_pdoc.cli import cli, jinja2pdoc
 
 def test_cli_folder(tmp_path):
     runner = CliRunner()
-    result = runner.invoke(
-        cli,
-        [
-            "examples/*.jinja2",
-            "--output",
-            str(tmp_path),
-        ],
-    )
+
+    with warnings.catch_warnings(record=True):
+        warnings.simplefilter("always", DeprecationWarning)
+
+        # Your code that may trigger a DeprecationWarning
+        result = runner.invoke(
+            cli,
+            [
+                "docs/*.jinja2",
+                "--output",
+                str(tmp_path),
+            ],
+        )
     assert result.exit_code == 0
     assert "rendering" in result.output
-    assert tmp_path.joinpath("example.md").is_file()
+    assert tmp_path.joinpath("README.md").is_file()
 
 
 def test_cli_nofile(tmp_path):
