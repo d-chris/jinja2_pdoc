@@ -213,7 +213,7 @@ $ jinja2pdoc --help
 ```
 
 ```cmd
-$ jinja2pdoc .\examples\*.jinja2
+$ jinja2pdoc ./examples/*.jinja2
 
   rendering        examples\example.md.jinja2......................   examples\example.md
 ```
