@@ -8,7 +8,11 @@ from jinja2_pdoc.cli import cli, jinja2pdoc
 
 def test_cli_folder(tmp_path):
     runner = CliRunner()
-    with warnings.catch_warnings(record=True, category=DeprecationWarning):
+
+    with warnings.catch_warnings(record=True):
+        warnings.simplefilter("always", DeprecationWarning)
+
+        # Your code that may trigger a DeprecationWarning
         result = runner.invoke(
             cli,
             [
