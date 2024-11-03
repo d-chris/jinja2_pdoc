@@ -54,12 +54,3 @@ repos:
     hooks:
       - id: flake8
         args: ["--max-line-length", "88"]
-  - repo: local
-    hooks:
-      - id: outdated
-        name: poetry outdated dependencies
-        entry: poetry run python docs/outdated.py
-        language: system
-        pass_filenames: false
-        stages:
-          - pre-push
